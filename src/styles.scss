@@ -3,3 +3,12 @@
 @tailwind utilities;
 
 @import "./assets/theme/reset";
+@import "./assets/theme/material";
+
+html, body { 
+    @apply h-full; 
+}
+
+body { 
+    @apply bg-body dark:bg-dark-body m-0 font-nunito box-border;
+}

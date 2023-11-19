@@ -11,5 +11,6 @@
     "editor.rulers": [
         100,
         120
-    ]
+    ],
+    "css.customData": [".vscode/tailwind.json"]
 }

@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+@include mat.core();
+$finance-angular-primary: mat.define-palette(mat.$indigo-palette);
+$finance-angular-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$finance-angular-warn: mat.define-palette(mat.$red-palette);
+$finance-angular-theme: mat.define-light-theme((
+  color: (
+    primary: $finance-angular-primary,
+    accent: $finance-angular-accent,
+    warn: $finance-angular-warn,
+  )
+));
+@include mat.all-component-themes($finance-angular-theme);
