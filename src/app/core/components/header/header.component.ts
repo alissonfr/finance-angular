@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
-import { ThemeSwitcher } from "../../../utils/theme.switcher";
+import { ThemeSwitcher } from "@utils/theme-switcher";
 
 @Component({
     selector: "header-component",

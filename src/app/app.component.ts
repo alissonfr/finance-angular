@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidenavComponent } from "./core/components/sidenav/sidenav.component";
-import { ThemeSwitcher } from "./utils/theme.switcher";
+import { ThemeSwitcher } from "./utils/theme-switcher";
 
 @Component({
     selector: "app-root",

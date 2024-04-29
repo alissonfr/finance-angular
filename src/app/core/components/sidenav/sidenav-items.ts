@@ -1,9 +1,19 @@
-import { SidenavItem } from "../../../types/sidenav-item.type";
+import { SidenavItem } from "@interfaces/sidenav-item.interface";
 
 export const SidenavItems: SidenavItem[] = [
     {
-        name: "Início",
-        route: "",
+        name: "Principal",
+        route: "/dashboard",
         icon: "grid_view"
-    }
+    },
+    {
+        name: "Transações",
+        route: "/transactions",
+        icon: "paid"
+    },
+    {
+        name: "Relatórios",
+        route: "/reports",
+        icon: "summarize"
+    },
 ]

@@ -1,20 +1,23 @@
 header {
-    @apply flex items-center justify-end py-4 px-6 gap-2 bg-body-1 dark:bg-body-dark-1;
+    @apply flex items-center justify-between py-4 px-6 bg-body-1 dark:bg-body-dark-1;
+    .items {
+        @apply flex items-center justify-end gap-2;
+
+        .avatar, .notifications, .theme {
+            @apply cursor-pointer w-9 h-9 rounded-full;
     
-    .avatar, .notifications, .theme {
-        @apply cursor-pointer w-9 h-9 rounded-full;
-
-        mat-icon {
-            @apply w-5 h-5 text-[1.25rem]
+            mat-icon {
+                @apply w-5 h-5 text-[1.25rem]
+            }
         }
-    }
-
-    .notifications {
-        @apply bg-[#0740D9] text-text-dark;
-    }
-
-    .theme {
-        @apply bg-body-2 dark:bg-body-dark-2 rounded-xl;
+    
+        .notifications {
+            @apply bg-accent text-text-dark;
+        }
+    
+        .theme {
+            @apply bg-body-2 dark:bg-body-dark-2 rounded-xl;
+        }
     }
 
 }

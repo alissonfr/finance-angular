@@ -1,21 +1,25 @@
-<header class="default-text">
-    <div class="avatar" [matMenuTriggerFor]="menu">
-        <img class="avatar" src="./assets/img/avatar.png" alt="">
-    </div>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Sair</span>
-        </button>
-    </mat-menu>
+<header>
+    <ng-content></ng-content>
 
-    <div class="notifications flex-center">
-        <mat-icon class="material-icons-outlined">notifications</mat-icon>
-    </div>
-
-    <div class="theme flex-center" (click)="change()">
-        <mat-icon class="material-icons-outlined">
-            {{ (themeSwitcher.theme | async) === "dark" ? "dark_mode" : "light_mode" }}
-        </mat-icon>
+    <div class="items default-text">
+        <div class="avatar" [matMenuTriggerFor]="menu">
+            <img class="avatar" src="./assets/img/avatar.png" alt="">
+        </div>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Sair</span>
+            </button>
+        </mat-menu>
+    
+        <div class="notifications flex-center">
+            <mat-icon class="material-icons-outlined">notifications</mat-icon>
+        </div>
+    
+        <div class="theme flex-center" (click)="change()">
+            <mat-icon class="material-icons-outlined">
+                {{ (themeSwitcher.theme | async) === "dark" ? "dark_mode" : "light_mode" }}
+            </mat-icon>
+        </div>
     </div>
 </header>

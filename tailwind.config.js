@@ -31,7 +31,8 @@ module.exports = {
         text: {
           DEFAULT: "#2E335B",
           dark: "#FFF",
-        }
+        },
+        accent: "#0041E1"
       },
     },
   },

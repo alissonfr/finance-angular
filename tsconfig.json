@@ -22,7 +22,16 @@
       "ES2022",
       "dom"
     ],
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["./src/app/core/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@utils/*": ["./src/app/utils/*"],
+      "@views/*": ["./src/app/views/*"],
+      "@assets/*": ["./src/assets/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

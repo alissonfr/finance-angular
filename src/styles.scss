@@ -4,6 +4,7 @@
 
 @import "./assets/theme/reset";
 @import "./assets/theme/material";
+@import "./assets/theme/utilitary-classes";
 
 html, body { 
     @apply h-full; 
@@ -11,20 +12,4 @@ html, body {
 
 body { 
     @apply m-0 font-nunito box-border;
-}
-
-.default-text {
-    @apply text-text dark:text-text-dark;
-}
-
-.flex-center {
-    @apply flex items-center justify-center;
-}
-
-::-webkit-scrollbar {
-    @apply w-[.4rem] h-[.4rem] rounded bg-gray-400 dark:bg-gray-500;
-}
-
-::-webkit-scrollbar-thumb {
-    @apply rounded bg-gray-600 dark:bg-gray-800;
 }
