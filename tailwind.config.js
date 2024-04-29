@@ -20,9 +20,18 @@ module.exports = {
         nunito: ["Nunito Sans, sans-serif"],
       },
       colors: {
-        primary: "#2E335B",
-        body: "#EEEDEB",
-        "dark-body": "#141332"
+        body: {
+          1: "#EEEDEB",
+          2: "#d7d5d1",
+          3: "#bebab3",
+          'dark-1': "#0A101A",
+          'dark-2': "#030911",
+          'dark-3': "#02080F",
+        },
+        text: {
+          DEFAULT: "#2E335B",
+          dark: "#FFF",
+        }
       },
     },
   },
