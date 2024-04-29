@@ -1,0 +1,17 @@
+:host ::ng-deep {
+
+    mat-sidenav-container {
+        mat-sidenav {
+            @apply bg-body-3 dark:bg-body-dark-3;
+
+            &.mat-drawer-opened {
+                @apply w-[270px];
+            }
+        }
+
+        mat-sidenav-content {
+            @apply min-h-screen bg-body-2 dark:bg-body-dark-2;
+        }
+    }
+
+}

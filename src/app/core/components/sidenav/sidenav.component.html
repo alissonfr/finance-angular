@@ -1,0 +1,16 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [opened]="true" [mode]="navMode" (mouseenter)="changeSize('normal')" (mouseleave)="changeSize('mini')">
+        <mat-nav-list>
+            @for (item of items; track item.route) {
+                <mat-icon>{{ item.icon }}</mat-icon>
+                <span>{{ item.name }}</span>
+            }
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <header-component></header-component>
+        <main>
+            <ng-content></ng-content>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -5,7 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ThemeSwitcher } from '../../../utils/theme.switcher';
 
 @Component({
-  selector: 'app-header',
+  selector: 'header-component',
   standalone: true,
   imports: [CommonModule, MatIconModule, MatMenuModule],
   templateUrl: './header.component.html',
