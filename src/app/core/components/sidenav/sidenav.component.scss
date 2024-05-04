@@ -2,15 +2,15 @@
 
     mat-sidenav-container {
         .title {
-            @apply p-3 pb-20;
+            @apply mx-6 mt-6 mb-16;
 
-            h1 {
-                @apply text-2xl font-black;
+            img {
+                @apply h-6 content-[url('../../../../assets/img/logo-dark.svg')] dark:content-[url('../../../../assets/img/logo-light.svg')]
             }
         }
 
         mat-sidenav {
-            @apply bg-body-3 dark:bg-body-dark-3;
+            @apply bg-white dark:bg-body-dark-3 border-0;
 
             &.mat-drawer-opened {
                 @apply w-[250px];
@@ -23,10 +23,10 @@
                     @apply list-none;
                     
                     li {
-                        @apply flex items-center justify-start gap-2 pl-3 py-2 cursor-pointer text-sm;
+                        @apply flex items-center justify-start gap-2 pl-5 py-2 cursor-pointer text-sm;
     
                         &:hover {
-                            @apply bg-accent;
+                            @apply bg-gray-100 dark:bg-accent;
                         }
     
                         mat-icon {
@@ -38,7 +38,7 @@
         }
 
         mat-sidenav-content {
-            @apply min-h-screen bg-body-2 dark:bg-body-dark-2;
+            @apply min-h-screen bg-body-1 dark:bg-body-dark-2;
         }
     }
 

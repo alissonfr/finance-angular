@@ -21,9 +21,7 @@ module.exports = {
       },
       colors: {
         body: {
-          1: "#EEEDEB",
-          2: "#d7d5d1",
-          3: "#bebab3",
+          1: "#F9F9F9",
           'dark-1': "#0A101A",
           'dark-2': "#030911",
           'dark-3': "#02080F",
@@ -32,7 +30,7 @@ module.exports = {
           DEFAULT: "#2E335B",
           dark: "#FFF",
         },
-        accent: "#0041E1"
+        accent: "#3D56B2"
       },
     },
   },
