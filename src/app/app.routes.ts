@@ -1,6 +1,5 @@
 import { Routes } from "@angular/router";
-import { DashboardComponent } from "@views/dashboard/dashboard.component";
-import { NotFoundComponent } from "@views/not-found/not-found.component";
+import { SidenavComponent } from "@core/components/sidenav/sidenav.component";
 
 export const routes: Routes = [
     {
@@ -9,15 +8,20 @@ export const routes: Routes = [
         pathMatch: "full",
     },
     {
-        path: "dashboard",
-        component: DashboardComponent
+        path: "login",
+        loadChildren: () => import("./views/auth/auth.routes").then((r) => r.routes),
     },
     {
-        path: "404",
-        component: NotFoundComponent
+        path: "dashboard",
+        loadChildren: () => import("./views/dashboard/dashboard.routes").then((r) => r.routes),
+        component: SidenavComponent,
+    },
+    {
+        path: "not-found",
+        loadChildren: () => import("./views/not-found/not-found.routes").then((r) => r.routes),
     },
     {
         path: "**",
-        redirectTo: "404",
+        redirectTo: "not-found",
     },
 ];

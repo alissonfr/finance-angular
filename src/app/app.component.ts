@@ -8,7 +8,7 @@ import { ThemeSwitcher } from "./utils/theme-switcher";
     selector: "app-root",
     standalone: true,
     imports: [CommonModule, RouterOutlet, SidenavComponent],
-    templateUrl: "./app.component.html",
+    template: "<router-outlet />",
 })
 export class AppComponent {
     constructor(

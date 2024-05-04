@@ -2,12 +2,12 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 
 @Component({
-    selector: "dashboard",
+    selector: "auth",
     standalone: true,
     imports: [CommonModule],
-    templateUrl: "./dashboard.component.html",
-    styleUrl: "./dashboard.component.scss"
+    templateUrl: "./auth.component.html",
+    styleUrl: "./auth.component.scss"
 })
-export class DashboardComponent {
+export class AuthComponent {
 
 }
