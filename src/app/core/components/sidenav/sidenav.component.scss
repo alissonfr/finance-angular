@@ -25,7 +25,7 @@
                     li {
                         @apply flex items-center justify-start gap-2 pl-5 py-2 cursor-pointer text-sm;
     
-                        &:hover {
+                        &.active, &:hover {
                             @apply bg-gray-100 dark:bg-accent;
                         }
     
@@ -39,6 +39,14 @@
 
         mat-sidenav-content {
             @apply min-h-screen bg-body-1 dark:bg-body-dark-2;
+
+            header-component header {
+                @apply h-[68px]
+            }
+
+            main {
+                @apply h-[calc(100vh-68px)];
+            }
         }
     }
 

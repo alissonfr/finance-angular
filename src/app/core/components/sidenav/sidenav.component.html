@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav [opened]="!isMobile" [mode]="isMobile ? 'over' : 'side'">
         <mat-nav-list>
-            <div class="title">
+            <div class="title flex-center">
                 <img alt="logo">
             </div>
             <ul>
@@ -16,9 +16,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <header-component>
-            <div>
-                <mat-icon *ngIf="isMobile" (click)="toggleMenu()">menu</mat-icon>
-            </div>
+            <mat-icon *ngIf="isMobile" (click)="toggleMenu()">menu</mat-icon>
         </header-component>
         <main>
             <router-outlet></router-outlet>

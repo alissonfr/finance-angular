@@ -1,5 +1,6 @@
 header {
     @apply flex items-center justify-between py-4 px-6 bg-white dark:bg-body-dark-1;
+    
     .items {
         @apply flex items-center justify-end gap-2;
 
@@ -12,7 +13,11 @@ header {
         }
     
         .notifications {
-            @apply bg-accent text-text-dark;
+            @apply bg-accent text-text-dark relative;
+
+            &:after {
+                @apply content-[""] absolute w-2.5 h-2.5 bg-red-500 rounded-full top-0 right-0;
+            }
         }
     
         .theme {

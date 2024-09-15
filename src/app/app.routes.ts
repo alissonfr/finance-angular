@@ -17,6 +17,11 @@ export const routes: Routes = [
         component: SidenavComponent,
     },
     {
+        path: "transacoes",
+        loadChildren: () => import("./views/transacoes/transacoes.routes").then((r) => r.routes),
+        component: SidenavComponent,
+    },
+    {
         path: "not-found",
         loadChildren: () => import("./views/not-found/not-found.routes").then((r) => r.routes),
     },

@@ -8,7 +8,7 @@ export const SidenavItems: SidenavItem[] = [
     },
     {
         name: "Transações",
-        route: "/transactions",
+        route: "/transacoes",
         icon: "paid"
     },
     {

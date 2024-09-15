@@ -4,7 +4,7 @@ import { Component, ViewChild } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { SidenavItem } from "@interfaces/sidenav-item.interface";
 import { HeaderComponent } from "../header/header.component";
 import { SidenavItems } from "./sidenav-items";
@@ -33,13 +33,20 @@ export class SidenavComponent {
     isCollapsed = true;
     items: SidenavItem[] = SidenavItems;
   
-    constructor (private _breakpointObserver: BreakpointObserver) {}
+    constructor (
+        private _breakpointObserver: BreakpointObserver,
+        private _router: Router
+    ) {}
 
     ngOnInit(): void {
         this._watchBreakpoint();
     }
 
-    toggleMenu() {
+    isCurrentRoute(route: string): boolean {
+        return this._router.url === route;
+    }
+
+    toggleMenu(): void {
         if(this.isMobile){
             this.sidenav.toggle();
             this.isCollapsed = false;
