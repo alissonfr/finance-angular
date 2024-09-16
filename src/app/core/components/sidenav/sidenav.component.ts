@@ -5,7 +5,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { SidenavItem } from "@interfaces/sidenav-item.interface";
+import { SidenavItem } from "@interfaces/sidenav-item.type";
+import { ThemeSwitcher } from "@utils/theme-switcher";
 import { HeaderComponent } from "../header/header.component";
 import { SidenavItems } from "./sidenav-items";
 
@@ -32,14 +33,20 @@ export class SidenavComponent {
     isMobile = true;
     isCollapsed = true;
     items: SidenavItem[] = SidenavItems;
+
+    private readonly LOGO_URL = "./assets/img/logo-dark.svg"
+    private readonly DARK_LOGO_URL = "./assets/img/logo-light.svg"
+    logo: string = this.LOGO_URL;
   
     constructor (
         private _breakpointObserver: BreakpointObserver,
-        private _router: Router
+        private _router: Router,
+        private _themeSwitcher: ThemeSwitcher
     ) {}
 
     ngOnInit(): void {
         this._watchBreakpoint();
+        this._watchTheme();
     }
 
     isCurrentRoute(route: string): boolean {
@@ -58,5 +65,9 @@ export class SidenavComponent {
 
     private _watchBreakpoint(): void {
         this._breakpointObserver.observe(["(max-width: 800px)"]).subscribe((screenSize: BreakpointState) => this.isMobile = screenSize.matches);
+    }
+
+    private _watchTheme(): void {
+        this._themeSwitcher.theme.subscribe(theme => theme === "dark" ? this.DARK_LOGO_URL : this.LOGO_URL)
     }
 }

@@ -8,8 +8,7 @@ import { ThemeSwitcher } from "@utils/theme-switcher";
     selector: "header-component",
     standalone: true,
     imports: [CommonModule, MatIconModule, MatMenuModule],
-    templateUrl: "./header.component.html",
-    styleUrl: "./header.component.scss"
+    templateUrl: "./header.component.html"
 })
 export class HeaderComponent {
     constructor (

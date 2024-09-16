@@ -1,16 +1,3 @@
-
-.card {
-    @apply bg-zinc-200 dark:bg-body-dark-1 w-full h-full rounded-xl text-text dark:text-text-dark;
-}
-
-.row {
-    @apply flex gap-6;
-}
-
 :host {
     @apply flex w-full h-full p-6 gap-6;
-
-    section {
-        @apply flex flex-col gap-6;
-    }
 }

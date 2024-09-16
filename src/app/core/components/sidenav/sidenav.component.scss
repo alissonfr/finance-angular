@@ -1,51 +1,14 @@
 :host ::ng-deep {
-
     mat-sidenav-container {
-        .title {
-            @apply mx-6 mt-6 mb-16;
-
-            img {
-                @apply h-6 content-[url('../../../../assets/img/logo-dark.svg')] dark:content-[url('../../../../assets/img/logo-light.svg')]
-            }
-        }
-
         mat-sidenav {
-            @apply bg-white dark:bg-body-dark-3 border-0;
-
             &.mat-drawer-opened {
                 @apply w-[250px];
             }
 
-            mat-nav-list {
-                @apply flex flex-col;
-
-                ul {
-                    @apply list-none;
-                    
-                    li {
-                        @apply flex items-center justify-start gap-2 pl-5 py-2 cursor-pointer text-sm;
-    
-                        &.active, &:hover {
-                            @apply bg-gray-100 dark:bg-accent;
-                        }
-    
-                        mat-icon {
-                            @apply w-5 h-5 text-[1.25rem];
-                        }
-                    }
+            mat-nav-list ul li {
+                &.active, &:hover {
+                    @apply bg-gray-100 dark:bg-accent;
                 }
-            }
-        }
-
-        mat-sidenav-content {
-            @apply min-h-screen bg-body-1 dark:bg-body-dark-2;
-
-            header-component header {
-                @apply h-[68px]
-            }
-
-            main {
-                @apply h-[calc(100vh-68px)];
             }
         }
     }

@@ -2,9 +2,9 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 
 @Component({
-    selector: "auth",
+    selector: "dashboard-card",
     standalone: true,
     imports: [CommonModule],
-    templateUrl: "./auth.component.html"
+    templateUrl: "./dashboard-card.component.html",
 })
-export class AuthComponent {}
+export class DashboardCardComponent {}

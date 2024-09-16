@@ -5,3 +5,7 @@
 ::-webkit-scrollbar-thumb {
     @apply rounded bg-gray-600 dark:bg-gray-800;
 }
+
+ul {
+    @apply list-none;
+}
