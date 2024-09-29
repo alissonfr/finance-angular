@@ -18,7 +18,7 @@
         <header-component>
             <mat-icon *ngIf="isMobile" (click)="toggleMenu()">menu</mat-icon>
         </header-component>
-        <main class="h-[calc(100vh-68px)]">
+        <main class="h-[calc(100vh-68px)] overflow-x-hidden">
             <router-outlet></router-outlet>
         </main>
     </mat-sidenav-content>
