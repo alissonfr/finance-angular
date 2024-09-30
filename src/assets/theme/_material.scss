@@ -17,3 +17,7 @@ $finance-angular-theme: mat.define-light-theme((
   align-items: center !important;
   justify-content: center !important;
 }
+
+.mdc-tooltip__surface {
+  font-size: 12px !important;
+}

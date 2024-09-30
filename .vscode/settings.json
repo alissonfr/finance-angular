@@ -12,5 +12,6 @@
         100,
         120
     ],
-    "css.customData": [".vscode/tailwind.json"]
+    "css.customData": [".vscode/tailwind.json"],
+    "scss.lint.unknownAtRules": "ignore"
 }

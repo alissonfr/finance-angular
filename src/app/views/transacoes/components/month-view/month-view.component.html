@@ -1,8 +1,8 @@
 <div class="flex items-center justify-center gap-2 cursor-default">
     <chevron (click)="dateControl.previousMonth()" direction="left"></chevron>
-    <span (click)="dateControl.changeView()" class="flex items-center justify-center gap-0.5 border-2 border-gray-800 p-2 rounded-3xl
-        hover:bg-gray-200
-        dark:border-gray-200 dark:text-gray-200">
+    <span (click)="dateControl.changeView()" class="flex items-center justify-center gap-0.5 border-2 border-accent text-accent p-2 rounded-3xl
+        hover:bg-gray-100
+        dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-700">
         <mat-icon class="mr-2">calendar_month</mat-icon>
         <b class="mr-0.5">{{ dateControl.getMonthLabel() | async }}</b>
         {{ dateControl.year | async }}

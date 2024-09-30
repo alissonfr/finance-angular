@@ -5,7 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { SidenavItem } from "@interfaces/sidenav-item.type";
+import { SidenavItem } from "@core/components/sidenav/sidenav-item.type";
 import { ThemeSwitcher } from "@utils/theme-switcher";
 import { HeaderComponent } from "../header/header.component";
 import { SidenavItems } from "./sidenav-items";
