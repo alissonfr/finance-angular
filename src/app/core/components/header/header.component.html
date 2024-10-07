@@ -21,7 +21,7 @@
     
         <div class="flex-center cursor-pointer w-9 h-9 bg-gray-200 dark:bg-body-dark-2 rounded-xl" (click)="change()">
             <mat-icon class="material-icons-outlined w-5 h-5 text-[1.25rem]">
-                {{ (themeSwitcher.theme | async) === "dark" ? "dark_mode" : "light_mode" }}
+                {{ themeSwitcher.theme() === "dark" ? "dark_mode" : "light_mode" }}
             </mat-icon>
         </div>
     </div>

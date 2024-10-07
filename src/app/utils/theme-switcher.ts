@@ -1,5 +1,4 @@
-import { Injectable, afterNextRender } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable, effect, signal } from "@angular/core";
 
 type Theme = "light" | "dark";
 
@@ -7,20 +6,18 @@ type Theme = "light" | "dark";
     providedIn: "root"
 })
 export class ThemeSwitcher {
-    public theme: BehaviorSubject<Theme> = new BehaviorSubject<Theme>("light");
-
+    public theme = signal<Theme>("light");
+    
     constructor() {
-        afterNextRender(() => {
-            this.theme.subscribe((theme) => this.handleTheme(theme));
-        });
+        effect(() => this.handleTheme(this.theme()));
     }
 
     load() {
-        this.theme.next("light");
+        this.theme.set("light");
     }
 
     changeTo(theme: Theme) {
-        this.theme.next(theme);
+        this.theme.set(theme);
     }
 
     private handleTheme(theme: Theme) {

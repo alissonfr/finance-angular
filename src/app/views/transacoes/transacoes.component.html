@@ -4,7 +4,7 @@
     <transacao-card>Balanço mensal</transacao-card>
 </div>
 
-<div class="flex flex-col bg-white w-full mt-7 dark:bg-gray-900">
+<div class="flex flex-col bg-white w-full mt-7 dark:bg-gray-950">
     <div class="flex flex-col gap-2 w-full my-6">
         @if(dateControlService.showMonthView | async) {
             <month-view/>
@@ -16,7 +16,7 @@
     <div class="table-section">
         <table>
             <thead>
-                <th fin-col><checkbox /></th>
+                <th fin-col><checkbox/></th>
                 <th fin-col fin-sort-header>Data</th>
                 <th fin-col fin-sort-header>Descrição</th>
                 <th fin-col fin-sort-header>Categoria</th>
@@ -27,7 +27,7 @@
             <tbody>
                 @for (transaction of transactions; track transaction.transactionId) {
                     <tr>
-                        <th fin-col><checkbox /></th>
+                        <th fin-col><checkbox/></th>
                         <td>{{ transaction.date }}</td>
                         <td>{{ transaction.description }}</td>
                         <td>{{ transaction.category }}</td>

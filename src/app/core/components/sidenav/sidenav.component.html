@@ -2,7 +2,7 @@
     <mat-sidenav [opened]="!isMobile" [mode]="isMobile ? 'over' : 'side'" class="bg-white dark:bg-body-dark-3 border-0">
         <mat-nav-list class="flex flex-col">
             <div class="flex-center mx-6 mt-6 mb-16">
-                <img class="h-6" alt="logo" [src]="logo">
+                <img class="h-6" alt="logo" [src]="themeSwitcher.theme() === 'dark' ? DARK_LOGO_URL : LOGO_URL">
             </div>
             <ul>
                 @for (item of items; track item.route) {

@@ -16,7 +16,7 @@ export class HeaderComponent {
     ) {}
   
     public change() {
-        const currentTheme = this.themeSwitcher.theme.getValue();
+        const currentTheme = this.themeSwitcher.theme();
         this.themeSwitcher.changeTo(currentTheme === "light" ? "dark" : "light");
     }
 }

@@ -34,19 +34,17 @@ export class SidenavComponent {
     isCollapsed = true;
     items: SidenavItem[] = SidenavItems;
 
-    private readonly LOGO_URL = "./assets/img/logo-dark.svg"
-    private readonly DARK_LOGO_URL = "./assets/img/logo-light.svg"
-    logo: string = this.LOGO_URL;
+    readonly LOGO_URL = "assets/img/logo-dark.svg"
+    readonly DARK_LOGO_URL = "assets/img/logo-light.svg"
   
     constructor (
         private _breakpointObserver: BreakpointObserver,
         private _router: Router,
-        private _themeSwitcher: ThemeSwitcher
+        public themeSwitcher: ThemeSwitcher
     ) {}
 
     ngOnInit(): void {
         this._watchBreakpoint();
-        this._watchTheme();
     }
 
     isCurrentRoute(route: string): boolean {
@@ -65,9 +63,5 @@ export class SidenavComponent {
 
     private _watchBreakpoint(): void {
         this._breakpointObserver.observe(["(max-width: 800px)"]).subscribe((screenSize: BreakpointState) => this.isMobile = screenSize.matches);
-    }
-
-    private _watchTheme(): void {
-        this._themeSwitcher.theme.subscribe(theme => theme === "dark" ? this.DARK_LOGO_URL : this.LOGO_URL)
-    }
+    }  
 }

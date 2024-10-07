@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidenavComponent } from "./core/components/sidenav/sidenav.component";
 import { ThemeSwitcher } from "./utils/theme-switcher";
@@ -11,9 +11,7 @@ import { ThemeSwitcher } from "./utils/theme-switcher";
     template: "<router-outlet />",
 })
 export class AppComponent {
-    constructor(
-        private _themeSwitcher: ThemeSwitcher
-    ) { }
+    private _themeSwitcher = inject(ThemeSwitcher)
   
     ngOnInit(): void {
         this._themeSwitcher.load();
