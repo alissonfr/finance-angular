@@ -1,8 +1,13 @@
+import { Account } from "./account";
+import { TransactionCategory } from "./transaction-category";
+import { User } from "./user";
+
 export class Transaction {
     transactionId?: number;
-    date: string;
+    date: Date;
     description: string;
-    category: string;
-    account: string;
     amount: string;
+    category: TransactionCategory;
+    account: Account;
+    user: User;
 }

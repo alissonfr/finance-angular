@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalAddComponent } from './modal-add.component';
+import { AutocompleteComponent } from './autocomplete.component';
 
-describe('ModalAddComponent', () => {
-  let component: ModalAddComponent;
-  let fixture: ComponentFixture<ModalAddComponent>;
+describe('AutocompleteComponent', () => {
+  let component: AutocompleteComponent;
+  let fixture: ComponentFixture<AutocompleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalAddComponent]
+      imports: [AutocompleteComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ModalAddComponent);
+    fixture = TestBed.createComponent(AutocompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

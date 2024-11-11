@@ -43,6 +43,9 @@ export class TransacoesComponent {
     }
 
     getTransactions() {
-        this.transactionService.getTransactions().subscribe(result => this.transactions = result);
+        this.transactionService.find().subscribe({
+            next: result => this.transactions = result,
+            error: e => console.error(e)
+        });
     }
 }

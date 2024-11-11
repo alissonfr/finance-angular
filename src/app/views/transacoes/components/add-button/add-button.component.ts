@@ -20,6 +20,8 @@ export class AddButtonComponent {
     open() {
         const dialogRef = this.dialog.open(ModalAddComponent, {
             data: {},
+            minWidth: "700px"
+            
         });
       
         dialogRef.afterClosed().subscribe(result => {

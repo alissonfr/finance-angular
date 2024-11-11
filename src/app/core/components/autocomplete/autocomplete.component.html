@@ -1,0 +1,28 @@
+<div class="dropdown-container relative mb-5">
+    <input
+      type="text"
+      formControlName="searchControl"
+      (focus)="openDropdown()"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      placeholder="Pesquisar..."
+      autocomplete="off"
+    />
+    
+    <div *ngIf="isDropdownOpen" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 dark:bg-gray-700 dark:border-gray-600">
+      <ul class="max-h-60 overflow-auto">
+        <li
+          *ngFor="let item of filteredItems"
+          (click)="selectItem(item)"
+          class="cursor-pointer px-4 py-2 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600"
+        >
+          {{ item[displayProperty] }}
+        </li>
+        <li
+          (click)="onAddNew()"
+          class="cursor-pointer px-4 py-2 text-blue-500 hover:bg-blue-100 dark:hover:bg-blue-600 dark:text-blue-400">
+          Novo
+        </li>
+      </ul>
+    </div>
+  </div>
+  
