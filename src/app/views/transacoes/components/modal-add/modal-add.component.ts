@@ -1,11 +1,19 @@
-import { Component } from "@angular/core";
+import { CommonModule, formatDate } from "@angular/common";
+import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { AutocompleteComponent } from "@core/components/autocomplete/autocomplete.component";
+import { FinAutocompleteComponent } from "@core/forms/fin-autocomplete/fin-autocomplete.component";
+import { AccountService } from "@services/api/account.service";
+import { TransactionCategoryService } from "@services/api/transaction-category.service";
+import { DateControlService } from "@services/date-control.service";
+import { firstValueFrom } from "rxjs";
+import { AccountDTO } from "src/app/dtos/account/account.dto";
+import { TransactionCategoryDTO } from "src/app/dtos/transaction-category/transaction-category.dto";
+import { FinDatePickerComponent } from "../../../../core/forms/fin-date-picker/fin-date-picker.component";
 
 @Component({
     selector: "app-modal-add",
     standalone: true,
-    imports: [ReactiveFormsModule, AutocompleteComponent],
+    imports: [CommonModule, ReactiveFormsModule, FinAutocompleteComponent, FinDatePickerComponent],
     templateUrl: "./modal-add.component.html",
     styleUrl: "./modal-add.component.scss"
 })
@@ -17,13 +25,36 @@ export class ModalAddComponent {
 
         categoryId: new FormControl("", [Validators.required]),
         accountId: new FormControl("", [Validators.required]),
-        userId: new FormControl("", [Validators.required]),
     });
+    accounts: AccountDTO[] = [];
+    categories: TransactionCategoryDTO[] = [];
+    
+    private dateControlService = inject(DateControlService)
+    private accountService = inject(AccountService)
+    private transactionCategoryService = inject(TransactionCategoryService)
 
-    users: unknown[] = [
-        { id: 1, name: "Alice", email: "alice@example.com" },
-        { id: 2, name: "Bob", email: "bob@example.com" },
-    ];
+    ngOnInit() {
+        this.initDateInput();
+
+        this.accountService.find().subscribe({
+            next: result => this.accounts = result,
+            error: e => console.error(e)
+        });
+        this.transactionCategoryService.find().subscribe({
+            next: result => this.categories = result,
+            error: e => console.error(e)
+        });
+    }
+
+    async initDateInput(): Promise<void> {
+        const date = new Date();
+        date.setFullYear(await firstValueFrom(this.dateControlService.year));
+        date.setMonth(await firstValueFrom(this.dateControlService.monthIndex));
+        
+        console.log(formatDate(date, "yyyy-MM-dd", "pt-BR"))
+        this.formGroup.get("date")?.setValue(formatDate(date, "yyyy-MM-dd", "pt-BR"));
+
+    }
 
     submit(): void {
         console.log(this.formGroup.value)

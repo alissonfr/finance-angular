@@ -16,7 +16,7 @@
     <div class="table-section">
         <table>
             <thead>
-                <th fin-col><checkbox/></th>
+                <th fin-col><fin-checkbox/></th>
                 <th fin-col fin-sort-header>Data</th>
                 <th fin-col fin-sort-header>Descrição</th>
                 <th fin-col fin-sort-header>Categoria</th>
@@ -27,11 +27,11 @@
             <tbody>
                 @for (transaction of transactions; track transaction.transactionId) {
                     <tr>
-                        <th fin-col><checkbox/></th>
-                        <td>{{ transaction.date }}</td>
+                        <th fin-col><fin-checkbox/></th>
+                        <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ transaction.description }}</td>
-                        <td>{{ transaction.category }}</td>
-                        <td>{{ transaction.account }}</td> 
+                        <td>{{ transaction.category.name }}</td>
+                        <td>{{ transaction.account.name }}</td> 
                         <td class="bolder">R$ {{ transaction.amount }}</td>
                         <td><mat-icon class="material-symbols-outlined ">more_vert</mat-icon></td>
                     </tr>

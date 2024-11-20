@@ -1,4 +1,4 @@
-import { SidenavItem } from "@core/components/sidenav/sidenav-item.type";
+import { SidenavItem } from "./sidenav-item.type";
 
 export const SidenavItems: SidenavItem[] = [
     {

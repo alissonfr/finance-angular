@@ -3,11 +3,11 @@ import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-    selector: "table-sorter",
+    selector: "fin-table-sorter",
     standalone: true,
     imports: [CommonModule, MatIconModule],
-    templateUrl: "./table-sorter.component.html"
+    templateUrl: "./fin-table-sorter.component.html"
 })
-export class TableSorterComponent {
+export class FinTableSorterComponent {
 
 }

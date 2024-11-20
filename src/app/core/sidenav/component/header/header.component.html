@@ -8,7 +8,7 @@
             <img class="cursor-pointer w-9 h-9 rounded-full" src="./assets/img/avatar.png" alt="">
         </div>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button (click)="logout()" mat-menu-item>
                 <mat-icon class="w-5 h-5 text-[1.25rem]">exit_to_app</mat-icon>
                 <span>Sair</span>
             </button>

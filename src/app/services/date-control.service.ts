@@ -21,7 +21,7 @@ enum MonthsIndexEnum {
     providedIn: "root" 
 })
 export class DateControlService {
-    private monthIndex: BehaviorSubject<number> = new BehaviorSubject<number>(new Date().getMonth());
+    monthIndex: BehaviorSubject<number> = new BehaviorSubject<number>(new Date().getMonth());
     showMonthView: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     year: BehaviorSubject<number> = new BehaviorSubject<number>(new Date().getFullYear());
     

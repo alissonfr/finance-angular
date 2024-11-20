@@ -1,14 +1,17 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { SidenavComponent } from "./core/components/sidenav/sidenav.component";
+import { FinToastComponent } from "@core/fin-toast/fin-toast.component";
 import { ThemeSwitcher } from "./utils/theme-switcher";
 
 @Component({
     selector: "app-root",
     standalone: true,
-    imports: [CommonModule, RouterOutlet, SidenavComponent],
-    template: "<router-outlet />",
+    imports: [CommonModule, RouterOutlet, FinToastComponent],
+    template: `
+        <router-outlet /> 
+        <fin-toast />
+    `
 })
 export class AppComponent {
     private _themeSwitcher = inject(ThemeSwitcher)

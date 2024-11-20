@@ -3,18 +3,14 @@ import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, HostListener, Input, Output } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 
-export class AutoCompleteConfig<T> {
-    items: T[];
-}
-
 @Component({
     selector: "fin-autocomplete",
     standalone: true,
     imports: [CommonModule],
-    templateUrl: "./autocomplete.component.html",
-    styleUrl: "./autocomplete.component.scss"
+    templateUrl: "./fin-autocomplete.component.html",
+    styleUrl: "./fin-autocomplete.component.scss"
 })
-export class AutocompleteComponent {
+export class FinAutocompleteComponent {
   @HostListener("document:click", ["$event"])
     clickOutside(event: Event) {
         const target = event.target as HTMLElement;
