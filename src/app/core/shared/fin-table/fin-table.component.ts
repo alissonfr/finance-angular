@@ -18,8 +18,6 @@ export class FinTableComponent implements AfterContentInit {
   @Input() data: any[] = [];
   @Input() columns: string[] = [];
   @Input() displayColumns: string[] = [];
-  @Input() pageSize: number = 5;
-  currentPage: number = 0;
 
   @Output() sorted = new EventEmitter<{ column: string, direction: "asc" | "desc" }>();
 
@@ -73,19 +71,5 @@ export class FinTableComponent implements AfterContentInit {
       });
 
       this.sorted.emit({ column, direction: this.sortDirection });
-  }
-
-  changePage(page: number) {
-      this.currentPage = page;
-  }
-
-  get paginatedData() {
-      const start = this.currentPage * this.pageSize;
-      const end = start + this.pageSize;
-      return this.data.slice(start, end);
-  }
-
-  get totalPages() {
-      return Math.ceil(this.data.length / this.pageSize);
   }
 }

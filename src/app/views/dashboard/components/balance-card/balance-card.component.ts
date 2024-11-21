@@ -2,9 +2,9 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 
 @Component({
-    selector: "dashboard-card",
+    selector: "balance-card",
     standalone: true,
     imports: [CommonModule],
-    templateUrl: "./dashboard-card.component.html",
+    templateUrl: "./balance-card.component.html",
 })
-export class DashboardCardComponent {}
+export class BalanceCardComponent {}

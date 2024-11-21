@@ -13,7 +13,7 @@
         }
     </div>
 
-    <!-- <div class="table-section">
+    <div class="fin-table">
         <table>
             <thead>
                 <th><fin-checkbox/></th>
@@ -35,14 +35,12 @@
                         <td class="bolder">R$ {{ transaction.amount }}</td>
                         <td><mat-icon class="material-symbols-outlined ">more_vert</mat-icon></td>
                     </tr>
-                  } @empty {
-                    <h1>Sem registros.</h1>
                   }
             </tbody>
         </table>
-    </div> -->
+    </div>
 
-    <fin-table [data]="transactions" [columns]="columns" [displayColumns]="displayColumns" [pageSize]="5" />
+    <!-- <fin-table [data]="transactions" [columns]="columns" [displayColumns]="displayColumns" /> -->
 
 
 </div>
