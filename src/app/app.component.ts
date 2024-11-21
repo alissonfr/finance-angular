@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { FinToastComponent } from "@core/fin-toast/fin-toast.component";
+import { FinToastComponent } from "@core/shared/fin-toast/fin-toast.component";
 import { ThemeSwitcher } from "./utils/theme-switcher";
 
 @Component({

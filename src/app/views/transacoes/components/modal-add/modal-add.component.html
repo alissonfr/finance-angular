@@ -12,15 +12,15 @@
     <form class="p-6"[formGroup]="formGroup">
       <div class="input-group">
         <label for="date">Data</label>
-        <fin-date-picker formControlName="date" />
+        <fin-date-picker controlName="date" />
       </div>
       <div class="input-group">
-        <label for="password">Descrição</label>
-        <input type="password" id="password"required formControlName="description" />
+        <label for="description">Descrição</label>
+        <fin-input id="description" required formControlName="description" />
       </div>
       <div class="input-group">
         <label for="value">Valor</label>
-        <input type="value" id="value"placeholder="name@flowbite.com" required formControlName="amount" />
+        <fin-input id="value" placeholder="R$ 12.99" required formControlName="amount" />
       </div>
       <div class="input-group">
         <label for="category">Categoria</label>
@@ -28,7 +28,7 @@
           [formGroup]="formGroup"
           [items]="categories"
           displayProperty="name"
-          formControlName="categoryId"
+          controlName="categoryId"
           (addNewItem)="handleAddNew($event)" />    
       </div>
       <div class="input-group">
@@ -37,7 +37,7 @@
           [formGroup]="formGroup"
           [items]="accounts"
           displayProperty="name"
-          formControlName="accountId"
+          controlName="accountId"
           (addNewItem)="handleAddNew($event)" />    
       </div>
   

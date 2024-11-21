@@ -1,19 +1,18 @@
 import { CommonModule, formatDate } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { FinAutocompleteComponent } from "@core/forms/fin-autocomplete/fin-autocomplete.component";
+import { FinFormsModule } from "@core/shared/fin-forms/fin-forms.module";
 import { AccountService } from "@services/api/account.service";
 import { TransactionCategoryService } from "@services/api/transaction-category.service";
 import { DateControlService } from "@services/date-control.service";
 import { firstValueFrom } from "rxjs";
 import { AccountDTO } from "src/app/dtos/account/account.dto";
 import { TransactionCategoryDTO } from "src/app/dtos/transaction-category/transaction-category.dto";
-import { FinDatePickerComponent } from "../../../../core/forms/fin-date-picker/fin-date-picker.component";
 
 @Component({
     selector: "app-modal-add",
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FinAutocompleteComponent, FinDatePickerComponent],
+    imports: [CommonModule, ReactiveFormsModule, FinFormsModule],
     templateUrl: "./modal-add.component.html",
     styleUrl: "./modal-add.component.scss"
 })

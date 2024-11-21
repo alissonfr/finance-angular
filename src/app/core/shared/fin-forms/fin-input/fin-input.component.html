@@ -1,0 +1,13 @@
+<input 
+  [type]="type" 
+  [id]="id" 
+  [value]="value || ''" 
+  (input)="onInputChange($event)"
+  [placeholder]="placeholder" 
+  [autocomplete]="autocomplete"
+
+  (focus)="onFocus()"
+  (blur)="onBlur()"
+
+  [matDatepicker]="matDatepicker"
+/>

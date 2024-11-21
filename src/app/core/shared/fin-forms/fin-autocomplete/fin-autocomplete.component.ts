@@ -2,11 +2,12 @@
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, HostListener, Input, Output } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { FinInputComponent } from "../fin-input/fin-input.component";
 
 @Component({
     selector: "fin-autocomplete",
+    imports: [CommonModule, FinInputComponent],
     standalone: true,
-    imports: [CommonModule],
     templateUrl: "./fin-autocomplete.component.html",
     styleUrl: "./fin-autocomplete.component.scss"
 })
@@ -22,7 +23,7 @@ export class FinAutocompleteComponent {
   @Input({ required: true }) items: any[] = [];
   @Input({ required: true }) displayProperty: any;
   @Input({ required: true }) formGroup: FormGroup;
-  @Input({ required: true }) formControlName: string;
+  @Input({ required: true }) controlName: string;
 
   @Output() addNewItem = new EventEmitter<string>();
 
@@ -34,7 +35,7 @@ export class FinAutocompleteComponent {
       this.filteredItems = this.items;
       this.searchControl.valueChanges.subscribe(value => this.filterItems(value));
 
-      const initialValue = this.formGroup.get(this.formControlName)?.value;
+      const initialValue = this.formGroup.get(this.controlName)?.value;
       if (initialValue) {
           this.searchControl.setValue(initialValue[this.displayProperty]);
       }
@@ -51,7 +52,7 @@ export class FinAutocompleteComponent {
   }
 
   selectItem(item: any) {
-      this.formGroup.get(this.formControlName)?.setValue(item);
+      this.formGroup.get(this.controlName)?.setValue(item);
       this.isDropdownOpen = false;
   }
 
