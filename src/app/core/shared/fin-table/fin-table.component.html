@@ -1,0 +1,28 @@
+<div class="fin-table">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns ; let i = index" (click)="sortData(column)">
+            <span>
+              {{ displayColumns[i] }}
+              <mat-icon *ngIf="sortedColumn === column" class="material-symbols-outlined">{{ sortDirection === 'asc' ? 'arrow_upward_alt' : 'arrow_downward_alt' }}</mat-icon>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of paginatedData">
+          <td *ngFor="let column of columns">
+            {{ getColumnValue(row, column) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+      <span>{{ currentPage + 1 }} / {{ totalPages }}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Next</button>
+    </div>
+</div>
+  

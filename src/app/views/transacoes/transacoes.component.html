@@ -1,7 +1,7 @@
-<div class="w-full items-center justify-center gap-3 grid grid-cols-3 grid-rows-1">
-    <transacao-card>Receitas</transacao-card>
-    <transacao-card>Despesas</transacao-card>
-    <transacao-card>Balanço mensal</transacao-card>
+<div class="w-full h-48 items-center justify-center gap-3 grid grid-cols-3 grid-rows-1">
+    <transacao-card class="h-full">Receitas</transacao-card>
+    <transacao-card class="h-full">Despesas</transacao-card>
+    <transacao-card class="h-full">Balanço mensal</transacao-card>
 </div>
 
 <div class="flex flex-col bg-white w-full mt-7 dark:bg-gray-950">
@@ -13,21 +13,21 @@
         }
     </div>
 
-    <div class="table-section">
+    <!-- <div class="table-section">
         <table>
             <thead>
-                <th fin-col><fin-checkbox/></th>
-                <th fin-col fin-sort-header>Data</th>
-                <th fin-col fin-sort-header>Descrição</th>
-                <th fin-col fin-sort-header>Categoria</th>
-                <th fin-col fin-sort-header>Conta</th>
-                <th fin-col fin-sort-header>Valor</th>
-                <th fin-col></th>
+                <th><fin-checkbox/></th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Conta</th>
+                <th>Valor</th>
+                <th></th>
             </thead>
             <tbody>
                 @for (transaction of transactions; track transaction.transactionId) {
                     <tr>
-                        <th fin-col><fin-checkbox/></th>
+                        <th><fin-checkbox/></th>
                         <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ transaction.description }}</td>
                         <td>{{ transaction.category.name }}</td>
@@ -40,8 +40,16 @@
                   }
             </tbody>
         </table>
-    </div>
+    </div> -->
+
+    <fin-table [data]="transactions" [columns]="columns" [displayColumns]="displayColumns" [pageSize]="5" />
+
 
 </div>
 
 <add-button />
+
+
+
+
+  

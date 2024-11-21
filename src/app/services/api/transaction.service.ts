@@ -27,7 +27,7 @@ export class TransactionService {
                     map(transactions =>
                         transactions.map(transaction => ({
                             ...transaction,
-                            selected: false as const,
+                            selected: false,
                         }))
                     )
                 )
