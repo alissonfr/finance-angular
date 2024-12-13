@@ -2,12 +2,11 @@ import { CommonModule, formatDate } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { FinFormsModule } from "@core/shared/fin-forms/fin-forms.module";
-import { AccountService } from "@services/api/account.service";
-import { TransactionCategoryService } from "@services/api/transaction-category.service";
+import { BankAccountService } from "@services/api/bank-account.service";
 import { DateControlService } from "@services/date-control.service";
+import { ToastService } from "@services/toast.service";
 import { firstValueFrom } from "rxjs";
-import { AccountDTO } from "src/app/dtos/account/account.dto";
-import { TransactionCategoryDTO } from "src/app/dtos/transaction-category/transaction-category.dto";
+import { BankAccount } from "src/app/models/bank-account";
 
 @Component({
     selector: "app-modal-add",
@@ -25,23 +24,18 @@ export class ModalAddComponent {
         categoryId: new FormControl("", [Validators.required]),
         accountId: new FormControl("", [Validators.required]),
     });
-    accounts: AccountDTO[] = [];
-    categories: TransactionCategoryDTO[] = [];
+    bankAccounts: BankAccount[] = [];
     
     private dateControlService = inject(DateControlService)
-    private accountService = inject(AccountService)
-    private transactionCategoryService = inject(TransactionCategoryService)
+    private bankAccountService = inject(BankAccountService)
+    private toastService = inject(ToastService);
 
     ngOnInit() {
         this.initDateInput();
 
-        this.accountService.find().subscribe({
-            next: result => this.accounts = result,
-            error: e => console.error(e)
-        });
-        this.transactionCategoryService.find().subscribe({
-            next: result => this.categories = result,
-            error: e => console.error(e)
+        this.bankAccountService.find().subscribe({
+            next: result => this.bankAccounts = result,
+            error: () => this.toastService.error("Erro ao realizar login.")
         });
     }
 

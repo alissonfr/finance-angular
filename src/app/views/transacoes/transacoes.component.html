@@ -1,8 +1,4 @@
-<div class="w-full h-48 items-center justify-center gap-3 grid grid-cols-3 grid-rows-1">
-    <transacao-card class="h-full">Receitas</transacao-card>
-    <transacao-card class="h-full">Despesas</transacao-card>
-    <transacao-card class="h-full">Balanço mensal</transacao-card>
-</div>
+
 
 <div class="flex flex-col bg-white w-full mt-7 dark:bg-gray-950">
     <div class="flex flex-col gap-2 w-full my-6">
@@ -13,36 +9,10 @@
         }
     </div>
 
-    <div class="fin-table">
-        <table>
-            <thead>
-                <th><fin-checkbox/></th>
-                <th>Data</th>
-                <th>Descrição</th>
-                <th>Categoria</th>
-                <th>Conta</th>
-                <th>Valor</th>
-                <th></th>
-            </thead>
-            <tbody>
-                @for (transaction of transactions; track transaction.transactionId) {
-                    <tr>
-                        <th><fin-checkbox/></th>
-                        <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
-                        <td>{{ transaction.description }}</td>
-                        <td>{{ transaction.category.name }}</td>
-                        <td>{{ transaction.account.name }}</td> 
-                        <td class="bolder">R$ {{ transaction.amount }}</td>
-                        <td><mat-icon class="material-symbols-outlined ">more_vert</mat-icon></td>
-                    </tr>
-                  }
-            </tbody>
-        </table>
-    </div>
-
-    <!-- <fin-table [data]="transactions" [columns]="columns" [displayColumns]="displayColumns" /> -->
-
-
+    <!-- <fin-table [data]="transactions" [columns]="columns" [displayColumns]="displayColumns" />
+    columns: string[] = ["date", "description", "category.name", "account.name"];
+    displayColumns: string[] = ["Data", "Descrição", "Categoria", "Conta"]; 
+    -->
 </div>
 
 <add-button />

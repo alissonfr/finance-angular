@@ -15,10 +15,7 @@ import { ThemeSwitcher } from "@utils/theme-switcher";
 export class HeaderComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
-    
-    constructor (
-      public themeSwitcher: ThemeSwitcher
-    ) {}
+    themeSwitcher = inject(ThemeSwitcher)
   
     public change() {
         const currentTheme = this.themeSwitcher.theme();

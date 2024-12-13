@@ -23,19 +23,10 @@
         <fin-input id="value" placeholder="R$ 12.99" required formControlName="amount" />
       </div>
       <div class="input-group">
-        <label for="category">Categoria</label>
-        <fin-autocomplete
-          [formGroup]="formGroup"
-          [items]="categories"
-          displayProperty="name"
-          controlName="categoryId"
-          (addNewItem)="handleAddNew($event)" />    
-      </div>
-      <div class="input-group">
         <label for="account">Conta</label>
         <fin-autocomplete
           [formGroup]="formGroup"
-          [items]="accounts"
+          [items]="bankAccounts"
           displayProperty="name"
           controlName="accountId"
           (addNewItem)="handleAddNew($event)" />    

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { DateControlService } from "@services/date-control.service";
 import { ChevronComponent } from "../chevron/chevron.component";
@@ -12,7 +12,5 @@ import { ChevronComponent } from "../chevron/chevron.component";
     styleUrl: "./month-view.component.scss"
 }) 
 export class MonthViewComponent {
-    constructor(
-        public dateControl: DateControlService
-    ) {}
+    dateControl = inject(DateControlService)
 }

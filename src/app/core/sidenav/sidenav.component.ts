@@ -1,6 +1,6 @@
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
 import { CommonModule } from "@angular/common";
-import { Component, ViewChild } from "@angular/core";
+import { Component, inject, ViewChild } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
@@ -36,12 +36,9 @@ export class SidenavComponent {
 
     readonly LOGO_URL = "assets/img/logo-dark.svg"
     readonly DARK_LOGO_URL = "assets/img/logo-light.svg"
-  
-    constructor (
-        private _breakpointObserver: BreakpointObserver,
-        private _router: Router,
-        public themeSwitcher: ThemeSwitcher
-    ) {}
+    private _breakpointObserver = inject(BreakpointObserver)
+    private _router = inject(Router)
+    themeSwitcher = inject(ThemeSwitcher)
 
     ngOnInit(): void {
         this._watchBreakpoint();

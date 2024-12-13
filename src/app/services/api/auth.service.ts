@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { environment } from "src/app/environment";
 
@@ -8,10 +8,7 @@ import { environment } from "src/app/environment";
 })
 export class AuthService {
     private readonly PATH = `${environment.API_URL}v1/auth`;
-
-    constructor(
-        private http: HttpClient
-    ) {}
+    private http = inject(HttpClient)
 
     signup(data: unknown) {
         return this.http.post(`${this.PATH}/register`, data);
@@ -23,6 +20,7 @@ export class AuthService {
     }
 
     logout() {
+        localStorage.removeItem("token");
         localStorage.removeItem("user");
     }
 

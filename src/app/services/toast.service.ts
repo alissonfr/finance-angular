@@ -21,8 +21,9 @@ export class ToastService {
         this.addToast("success", message, duration);
     }
 
-    error(message: string, duration: number = 3000) {
-        this.addToast("error", message, duration);
+    error(e: unknown, duration: number = 3000) {
+        console.log(e)
+        this.addToast("error", "aa", duration);
     }
 
     info(message: string, duration: number = 3000) {

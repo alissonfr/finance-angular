@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -12,10 +12,7 @@ import { ModalAddComponent } from "../modal-add/modal-add.component";
     templateUrl: "./add-button.component.html",
 })
 export class AddButtonComponent {
-
-    constructor(
-        private dialog: MatDialog
-    ) {}
+    private dialog = inject(MatDialog)
 
     open() {
         const dialogRef = this.dialog.open(ModalAddComponent, {
@@ -24,7 +21,7 @@ export class AddButtonComponent {
             
         });
       
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(() => {
             console.log("The dialog was closed");
         });
     }

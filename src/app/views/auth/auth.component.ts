@@ -29,7 +29,7 @@ export class AuthComponent {
                         this.router.navigate(["/dashboard"]);
                     }
                 },
-                error: () => this.toastService.error("Erro ao realizar login.")
+                error: e => this.toastService.error(e)
             });
     }
 
