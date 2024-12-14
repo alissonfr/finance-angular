@@ -25,24 +25,21 @@ export class DateControlService {
     showMonthView: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     year: BehaviorSubject<number> = new BehaviorSubject<number>(new Date().getFullYear());
     
-    // month view
     nextMonth(): void {
-        const month = this.monthIndex.value + 1;
-        if(MONTHS[month]) {
-            this.monthIndex.next(this.monthIndex.value + 1);
-        } else {
-            this.monthIndex.next(MonthsIndexEnum.JANEIRO);
-            this.year.next(this.year.value + 1);
-        }
+        this.updateMonth(1, MonthsIndexEnum.JANEIRO, 1);
     }
-
+    
     previousMonth(): void {
-        const month = this.monthIndex.value - 1;
-        if(MONTHS[month]) {
-            this.monthIndex.next(this.monthIndex.value - 1);
+        this.updateMonth(-1, MonthsIndexEnum.DEZEMBRO, -1);
+    }
+    
+    private updateMonth(monthIncrement: number, resetMonth: MonthsIndexEnum, yearIncrement: number): void {
+        const month = this.monthIndex.value + monthIncrement;
+        if (MONTHS[month]) {
+            this.monthIndex.next(month);
         } else {
-            this.monthIndex.next(MonthsIndexEnum.DEZEMBRO);
-            this.year.next(this.year.value - 1);
+            this.monthIndex.next(resetMonth);
+            this.year.next(this.year.value + yearIncrement);
         }
     }
 
@@ -51,7 +48,6 @@ export class DateControlService {
     }
 
 
-    // year view
     nextYear(): void {
         this.year.next(this.year.value + 1);
     }
@@ -65,7 +61,6 @@ export class DateControlService {
         this.changeView();
     }
     
-    // year view e month view
 
     getMonthLabel(): Observable<string> {
         return this.monthIndex.pipe(map(monthIndex => MONTHS[monthIndex]));

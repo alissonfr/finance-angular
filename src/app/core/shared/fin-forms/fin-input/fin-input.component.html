@@ -1,6 +1,10 @@
-<input 
+
+
+@if(matDatepicker) {
+  <input 
   [type]="type" 
   [id]="id" 
+  [name]="name" 
   [value]="value || ''" 
   (input)="onInputChange($event)"
   [placeholder]="placeholder" 
@@ -11,3 +15,16 @@
 
   [matDatepicker]="matDatepicker"
 />
+} @else {
+  <input 
+  [type]="type" 
+  [id]="id" 
+  [name]="name" 
+  [value]="value || ''" 
+  (input)="onInputChange($event)"
+  [placeholder]="placeholder" 
+  [autocomplete]="autocomplete"
+  (focus)="onFocus()"
+  (blur)="onBlur()"
+/>
+}

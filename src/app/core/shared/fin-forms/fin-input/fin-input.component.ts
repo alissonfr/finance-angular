@@ -20,6 +20,7 @@ import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from "@
 export class FinInputComponent implements ControlValueAccessor {
     @Input() type: string = "text";
     @Input() id: string;
+    @Input() name: string;
     @Input() placeholder: string;
     @Input() autocomplete: string = "off";
     @Input() matDatepicker: MatDatepickerPanel<MatDatepickerControl<unknown>, unknown, unknown>;

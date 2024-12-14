@@ -5,24 +5,23 @@
       <form class="mt-6 space-y-4" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input 
+          <fin-input 
             type="email" 
             id="email" 
             name="email" 
             required 
-            class="w-full mt-1 px-4 py-2 text-sm border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             placeholder="you@example.com"
             formControlName="email"
+            autocomplete="off"
           />
         </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <input 
+          <fin-input 
             type="password" 
             id="password" 
             name="password" 
             required 
-            class="w-full mt-1 px-4 py-2 text-sm border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             placeholder="••••••••"
             formControlName="password"
           />
@@ -37,13 +36,22 @@
         <button 
           type="submit" 
           class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          [disabled]="loadingService.isLoading() | async"
         >
-          Login
+          @if(!(loadingService.isLoading() | async)) {
+            Login
+          } @else {
+            <svg class="w-5 h-5 mx-auto animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+          }
         </button>
       </form>
       <p class="mt-6 text-sm text-center text-gray-600">
         Não tem uma conta? 
-        <a href="#" class="text-indigo-500 hover:underline">Cadastre-se</a>
+        <a class="text-indigo-500 hover:underline" routerLink="/auth/register">Cadastre-se</a>
       </p>
     </div>
   </div>
+  
