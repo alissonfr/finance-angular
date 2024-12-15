@@ -1,13 +1,13 @@
 <div class="flex items-center justify-center gap-2">
     <chevron (click)="dateControl.previousYear()" direction="left"></chevron>
-    <span class="flex items-center justify-center gap-0.5 p-2 text-accent
+    <span class="flex items-center justify-center gap-0.5 p-2 text-primary
         dark:text-gray-200">
         {{ dateControl.year | async }}
     </span>
     <chevron (click)="dateControl.nextYear()" direction="right"></chevron>
 </div>
 <div class="flex items-center justify-center gap-2 mt-2">
-    <span class="month-label text-xs flex items-center justify-center gap-0.5 border-2 border-accent text-accent p-2 rounded-3xl cursor-pointer
+    <span class="month-label text-xs flex items-center justify-center gap-0.5 border-2 border-primary text-primary p-2 rounded-3xl cursor-pointer
         hover:bg-gray-100
         dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-700" 
         *ngFor="let month of months ; let i = index"

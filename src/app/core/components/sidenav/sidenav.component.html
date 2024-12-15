@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav [opened]="!isMobile" [mode]="isMobile ? 'over' : 'side'" class="bg-white dark:bg-body-dark-3 border-0">
+    <mat-sidenav [opened]="!isMobile" [mode]="isMobile ? 'over' : 'side'" class="bg-white border-0">
         <mat-nav-list class="flex flex-col">
             <div class="flex-center mx-6 mt-6 mb-16">
                 <img class="h-6" alt="logo" [src]="themeSwitcher.theme() === 'dark' ? DARK_LOGO_URL : LOGO_URL">
@@ -14,7 +14,7 @@
             </ul>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content class="min-h-screen bg-body-1 dark:bg-gray-900">
+    <mat-sidenav-content class="min-h-screen bg-sidenav dark:bg-gray-900">
         <header-component>
             <mat-icon *ngIf="isMobile" (click)="toggleMenu()">menu</mat-icon>
         </header-component>

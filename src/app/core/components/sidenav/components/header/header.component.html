@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between py-4 px-6 bg-white dark:bg-body-dark-1 h-[68px]">
+<header class="flex items-center justify-between py-4 px-6 bg-white h-[68px]">
     <div>
         <ng-content></ng-content>
     </div>
@@ -16,12 +16,12 @@
             </button>
         </mat-menu>
     
-        <div class="flex-center cursor-pointer w-9 h-9 rounded-full bg-accent text-text-dark relative
+        <div class="flex-center cursor-pointer w-9 h-9 rounded-full bg-primary text-text-dark relative
                 after: content-[''] after:absolute after:w-2.5 after:h-2.5 after:bg-red-500 after:rounded-full after:top-0 after:right-0">
             <mat-icon class="material-icons-outlined" class="w-5 h-5 text-[1.25rem]">notifications</mat-icon>
         </div>
     
-        <div class="flex-center cursor-pointer w-9 h-9 bg-gray-200 dark:bg-body-dark-2 rounded-xl" (click)="change()">
+        <div class="flex-center cursor-pointer w-9 h-9 bg-gray-200 rounded-xl" (click)="change()">
             <mat-icon class="material-icons-outlined w-5 h-5 text-[1.25rem]">
                 {{ themeSwitcher.theme() === "dark" ? "dark_mode" : "light_mode" }}
             </mat-icon>

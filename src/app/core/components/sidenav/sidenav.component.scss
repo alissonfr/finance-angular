@@ -7,7 +7,7 @@
 
             mat-nav-list ul li {
                 &.active, &:hover {
-                    @apply bg-gray-100 dark:bg-accent;
+                    @apply bg-gray-100 dark:bg-primary;
                 }
             }
         }
