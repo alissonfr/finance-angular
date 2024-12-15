@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { RouterOutlet } from "@angular/router";
-import { FinToastComponent } from "@core/shared/fin-toast/fin-toast.component";
+import { FinToastComponent } from "src/app/shared/fin-toast/fin-toast.component";
 import { ThemeSwitcher } from "./utils/theme-switcher";
 
 @Component({

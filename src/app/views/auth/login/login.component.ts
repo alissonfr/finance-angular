@@ -2,10 +2,10 @@ import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
-import { FinFormsModule } from "@core/shared/fin-forms/fin-forms.module";
 import { AuthService } from "@services/api/auth.service";
 import { LoadingService } from "@services/loading.service";
 import { ToastService } from "@services/toast.service";
+import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 class LoginRequest {
     email: string;

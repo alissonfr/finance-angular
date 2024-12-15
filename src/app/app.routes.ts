@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
-import { SidenavComponent } from "@core/sidenav/sidenav.component";
-import { authGuard } from "src/app/guards/auth.guard";
+import { SidenavComponent } from "@core/components/sidenav/sidenav.component";
+import { authGuard } from "@core/guards/auth.guard";
 
 export const routes: Routes = [
     {
@@ -19,8 +19,14 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
-        path: "transacoes",
-        loadChildren: () => import("./views/transacoes/transacoes.routes").then((r) => r.routes),
+        path: "bank-accounts",
+        loadChildren: () => import("./views/bank-accounts/bank-accounts.routes").then((r) => r.routes),
+        component: SidenavComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: "bank-account-transactions",
+        loadChildren: () => import("./views/bank-account-transactions/bank-account-transactions.routes").then((r) => r.routes),
         component: SidenavComponent,
         canActivate: [authGuard]
     },

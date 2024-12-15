@@ -1,0 +1,7 @@
+<button 
+    [class]="classes"
+    [disabled]="disabled"
+    (click)="handleClick($event)">
+    <mat-icon *ngIf="startIcon" class="material-symbols-outlined">{{ startIcon }}</mat-icon>
+  <ng-content></ng-content>
+</button>
