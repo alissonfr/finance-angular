@@ -1,0 +1,10 @@
+form {
+    .input-group{
+        @apply mb-5;
+
+        label {
+            @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+        }
+
+    }
+}

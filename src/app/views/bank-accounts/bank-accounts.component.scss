@@ -1,24 +1,3 @@
 :host {
     @apply flex p-6 flex-col items-start;
-
-
-    .form-header {
-        @apply flex items-center justify-between text-gray-600 w-full pb-12;
-      
-        .header-title {
-            @apply flex items-center gap-3 justify-center;
-            
-          h1 {
-            @apply text-2xl font-bold;
-          }
-        }
-      
-        .button {
-            @apply w-48;
-        }
-      }
-    
-    .search {
-        @apply flex gap-3 items-center justify-between w-full;
-    }
 }

@@ -1,16 +1,8 @@
-<header class="form-header">
-    <div class="header-title">
-      <mat-icon>person</mat-icon>
-      <h1>Contas bancárias</h1>
-    </div>
-    <fin-button size="normal" startIcon="assignment">Novo</fin-button>
-  </header>
-
+<page-header title="Contas bancárias" icon="person" (newClick)="create()" />
 
   <div class="fin-table">
     <div class="search">
         <fin-input class="w-full h-12" placeholder="Nome" />
-        <fin-input class="w-full h-12" placeholder="E-mail" />
         <fin-button size="large" color="outlined" startIcon="delete">Limpar</fin-button>
         <fin-button size="large" startIcon="search">Pesquisar</fin-button>
     </div>

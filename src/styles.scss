@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "../public/assets/theme/reset";
-@import "../public/assets/theme/material";
-@import "../public/assets/theme/utilitary-classes";
-@import "../public/assets/theme/table";
+@import "./theme/reset";
+@import "./theme/material";
+@import "./theme/utilitary-classes";
+@import "./theme/table";
 
 html, body { 
     @apply h-full; 

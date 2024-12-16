@@ -19,17 +19,22 @@ import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from "@
 })
 export class FinInputComponent implements ControlValueAccessor {
     @Input() type: string = "text";
-    @Input() id: string;
-    @Input() name: string;
-    @Input() placeholder: string;
+    @Input() id: string = "";
+    @Input() name: string = "";
+    @Input() placeholder: string = "";
     @Input() autocomplete: string = "off";
     @Input() matDatepicker: MatDatepickerPanel<MatDatepickerControl<unknown>, unknown, unknown>;
+    @Input() initialValue: string;
 
     @Output() focus = new EventEmitter<void>();
     @Output() blur = new EventEmitter<void>();
 
     protected disabled: boolean;
-    protected value: string;
+    protected value: string = "";
+
+    ngAfterViewInit() {
+        setTimeout(() => this.writeValue(this.initialValue), 0)
+    }
   
     onChanged: (value: string) => void;
     onTouched: () => void;

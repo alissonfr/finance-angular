@@ -14,4 +14,8 @@ export class BankAccountService {
     find(): Observable<BankAccount[]> {
         return this.http.get<BankAccount[]>(this.PATH);
     }
+
+    get(id: number): Observable<BankAccount> {
+        return this.http.get<BankAccount>(`${this.PATH}/${id}`);
+    }
 }

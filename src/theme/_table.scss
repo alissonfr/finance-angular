@@ -1,5 +1,9 @@
 .fin-table {
-  @apply relative overflow-x-auto w-full bg-white p-6 rounded-lg;
+  @apply relative overflow-x-auto w-full bg-gray-50 p-6 rounded-lg;
+
+  .search {
+    @apply flex gap-3 items-center justify-between w-full;
+  }
 
   table {
     @apply border-collapse w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border dark:border-zinc-500;
@@ -28,6 +32,6 @@
   }
 
   h1 {
-    @apply w-full text-center mt-8 font-semibold text-xl;
+    @apply w-full text-center mt-8 font-semibold text-base;
   }
 }

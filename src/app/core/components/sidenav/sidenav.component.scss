@@ -1,13 +1,17 @@
 :host ::ng-deep {
     mat-sidenav-container {
         mat-sidenav {
+            @apply border-0 bg-sidenav;
+
             &.mat-drawer-opened {
                 @apply w-[250px];
             }
 
             mat-nav-list ul li {
+                @apply text-text dark:text-text-dark flex items-center justify-start gap-2 px-2 py-2 mx-3 rounded-lg cursor-pointer text-sm;
+
                 &.active, &:hover {
-                    @apply bg-gray-100 dark:bg-primary;
+                    @apply bg-[#00000008] dark:bg-primary;
                 }
             }
         }

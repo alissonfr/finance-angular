@@ -1,6 +1,6 @@
 :host {
     button {
-        @apply font-sans font-medium text-base rounded-lg cursor-pointer inline-flex justify-center items-center gap-2;
+        @apply font-sans text-sm rounded-lg cursor-pointer inline-flex justify-center items-center gap-2;
 
         .mat-icon {
             @apply flex items-center justify-center h-4 w-4 text-[1rem] mt-0.5;
@@ -15,7 +15,7 @@
         }
         
         &.large {
-            @apply h-12 px-8;
+            @apply h-12 px-8 text-base;
 
             .mat-icon {
                 @apply h-5 w-5 text-[1.25rem];
@@ -24,7 +24,7 @@
 
         
         &.primary {
-            @apply bg-blue-500 text-white;
+            @apply bg-primary text-white;
         }
         
         &.secondary {
@@ -32,7 +32,7 @@
         }
         
         &.outlined {
-            @apply bg-transparent text-blue-500 border border-blue-500;
+            @apply bg-transparent text-primary border border-primary;
         }
         
         &.cancel {
