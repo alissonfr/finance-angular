@@ -1,20 +1,20 @@
 :host {
 
     .toast {
-        @apply relative flex items-center gap-4 p-4 pr-12 rounded-lg shadow-lg transition-transform transform bg-white text-white border border-gray-200;
+        @apply relative flex items-center gap-4 p-4 pr-12 rounded-lg shadow-lg transition-transform transform bg-white text-white;
         animation: fadeIn 0.5s;
 
         &.success {
-            @apply bg-green-500;
+            @apply bg-success;
         }
         &.error {
-            @apply bg-red-500;
+            @apply bg-error;
         }
         &.info {
-            @apply bg-indigo-500;
+            @apply bg-info;
         }
         &.warning {
-            @apply bg-yellow-500;
+            @apply bg-warning;
         }
 
         .close-btn {

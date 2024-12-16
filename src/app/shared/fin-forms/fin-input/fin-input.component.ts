@@ -1,12 +1,14 @@
 /* eslint-disable @angular-eslint/no-output-native */
-import { Component, EventEmitter, forwardRef, Input, Output } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { Component, EventEmitter, forwardRef, Input, Optional, Output } from "@angular/core";
+import { ControlContainer, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from "@angular/material/datepicker";
+import { NgxCurrencyDirective } from "ngx-currency";
 
 @Component({
     selector: "fin-input",
     standalone: true,
-    imports: [ReactiveFormsModule, MatDatepickerModule],
+    imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule, NgxCurrencyDirective],
     templateUrl: "./fin-input.component.html",
     styleUrl: "./fin-input.component.scss",
     providers: [
@@ -19,20 +21,30 @@ import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from "@
 })
 export class FinInputComponent implements ControlValueAccessor {
     @Input() type: string = "text";
-    @Input() id: string = "";
     @Input() name: string = "";
     @Input() placeholder: string = "";
     @Input() autocomplete: string = "off";
     @Input() matDatepicker: MatDatepickerPanel<MatDatepickerControl<unknown>, unknown, unknown>;
     @Input() initialValue: string;
-
+    @Input() label: string;
+    @Input() currency: string;
+    
     @Output() focus = new EventEmitter<void>();
     @Output() blur = new EventEmitter<void>();
-
+    
     protected disabled: boolean;
     protected value: string = "";
+    protected control: FormControl;
+
+    constructor(@Optional() private controlContainer: ControlContainer) {}
 
     ngAfterViewInit() {
+        console.log(this.currency)
+        if (this.controlContainer && this.name) {
+            const formGroup = this.controlContainer.control as FormGroup;
+            this.control = formGroup?.get(this.name) as FormControl;
+        }
+
         setTimeout(() => this.writeValue(this.initialValue), 0)
     }
   

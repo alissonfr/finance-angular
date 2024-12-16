@@ -3,8 +3,8 @@ import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "@services/api/auth.service";
-import { LoadingService } from "@services/loading.service";
 import { ToastService } from "@services/toast.service";
+import { isFormInvalid } from "@utils/validators";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 class LoginRequest {
@@ -20,20 +20,24 @@ class LoginRequest {
 })
 export class LoginComponent {
     formGroup = new FormGroup({
-        email: new FormControl("", [Validators.required]),
+        email: new FormControl("", [Validators.required, Validators.email]),
         password: new FormControl("", [Validators.required]),
     });
 
-    public loadingService = inject(LoadingService);
     private authService = inject(AuthService);
     private router = inject(Router);
     private toastService = inject(ToastService);
 
     onSubmit(): void {
+        if(isFormInvalid(this.formGroup)) {
+            this.toastService.invalidForm();
+            return;
+        }
+
         this.authService.login(this.formGroup.value as LoginRequest)
             .subscribe({
                 next: () => this.router.navigate(["/dashboard"]),
-                error: e => this.toastService.error(JSON.stringify(e?.response?.message) || "Erro ao realizar login."),
+                error: e => this.toastService.error(e, "Erro ao realizar login."),
             });
     }
 

@@ -8,12 +8,10 @@
 
   <form class="pt-4" [formGroup]="formGroup">
     <div class="input-group">
-      <label for="name">Nome</label>
-      <fin-input id="name" placeholder="Itaú" required formControlName="name" />
+      <fin-input label="Nome" name="name" placeholder="Itaú" required formControlName="name" />
     </div>
     <div class="input-group">
-      <label for="initialAmount">Valor inicial</label>
-      <fin-input id="initialAmount" name="initialAmount" placeholder="R$ 12.99" required formControlName="initialAmount" />
+      <fin-input label="Valor inicial" currency name="initialAmount" placeholder="R$ 12.99" required formControlName="initialAmount" />
     </div>
 
     <div class="flex justify-end">
@@ -22,9 +20,6 @@
   </form>
   
 </div>
-
-
-
 
 <!-- <fin-autocomplete
 [formGroup]="formGroup"

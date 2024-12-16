@@ -36,10 +36,10 @@
         }
         
         &.cancel {
-            @apply bg-transparent text-red-500 border border-red-500 transition duration-300;
+            @apply bg-transparent text-error border border-error transition duration-300;
 
             &:hover {
-                @apply bg-red-500 text-white border-transparent;
+                @apply bg-error text-white border-transparent;
             }
         }
     }

@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
+import { HttpService } from "@services/http.service";
 import { LoadingService } from "@services/loading.service";
 import { finalize, Observable, tap } from "rxjs";
 import { environment } from "src/app/environment";
@@ -20,7 +20,7 @@ class RegisterResponse {
 })
 export class AuthService {
     private readonly PATH = `${environment.API_URL}v1/auth`;
-    private http = inject(HttpClient);
+    private http = inject(HttpService);
     private loadingService = inject(LoadingService);
 
     register(data: User) {

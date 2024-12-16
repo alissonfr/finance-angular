@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { BankAccountService } from "@services/api/bank-account.service";
 import { ToastService } from "@services/toast.service";
+import { isFormInvalid } from "@utils/validators";
 import { BankAccount } from "src/app/models/bank-account";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
@@ -28,12 +29,7 @@ export class BankAccountModalComponent {
     private readonly data = inject(MAT_DIALOG_DATA);
 
     ngOnInit() {
-        if(this.data.id) {
-            this.bankAccountService.get(this.data.id).subscribe({
-                next: result => this.bankAccount = result,
-                error: () => this.toastService.error("Erro ao obter conta bancária.")
-            });
-        } 
+        if(this.data?.id) this.get(this.data.id);
     }
 
     close(): void {
@@ -41,6 +37,23 @@ export class BankAccountModalComponent {
     }
 
     submit(): void {
-        console.log(this.formGroup.value)
+        if(isFormInvalid(this.formGroup)) {
+            this.toastService.invalidForm();
+            return;
+        }
+        this.bankAccountService.create(this.formGroup.getRawValue() as unknown as BankAccount).subscribe({
+            next: () => {
+                this.toastService.success("Conta bancária criada com sucesso.");
+                this.close();
+            },
+            error: e => this.toastService.error(e, "Erro ao criar conta bancária.")
+        });
+    }
+
+    private get(id: number): void {
+        this.bankAccountService.get(id).subscribe({
+            next: result => this.bankAccount = result,
+            error: e => this.toastService.error(e, "Erro ao obter conta bancária.")
+        });
     }
 }

@@ -26,6 +26,11 @@ module.exports = {
           DEFAULT: "#2E335B",
           dark: "#FFF",
         },
+
+        error: "#D84A49",
+        warning: "#ECBF58",
+        info: "#6CB3C7",
+        success: "#5BC3A2",
       },
     },
   },

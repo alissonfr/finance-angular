@@ -22,7 +22,7 @@ export class BankAccountTransactionsComponent {
     ngOnInit() {
         this.transactionsService.find().subscribe({
             next: (transactions) => this.transactions = transactions,
-            error: () => this.toastService.error("Erro ao obter transações.")
+            error: e => this.toastService.error(e, "Erro ao obter transações.")
         })
     }
 

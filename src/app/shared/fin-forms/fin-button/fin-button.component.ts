@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
+import { LoadingService } from "@services/loading.service";
 
 @Component({
     selector: "fin-button",
@@ -15,6 +16,8 @@ export class FinButtonComponent {
   @Input() color: "primary" | "secondary" | "outlined" | "cancel" = "primary";
   @Input() disabled: boolean = false;
   @Input() startIcon?: string;
+
+  protected loadingService = inject(LoadingService);
 
   get classes() {
       return `${this.size} ${this.color} ${this.class}`;

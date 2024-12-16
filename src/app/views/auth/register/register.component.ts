@@ -31,7 +31,7 @@ export class RegisterComponent {
         this.authService.register(this.formGroup.value as User)
             .subscribe({
                 next: () => this.router.navigate(["/dashboard"]),
-                error: e => this.toastService.error(JSON.stringify(e?.response?.message) || "Erro ao realizar cadastro."),
+                error: e => this.toastService.error(e, "Erro ao realizar cadastro."),
             });
     }
 

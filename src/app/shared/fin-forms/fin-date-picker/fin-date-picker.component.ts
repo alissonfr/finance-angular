@@ -16,7 +16,7 @@ import { FinInputComponent } from "../fin-input/fin-input.component";
     viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class FinDatePickerComponent {
-  @Input({ required: true }) controlName: string;
+  @Input({ required: true }) control: string;
   initialValue: string;
 
   private readonly dateControlService = inject(DateControlService)

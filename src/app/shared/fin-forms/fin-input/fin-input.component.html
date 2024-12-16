@@ -1,9 +1,9 @@
-
+<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" [for]="name" *ngIf="label">{{ label }}</label>
 
 @if(matDatepicker) {
   <input 
   [type]="type" 
-  [id]="id" 
+  [id]="name" 
   [name]="name" 
   [value]="value" 
   (input)="onInputChange($event)"
@@ -14,11 +14,11 @@
   (blur)="onBlur()"
 
   [matDatepicker]="matDatepicker"
-/>
-} @else {
+  />
+} @else if (currency || currency === '') {
   <input 
   [type]="type" 
-  [id]="id" 
+  [id]="name" 
   [name]="name" 
   [value]="value" 
   (input)="onInputChange($event)"
@@ -26,5 +26,27 @@
   [autocomplete]="autocomplete"
   (focus)="onFocus()"
   (blur)="onBlur()"
-/>
+  currencyMask
+  />
+} @else {
+  <input 
+  [type]="type" 
+  [id]="name" 
+  [name]="name" 
+  [value]="value" 
+  (input)="onInputChange($event)"
+  [placeholder]="placeholder" 
+  [autocomplete]="autocomplete"
+  (focus)="onFocus()"
+  (blur)="onBlur()"
+  />
 }
+
+<div *ngIf="control?.touched && control?.invalid">
+  <span class="text-xs text-error mt-1" *ngIf="control?.errors?.['required']">&#9888; Este campo é obrigatório.</span>
+  <span class="text-xs text-error mt-1" *ngIf="control?.errors?.['email']">&#9888; Digite um e-mail válido.</span>
+  <span class="text-xs text-error mt-1" *ngIf="control?.errors?.['maxlength']">&#9888; O valor é muito longo.</span>
+  <span class="text-xs text-error mt-1" *ngIf="control?.errors?.['minlength']">&#9888; O valor é muito curto.</span>
+</div>
+
+<div class="mb-5" *ngIf="label"> </div>

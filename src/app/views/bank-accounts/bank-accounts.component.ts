@@ -30,7 +30,7 @@ export class BankAccountComponent {
     find(): void {
         this.bankAccountService.find().subscribe({
             next: (bankAccounts) => this.bankAccounts = bankAccounts,
-            error: () => this.toastService.error("Erro ao obter contas bancárias.")
+            error: e => this.toastService.error(e, "Erro ao obter contas bancárias.")
         });
     }
 
