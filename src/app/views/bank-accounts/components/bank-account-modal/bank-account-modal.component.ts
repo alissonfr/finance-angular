@@ -41,7 +41,9 @@ export class BankAccountModalComponent {
             this.toastService.invalidForm();
             return;
         }
-        this.bankAccountService.create(this.formGroup.getRawValue() as unknown as BankAccount).subscribe({
+
+        const bankAccount = this.formGroup.getRawValue() as unknown as BankAccount;
+        this.bankAccountService.create(bankAccount).subscribe({
             next: () => {
                 this.toastService.success("Conta bancária criada com sucesso.");
                 this.close();

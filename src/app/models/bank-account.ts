@@ -3,6 +3,6 @@ import { User } from "./user";
 export class BankAccount {
     bankAccountId?: number;
     name: string;
-    initialAmount: number;
+    initialAmount: string;
     user: User;
 }
