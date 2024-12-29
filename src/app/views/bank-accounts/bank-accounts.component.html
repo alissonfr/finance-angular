@@ -1,31 +1,43 @@
 <page-header title="Contas bancárias" icon="person" (newClick)="create()" />
 
-  <div class="fin-table">
-    <div class="search">
-        <fin-input class="w-full h-12" placeholder="Nome" />
-        <fin-button size="large" color="outlined" startIcon="delete">Limpar</fin-button>
-        <fin-button size="large" startIcon="search">Pesquisar</fin-button>
-    </div>
+<div class="fin-table">
+    <form class="search mb-10" [formGroup]="formGroup">
+        <fin-input class="w-full h-12" placeholder="Nome" formControlName="name"/>
+        <fin-button (click)="clear()" size="large" color="outlined" startIcon="delete">Limpar</fin-button>
+        <fin-button (click)="find()" size="large" startIcon="search">Pesquisar</fin-button>
+    </form>
     @if(bankAccounts.length > 0) {
-        <table>
-            <thead>
-                <th>Nome</th>
-                <th>Saldo inicial</th>
-                <th>Saldo total</th>
-                <th></th>
-            </thead>
-            <tbody>
-                @for (account of bankAccounts; track account.bankAccountId) {
-                    <tr>
-                        <td>{{ account.name }}</td>
-                        <td>{{ account.initialAmount }}</td>
-                        <td>{{ account.initialAmount }}</td>
-    
-                        <td><mat-icon class="material-symbols-outlined ">more_vert</mat-icon></td>
-                    </tr>
-                  }
-            </tbody>
-        </table>
+        <section class="table">
+            <table>
+                <thead>
+                    <th>Nome</th>
+                    <th>Saldo inicial</th>
+                    <th>Saldo total</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    @for (account of bankAccounts; track account.bankAccountId) {
+                        <tr>
+                            <td>{{ account.name }}</td>
+                            <td>{{ account.initialAmount }}</td>
+                            <td>{{ account.initialAmount }}</td>
+        
+                            <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
+                            <mat-menu #menu="matMenu">
+                                <button (click)="update(account.bankAccountId)" mat-menu-item>
+                                    <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                                    <span>Editar</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon class="material-symbols-outlined">delete</mat-icon>
+                                    <span>Apagar</span>
+                                </button>
+                            </mat-menu>
+                        </tr>
+                      }
+                </tbody>
+            </table>
+        </section>
     } @else {
         <h1>Sem registros.</h1>
     }

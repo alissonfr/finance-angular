@@ -17,11 +17,10 @@ import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 })
 export class BankAccountModalComponent {
     formGroup = new FormGroup({
+        bankAccountId: new FormControl(0),
         name: new FormControl("", [Validators.required]),
         initialAmount: new FormControl("", [Validators.required]),
     });
-
-    bankAccount: BankAccount;
     
     private readonly bankAccountService = inject(BankAccountService)
     private readonly toastService = inject(ToastService);
@@ -54,7 +53,7 @@ export class BankAccountModalComponent {
 
     private get(id: number): void {
         this.bankAccountService.get(id).subscribe({
-            next: result => this.bankAccount = result,
+            next: result => this.formGroup.patchValue(result),
             error: e => this.toastService.error(e, "Erro ao obter conta bancária.")
         });
     }

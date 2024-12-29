@@ -2,7 +2,7 @@
     <chevron (click)="dateControl.previousMonth()" direction="left"></chevron>
     <span (click)="dateControl.changeView()" class="flex items-center justify-center border-2 text-sm border-primary text-primary py-1 px-2 rounded-3xl
         hover:bg-gray-100
-        dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-700">
+        dark:border-text-dark dark:text-text-dark dark:hover:bg-hover-dark">
         <mat-icon class="text-base mb-0.5">calendar_month</mat-icon>
         <b class="mr-0.5">{{ dateControl.getMonthLabel() | async }}</b>
         {{ dateControl.year | async }}

@@ -21,10 +21,19 @@ module.exports = {
       },
       colors: {
         primary: "#3D56B2",
-        sidenav: "#f8f8f7",
+        sidenav: {
+          DEFAULT: "#f8f8f7",
+          dark: "#202020",
+        },
+
         text: {
           DEFAULT: "#2E335B",
-          dark: "#FFF",
+          dark: "#D4D4D4",
+        },
+
+        hover: {
+          DEFAULT: "#2C2C2C",
+          dark: "#2C2C2C"
         },
 
         error: "#D84A49",

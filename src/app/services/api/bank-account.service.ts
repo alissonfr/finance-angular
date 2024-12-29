@@ -11,8 +11,8 @@ export class BankAccountService {
     private readonly PATH = `${environment.API_URL}v1/bank-accounts`;
     private http = inject(HttpService)
 
-    find(): Observable<BankAccount[]> {
-        return this.http.get<BankAccount[]>(this.PATH);
+    find(params: Record<string, string | number | null | undefined>): Observable<BankAccount[]> {
+        return this.http.get<BankAccount[]>(this.PATH, params);
     }
 
     get(id: number): Observable<BankAccount> {

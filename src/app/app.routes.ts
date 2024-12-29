@@ -25,12 +25,6 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
-        path: "bank-account-transactions",
-        loadChildren: () => import("./views/bank-account-transactions/bank-account-transactions.routes").then((r) => r.routes),
-        component: SidenavComponent,
-        canActivate: [authGuard]
-    },
-    {
         path: "not-found",
         loadChildren: () => import("./views/not-found/not-found.routes").then((r) => r.routes),
     },

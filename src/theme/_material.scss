@@ -21,3 +21,20 @@ $finance-angular-theme: mat.m2-define-light-theme((
 .mdc-tooltip__surface {
   font-size: 12px !important;
 }
+
+.mat-mdc-menu-panel {
+  @apply bg-sidenav dark:bg-sidenav-dark;
+  font-size: 14px !important;
+
+  .mat-mdc-menu-item {
+    @apply text-text dark:text-text-dark hover:dark:bg-hover-dark;
+  }
+
+  .mat-icon {
+    @apply text-text dark:text-text-dark;
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 8px !important;
+  }
+}

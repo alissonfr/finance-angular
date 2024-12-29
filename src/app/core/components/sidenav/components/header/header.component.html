@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between py-4 px-6 bg-white h-[68px]">
+<header class="flex items-center justify-between py-4 px-6 bg-transparent h-[68px]">
     <div>
         <ng-content></ng-content>
     </div>
@@ -6,7 +6,7 @@
     <date-view></date-view>
 
     <div class="default-text flex items-center justify-end gap-2">
-        <div class="cursor-pointer w-9 h-9 rounded-full " [matMenuTriggerFor]="menu">
+        <div class="cursor-pointer w-9 h-9 rounded-full" [matMenuTriggerFor]="menu">
             <img class="cursor-pointer w-9 h-9 rounded-full" src="./assets/img/avatar.png" alt="">
         </div>
         <mat-menu #menu="matMenu">
@@ -21,7 +21,7 @@
             <mat-icon class="material-icons-outlined" class="w-5 h-5 text-[1.25rem]">notifications</mat-icon>
         </div>
     
-        <div class="flex-center cursor-pointer w-9 h-9 bg-gray-200 rounded-xl" (click)="change()">
+        <div class="flex-center cursor-pointer w-9 h-9 bg-gray-200 dark:bg-text rounded-xl" (click)="change()">
             <mat-icon class="material-icons-outlined w-5 h-5 text-[1.25rem]">
                 {{ themeSwitcher.theme() === "dark" ? "dark_mode" : "light_mode" }}
             </mat-icon>
