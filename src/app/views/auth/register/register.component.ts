@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "@services/api/auth.service";
 import { LoadingService } from "@services/loading.service";
 import { ToastService } from "@services/toast.service";
@@ -11,7 +11,7 @@ import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 @Component({
     selector: "register",
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FinFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, FinFormsModule, RouterLink],
     templateUrl: "./register.component.html"
 })
 export class RegisterComponent {

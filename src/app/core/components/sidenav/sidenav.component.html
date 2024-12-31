@@ -1,25 +1,42 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav [opened]="!isMobile" [mode]="isMobile ? 'over' : 'side'">
-        <mat-nav-list class="flex flex-col h-[calc(100vh-112px)]">
-            <div class="flex-center mx-6 mt-6 mb-16">
+        <mat-nav-list class="flex flex-col h-[calc(100vh-148px)]">
+            <div class="flex-center mx-6 mt-6">
                 <img class="h-6" alt="logo" [src]="themeSwitcher.theme() === 'dark' ? DARK_LOGO_URL : LOGO_URL">
+            </div>
+            <div class="flex items-center justify-center w-full px-3 my-5 mt-12">
+                <fin-button [matMenuTriggerFor]="menu" class="w-full" startIcon="add">Novo</fin-button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon class="material-icons-outlined success">show_chart</mat-icon>
+                        <span>Receita</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon class="material-icons-outlined error">show_chart</mat-icon>
+                        <span>Despesa</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon class="material-icons-outlined">credit_card</mat-icon>
+                        <span>Despesa no cartão &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                </mat-menu>
             </div>
             <nav class="flex flex-col justify-between h-full">
                 <ul>
                     @for (item of items; track item.route) {
                         <li [routerLink]="item.route" routerLinkActive="active">
-                            <mat-icon class="material-icons-outlined w-5 h-5 text-[1.25rem]">{{ item.icon }}</mat-icon>
+                            <mat-icon class="material-icons-outlined">{{ item.icon }}</mat-icon>
                             <a>{{ item.name }}</a>
                         </li>
                     }
                 </ul>
                 <ul>
                     <li>
-                        <mat-icon class="material-icons-outlined w-5 h-5 text-[1.25rem]">settings</mat-icon>
+                        <mat-icon class="material-icons-outlined">settings</mat-icon>
                         <a>Configurações</a>
                     </li>
                     <li>
-                        <mat-icon class="material-icons-outlined w-5 h-5 text-[1.25rem]">info</mat-icon>
+                        <mat-icon class="material-icons-outlined">info</mat-icon>
                         <a>Ajuda</a>
                     </li>
                 </ul>

@@ -1,7 +1,7 @@
 :host {
     @apply flex w-full h-full p-6 gap-6;
 
-    dashboard-card {
-        @apply w-full;
+    .card {
+        @apply bg-sidenav dark:bg-sidenav-dark border border-gray-200 dark:border-hover rounded-xl w-full text-text dark:text-text-dark;
     }
 }

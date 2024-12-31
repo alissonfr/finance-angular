@@ -1,44 +1,39 @@
-<div class="flex items-center justify-center h-screen bg-gray-50">
-    <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold text-center text-gray-800">Bem-vindo de volta!</h2>
-      <p class="mt-2 text-sm text-center text-gray-500">Acesse sua conta</p>
-      <form class="mt-6 space-y-4" [formGroup]="formGroup">
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <fin-input 
-            type="email" 
-            id="email" 
-            name="email" 
-            required 
-            placeholder="you@example.com"
-            formControlName="email"
-            autocomplete="off"
-          />
-        </div>
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <fin-input 
-            type="password" 
-            id="password" 
-            name="password" 
-            required 
-            placeholder="••••••••"
-            formControlName="password"
-          />
-        </div>
-        <div class="flex items-center justify-between">
-          <label class="inline-flex items-center">
-            <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-indigo-400" />
-            <span class="ml-2 text-sm text-gray-600">Lembrar senha</span>
-          </label>
-          <a href="#" class="text-sm text-primary hover:underline">Esqueceu sua senha?</a>
-        </div>
-        <fin-button (click)="onSubmit()" type="submit">Login</fin-button>
-      </form>
-      <p class="mt-6 text-sm text-center text-gray-600">
-        Não tem uma conta? 
-        <a class="text-primary hover:underline" routerLink="/auth/register">Cadastre-se</a>
-      </p>
-    </div>
+<div class="flex items-center justify-center h-screen bg-white dark:bg-[#191919]">
+  <div class="w-full max-w-sm p-6 bg-sidenav dark:bg-sidenav-dark rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-text dark:text-text-dark">Bem-vindo de volta!</h2>
+    <p class="mt-2 text-sm text-center text-text/75 dark:text-text-dark/75">Acesse sua conta</p>
+    <form class="mt-6 space-y-4" [formGroup]="formGroup">
+      <fin-input 
+        label="Email"
+        type="email" 
+        id="email" 
+        name="email" 
+        required 
+        placeholder="you@example.com"
+        formControlName="email"
+        autocomplete="off"
+      />
+      <fin-input 
+        label="Senha"
+        type="password" 
+        id="password" 
+        name="password" 
+        required 
+        placeholder="••••••••"
+        formControlName="password"
+      />
+      <div class="flex items-center justify-between">
+        <label class="inline-flex items-center">
+          <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary" />
+          <span class="ml-2 text-sm text-text/75 dark:text-text-dark/75">Lembrar de mim</span>
+        </label>
+        <a href="#" class="text-sm text-primary dark:brightness-150 hover:underline">Esqueceu sua senha?</a>
+      </div>
+      <fin-button class="w-full mt-4" (click)="onSubmit()" type="submit">Login</fin-button>
+    </form>
+    <p class="mt-6 text-sm text-center text-text/75 dark:text-text-dark/75">
+      Não tem uma conta? 
+      <a class="text-primary hover:underline brightness-150" routerLink="/auth/register">Cadastre-se</a>
+    </p>
   </div>
-  
+</div>

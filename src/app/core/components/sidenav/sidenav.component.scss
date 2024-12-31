@@ -1,4 +1,8 @@
 :host ::ng-deep {
+    mat-icon {
+        @apply w-5 h-5 text-[1.25rem];
+    }
+
     mat-sidenav-container {
         mat-sidenav {
             @apply border-0 dark:border-0 bg-sidenav dark:bg-sidenav-dark;

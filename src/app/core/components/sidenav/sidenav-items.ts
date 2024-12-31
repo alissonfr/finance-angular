@@ -12,11 +12,6 @@ export const SidenavItems: SidenavItem[] = [
         icon: "paid"
     },
     {
-        name: "Transações bancarias",
-        route: "/bank-account-transactions",
-        icon: "paid"
-    },
-    {
         name: "Relatórios",
         route: "/reports",
         icon: "summarize"

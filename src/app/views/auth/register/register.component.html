@@ -1,73 +1,49 @@
-<div class="flex items-center justify-center h-screen bg-gray-50">
-    <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold text-center text-gray-800">Bem-vindo!</h2>
-      <p class="mt-2 text-sm text-center text-gray-500">Crie sua conta</p>
-      <form class="mt-6 space-y-4" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <fin-input 
-            type="email" 
-            id="email" 
-            name="email" 
-            required 
-            placeholder="you@example.com"
-            formControlName="email"
-            autocomplete="off"
-          />
-        </div>
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-          <fin-input 
-            type="password" 
-            id="password" 
-            name="password" 
-            required 
-            placeholder="••••••••"
-            formControlName="password"
-          />
-        </div>
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
-          <fin-input 
-            type="name" 
-            id="name" 
-            name="name" 
-            required 
-            placeholder="Alisson Rodrigues"
-            formControlName="name"
-          />
-        </div>
-        <div>
-          <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
-          <fin-input 
-            type="cpf" 
-            id="cpf" 
-            name="cpf" 
-            required 
-            placeholder="000.000.000-00"
-            formControlName="cpf"
-          />
-        </div>
-
-        <button 
-          type="submit" 
-          class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-          [disabled]="loadingService.isLoading() | async"
-        >
-          @if(!(loadingService.isLoading() | async)) {
-            Criar conta
-          } @else {
-            <svg class="w-5 h-5 mx-auto animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-            </svg>
-          }
-        </button>
-      </form>
-      <p class="mt-6 text-sm text-center text-gray-600">
-        Já tem uma conta? 
-        <a href="#" class="text-indigo-500 hover:underline">Faça login</a>
-      </p>
-    </div>
+<div class="flex items-center justify-center h-screen bg-white dark:bg-[#191919]">
+  <div class="w-full max-w-sm p-6 bg-sidenav dark:bg-sidenav-dark rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-text dark:text-text-dark">Bem-vindo de volta!</h2>
+    <p class="mt-2 text-sm text-center text-text/75 dark:text-text-dark/75">Acesse sua conta</p>
+    <form class="mt-6 space-y-4" [formGroup]="formGroup">
+      <fin-input 
+        label="Nome"
+        id="name" 
+        name="name" 
+        required 
+        placeholder="Alisson R"
+        formControlName="name"
+        autocomplete="off"
+      />
+      <fin-input 
+        label="CPF"
+        id="cpf" 
+        name="cpf" 
+        required 
+        placeholder="000.000.000-00"
+        formControlName="cpf"
+      />
+      <fin-input 
+        label="Email"
+        type="email" 
+        id="email" 
+        name="email" 
+        required 
+        placeholder="you@example.com"
+        formControlName="email"
+        autocomplete="off"
+      />
+      <fin-input 
+        label="Senha"
+        type="password" 
+        id="password" 
+        name="password" 
+        required 
+        placeholder="••••••••"
+        formControlName="password"
+      />
+      <fin-button class="w-full" (click)="onSubmit()" type="submit">Criar conta</fin-button>
+    </form>
+    <p class="mt-6 text-sm text-center text-text/75 dark:text-text-dark/75">
+      Já possui uma conta? 
+      <a class="text-primary hover:underline brightness-150" routerLink="/auth/login">Faça login</a>
+    </p>
   </div>
-  
+</div>
