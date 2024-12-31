@@ -1,0 +1,16 @@
+<div class="p-8 h-full flex flex-col justify-between items-center text-center">
+  <span class="error">
+    <mat-icon class="material-icons-outlined">warning</mat-icon>
+  </span>
+  
+  <section class="my-3">
+    <h1 class="text-2xl font-bold">{{ data.title }}</h1>
+    <h3>{{ data.message }}</h3>
+  </section>
+  
+
+  <div class="flex w-full justify-between">
+    <fin-button (click)="close()" color="plain">Não, mantenha.</fin-button>
+    <fin-button (click)="confirm()" color="cancel">Sim, apague!</fin-button>
+  </div>
+</div>

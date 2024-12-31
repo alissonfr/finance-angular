@@ -1,14 +1,14 @@
 /* eslint-disable @angular-eslint/no-output-native */
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, forwardRef, Input, Optional, Output } from "@angular/core";
-import { ControlContainer, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
+import { Component, EventEmitter, forwardRef, Input, Output } from "@angular/core";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from "@angular/material/datepicker";
-import { NgxCurrencyDirective } from "ngx-currency";
+import { formatToCurrency, formatToNumeric } from "@utils/parsers";
 
 @Component({
     selector: "fin-input",
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule, NgxCurrencyDirective],
+    imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
     templateUrl: "./fin-input.component.html",
     styleUrl: "./fin-input.component.scss",
     providers: [
@@ -36,23 +36,19 @@ export class FinInputComponent implements ControlValueAccessor {
     protected value: string = "";
     protected control: FormControl;
 
-    constructor(@Optional() private controlContainer: ControlContainer) {}
-
-    ngAfterViewInit() {
-        console.log(this.currency)
-        if (this.controlContainer && this.name) {
-            const formGroup = this.controlContainer.control as FormGroup;
-            this.control = formGroup?.get(this.name) as FormControl;
-        }
-
-        setTimeout(() => this.writeValue(this.initialValue), 0)
+    get isCurrency() {
+        return this.currency || this.currency === "";
     }
   
     onChanged: (value: string) => void;
     onTouched: () => void;
   
     writeValue(value: string) {
-        this.value = value ?? "";
+        if(this.isCurrency && this.value) {
+            this.value = formatToNumeric(value).toString() ?? "";
+        } else {
+            this.value = value ?? "";
+        }
     }
   
     registerOnChange(fn: (value: string) => void) {
@@ -69,7 +65,11 @@ export class FinInputComponent implements ControlValueAccessor {
 
     onInputChange(event: Event): void {
         const value = (event.target as HTMLInputElement)?.value ?? "";
-        this.value = value;
+        if(this.isCurrency) {
+            this.value = formatToCurrency(formatToNumeric(value));
+        } else {
+            this.value = value;
+        }
         this.onChanged(value);
     }
 

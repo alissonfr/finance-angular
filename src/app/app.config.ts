@@ -7,7 +7,6 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideRouter } from "@angular/router";
 import { JwtModule } from "@auth0/angular-jwt";
 import { authInterceptor } from "@core/interceptors/auth.interceptor";
-import { NgxCurrencyInputMode, provideEnvironmentNgxCurrency } from "ngx-currency";
 import { routes } from "./app.routes";
 
 registerLocaleData(localePt);
@@ -26,20 +25,6 @@ export const appConfig: ApplicationConfig = {
                 }
             })
         ]),
-        provideEnvironmentNgxCurrency({
-            align: "left",
-            allowNegative: true,
-            allowZero: true,
-            decimal: ",",
-            precision: 2,
-            prefix: "R$ ",
-            suffix: "",
-            thousands: ".",
-            nullable: true,
-            min: null,
-            max: null,
-            inputMode: NgxCurrencyInputMode.Financial,
-        }),
         { provide: LOCALE_ID, useValue: "pt-BR" },
     ]
 };

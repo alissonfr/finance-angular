@@ -51,9 +51,6 @@ export class HttpService {
             return acc;
         }, "")
 
-        console.log(params)
-        console.log(paramsString)
-
         return `${url}${paramsString}`
     }
 }

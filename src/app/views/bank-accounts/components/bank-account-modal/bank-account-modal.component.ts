@@ -42,6 +42,33 @@ export class BankAccountModalComponent {
         }
 
         const bankAccount = this.formGroup.getRawValue() as unknown as BankAccount;
+        bankAccount.initialAmount = bankAccount.initialAmount
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+            .trim();
+
+        if(bankAccount.bankAccountId) {
+            this.update(bankAccount.bankAccountId, bankAccount);
+        } else {
+            this.create(bankAccount)
+        }
+    }
+
+    private get(id: number): void {
+        this.bankAccountService.get(id).subscribe({
+            next: result => {
+                this.formGroup.patchValue({
+                    ...result,
+                    // initialAmount: result.initialAmount = result.initialAmount.replace(".", ",")
+                })
+                // this.formGroup.get("initialAmount")?.updateValueAndValidity()
+            },
+            error: e => this.toastService.error(e, "Erro ao obter conta bancária.")
+        });
+    }
+
+    private create(bankAccount: BankAccount) {
         this.bankAccountService.create(bankAccount).subscribe({
             next: () => {
                 this.toastService.success("Conta bancária criada com sucesso.");
@@ -51,10 +78,13 @@ export class BankAccountModalComponent {
         });
     }
 
-    private get(id: number): void {
-        this.bankAccountService.get(id).subscribe({
-            next: result => this.formGroup.patchValue(result),
-            error: e => this.toastService.error(e, "Erro ao obter conta bancária.")
+    private update(id: number, bankAccount: BankAccount) {
+        this.bankAccountService.update(id, bankAccount).subscribe({
+            next: () => {
+                this.toastService.success("Conta bancária atualizada com sucesso.");
+                this.close();
+            },
+            error: e => this.toastService.error(e, "Erro ao atualizar conta bancária.")
         });
     }
 }

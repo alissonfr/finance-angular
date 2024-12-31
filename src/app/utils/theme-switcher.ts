@@ -6,14 +6,14 @@ type Theme = "light" | "dark";
     providedIn: "root"
 })
 export class ThemeSwitcher {
-    public theme = signal<Theme>("light");
+    public theme = signal<Theme>("dark");
     
     constructor() {
         effect(() => this.handleTheme(this.theme()));
     }
 
     load() {
-        this.theme.set("light");
+        this.theme.set("dark");
     }
 
     changeTo(theme: Theme) {

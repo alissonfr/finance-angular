@@ -1,6 +1,6 @@
 :host {
     button {
-        @apply font-sans text-sm rounded-lg cursor-pointer inline-flex justify-center items-center gap-2;
+        @apply font-sans text-sm rounded-lg cursor-pointer inline-flex justify-center items-center gap-2 outline-none;
 
         .mat-icon {
             @apply flex items-center justify-center h-4 w-4 text-[1rem] mt-0.5;
@@ -24,22 +24,27 @@
 
         
         &.primary {
-            @apply bg-primary text-white;
+            @apply bg-primary text-white dark:text-text-dark;
         }
         
         &.secondary {
-            @apply bg-green-500 text-white;
+            @apply bg-green-500 text-white dark:text-text-dark;
         }
         
         &.outlined {
-            @apply bg-transparent text-primary border border-primary;
+            @apply bg-transparent text-primary border border-primary hover:bg-gray-100 dark:hover:bg-gray-900 dark:brightness-150;
+        }
+
+        &.plain {
+            @apply bg-transparent text-text dark:text-text-dark border border-text dark:border-text-dark
+                hover:bg-gray-50 dark:hover:bg-hover-dark;
         }
         
         &.cancel {
-            @apply bg-transparent text-error border border-error transition duration-300;
+            @apply bg-error text-white border border-transparent transition duration-300;
 
             &:hover {
-                @apply bg-error text-white border-transparent;
+                @apply bg-error/80;
             }
         }
     }

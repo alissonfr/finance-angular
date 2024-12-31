@@ -1,4 +1,4 @@
-<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" [for]="name" *ngIf="label">{{ label }}</label>
+<label class="block mb-2 text-sm font-medium text-text dark:text-text-dark" [for]="name" *ngIf="label">{{ label }}</label>
 
 @if(matDatepicker) {
   <input 
@@ -15,7 +15,7 @@
 
   [matDatepicker]="matDatepicker"
   />
-} @else if (currency || currency === '') {
+} @else if (isCurrency) {
   <input 
   [type]="type" 
   [id]="name" 
@@ -24,9 +24,9 @@
   (input)="onInputChange($event)"
   [placeholder]="placeholder" 
   [autocomplete]="autocomplete"
+
   (focus)="onFocus()"
   (blur)="onBlur()"
-  currencyMask
   />
 } @else {
   <input 

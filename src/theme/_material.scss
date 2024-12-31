@@ -38,3 +38,11 @@ $finance-angular-theme: mat.m2-define-light-theme((
     margin-right: 8px !important;
   }
 }
+
+.mat-dialog-container {
+  border-radius: 20px !important;
+}
+
+.mat-mdc-dialog-surface {
+  @apply bg-sidenav dark:bg-sidenav-dark text-text dark:text-text-dark shadow-lg max-w-lg rounded-xl;
+}

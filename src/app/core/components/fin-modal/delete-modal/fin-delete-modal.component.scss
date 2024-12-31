@@ -1,0 +1,9 @@
+:host {
+    .error {
+        @apply w-20 h-20 bg-error/10 rounded-full flex items-center justify-center;
+        
+        .mat-icon {
+            @apply w-12 h-12 text-[2.5rem] text-error;
+        }
+    }
+}

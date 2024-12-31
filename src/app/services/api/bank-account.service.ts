@@ -22,4 +22,12 @@ export class BankAccountService {
     create(bankAccount: Partial<BankAccount>): Observable<BankAccount> {
         return this.http.post<BankAccount>(this.PATH, bankAccount);
     }
+
+    update(id: number, bankAccount: Partial<BankAccount>): Observable<BankAccount> {
+        return this.http.put<BankAccount>(`${this.PATH}/${id}`, bankAccount); 
+    }
+
+    delete(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.PATH}/${id}`);
+    }
 }

@@ -13,7 +13,7 @@ import { LoadingService } from "@services/loading.service";
 export class FinButtonComponent {
   @Input() class: string = "";
   @Input() size: "normal" | "large" = "normal";
-  @Input() color: "primary" | "secondary" | "outlined" | "cancel" = "primary";
+  @Input() color: "primary" | "secondary" | "outlined" | "cancel" | "plain" = "primary";
   @Input() disabled: boolean = false;
   @Input() startIcon?: string;
 
