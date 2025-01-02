@@ -5,8 +5,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { BankAccountService } from "@services/api/bank-account.service";
 import { PaymentMethodService } from "@services/api/payment-method.service";
+import { ModalService } from "@services/modal.service";
 import { ToastService } from "@services/toast.service";
 import { isFormInvalid } from "@utils/validators";
+import { BankAccountModalComponent } from "@views/bank-accounts/components/bank-account-modal/bank-account-modal.component";
 import { CategoryModalComponent } from "@views/categories/components/bank-account-modal/category-modal.component";
 import { TransactionTypeLabels } from "src/app/enums/transaction-type.enum";
 import { BankAccount } from "src/app/models/bank-account";
@@ -21,6 +23,7 @@ import { FinFormsModule } from "../../fin-forms/fin-forms.module";
     styleUrl: "./fin-transaction-modal.component.scss"
 })
 export class FinTransactionModalComponent {
+    expanded: boolean = false;
     formGroup = new FormGroup({
         bankAccountTransactionId: new FormControl(0),
         description: new FormControl("", [Validators.required]),
@@ -38,7 +41,7 @@ export class FinTransactionModalComponent {
     paymentMethods: PaymentMethod[] = [];
     transactionTypes: {name: string, label: string}[] = Array.from(TransactionTypeLabels, ([name, label]) => ({ name, label }));
 
-    expanded: boolean = false;
+    private readonly modalService = inject(ModalService);
     private readonly dialog = inject(MatDialogRef<CategoryModalComponent>);
     private readonly data = inject(MAT_DIALOG_DATA);
     private readonly bankAccountService = inject(BankAccountService);
@@ -46,7 +49,7 @@ export class FinTransactionModalComponent {
     private readonly toastService = inject(ToastService);
     
     ngOnInit() {
-        // if(this.data?.id) ;
+        if(this.data?.id) this.get(this.data.id);
         this.findAutocompleteProps();
     }
 
@@ -74,7 +77,21 @@ export class FinTransactionModalComponent {
         }
     }
 
-    handleAddNew(aa: unknown) {
-        console.log(aa)
+    createNewBankAccount(name: string) {
+        const dialogRef = this.modalService.open(BankAccountModalComponent, { data: name });
+        dialogRef.afterClosed().subscribe(() => {
+
+        });
+    }
+
+    createNewCategory(name: string) {
+        const dialogRef = this.modalService.open(CategoryModalComponent, { data: name });
+        dialogRef.afterClosed().subscribe(() => {
+            
+        });
+    }
+
+    private get(id: number) {
+        console.log(id)
     }
 }

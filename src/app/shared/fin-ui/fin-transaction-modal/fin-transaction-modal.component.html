@@ -29,7 +29,7 @@
             [items]="bankAccounts"
             displayProperty="name"
             controlName="bankAccount"
-            (addNewItem)="handleAddNew($event)"
+            (addNewItem)="createNewBankAccount($event)"
           />
     
           <fin-autocomplete
@@ -38,7 +38,7 @@
             [items]="bankAccounts"
             displayProperty="name"
             controlName="category"
-            (addNewItem)="handleAddNew($event)" 
+            (addNewItem)="createNewCategory($event)" 
           />
         </div>
       </div>

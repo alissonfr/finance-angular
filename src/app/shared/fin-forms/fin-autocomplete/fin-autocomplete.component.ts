@@ -55,7 +55,6 @@ export class FinAutocompleteComponent {
     }
 
     filterItems(query: string | null | undefined) {
-        console.log("searcginh")
         if (!query) {
             this.filteredItems = this.items;
             return
@@ -82,11 +81,9 @@ export class FinAutocompleteComponent {
 
     onAddNew() {
         const newItem = this.searchFormGroup.get("searchControl")?.value;
-        if (newItem) {
-            this.addNewItem.emit(newItem);
-            this.searchFormGroup.get("searchControl")?.setValue("");
-            this.isDropdownOpen = false;
-        }
+        this.addNewItem.emit(newItem || "");
+        this.searchFormGroup.get("searchControl")?.setValue("");
+        this.isDropdownOpen = false;
     }
 
 }
