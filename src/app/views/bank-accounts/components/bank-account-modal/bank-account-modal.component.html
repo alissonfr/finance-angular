@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center mb-4">
+<div class="flex justify-between items-center">
   <h2 class="text-xl font-semibold">{{ formGroup.get('bankAccountId')?.value ? 'Atualizar conta bancária' : 'Nova conta bancária' }}</h2>
   <span class="cursor-pointer flex items-center justify-center rounded-full p-3 w-2 h-2 duration-200 hover:bg-hover-dark">
     <button (click)="close()" class="focus:outline-none">&times;</button>
@@ -13,10 +13,3 @@
     <fin-button (click)="submit()" >Enviar</fin-button>
   </div>
 </form>
-
-<!-- <fin-autocomplete
-[formGroup]="formGroup"
-[items]="bankAccounts"
-displayProperty="name"
-controlName="accountId"
-(addNewItem)="handleAddNew($event)" />     -->

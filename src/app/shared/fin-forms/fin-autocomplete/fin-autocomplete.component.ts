@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, HostListener, Input, Output } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from "@angular/core";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
 import { FinInputComponent } from "../fin-input/fin-input.component";
 
 @Component({
     selector: "fin-autocomplete",
-    imports: [CommonModule, FinInputComponent],
+    imports: [CommonModule, FinInputComponent, ReactiveFormsModule, MatIconModule],
     standalone: true,
     templateUrl: "./fin-autocomplete.component.html",
     styleUrl: "./fin-autocomplete.component.scss"
 })
 export class FinAutocompleteComponent {
-  @HostListener("document:click", ["$event"])
+    @HostListener("document:click", ["$event"])
     clickOutside(event: Event) {
         const target = event.target as HTMLElement;
         if (!target.closest(".dropdown-container")) {
@@ -20,58 +21,78 @@ export class FinAutocompleteComponent {
         }
     }
 
-  @Input({ required: true }) items: any[] = [];
-  @Input({ required: true }) displayProperty: any;
-  @Input({ required: true }) formGroup: FormGroup;
-  @Input({ required: true }) controlName: string;
+    @Input({ required: true }) items: any[] = [];
+    @Input({ required: true }) displayProperty: any;
+    @Input({ required: true }) formGroup: FormGroup;
+    @Input({ required: true }) controlName: string;
+    @Input() label: string;
 
-  @Output() addNewItem = new EventEmitter<string>();
+    @Output() addNewItem = new EventEmitter<string>();
 
-  searchControl = new FormControl("");
-  filteredItems: typeof this.items = [];
-  isDropdownOpen: boolean = false;
+    @ViewChild(FinInputComponent) input: FinInputComponent;
+    @ViewChild(FinInputComponent, { static: true, read: ElementRef }) inputRef: ElementRef;
 
-  ngOnInit() {
-      this.filteredItems = this.items;
-      this.searchControl.valueChanges.subscribe(value => this.filterItems(value));
+    filteredItems: typeof this.items = [];
+    isDropdownOpen: boolean = false;
 
-      const initialValue = this.formGroup.get(this.controlName)?.value;
-      if (initialValue) {
-          this.searchControl.setValue(initialValue[this.displayProperty]);
-      }
-  }
+    searchFormGroup = new FormGroup({
+        searchControl: new FormControl(""),
+    });
 
-  filterItems(query: string | null) {
-      if (!query) {
-          this.filteredItems = this.items;
-          return
-      }
-      this.filteredItems = this.items.filter(item =>
-          item[this.displayProperty].toLowerCase().includes(query.toLowerCase())
-      );
-  }
+    ngOnInit() {
+        this.filteredItems = this.items;
+        const autocompleteInput = this.searchFormGroup.get("searchControl");
+        const propInput = this.formGroup.get(this.controlName);
+        
+        autocompleteInput?.valueChanges.subscribe(value => {
+            propInput?.reset();
+            this.filterItems(value);
+        });
+        
+        if(propInput?.hasValidator(Validators.required)) {
+            propInput?.events.subscribe(() => {
+                if(propInput?.invalid && propInput?.touched) {
+                    this.inputRef.nativeElement.classList.add("ng-touched", "ng-invalid")
+                } else {
+                    this.inputRef.nativeElement.classList.remove("ng-touched", "ng-invalid")
+                }
+            });
+        }
+    }
 
-  selectItem(item: any) {
-      this.formGroup.get(this.controlName)?.setValue(item);
-      this.isDropdownOpen = false;
-  }
+    filterItems(query: string | null | undefined) {
+        console.log("searcginh")
+        if (!query) {
+            this.filteredItems = this.items;
+            return
+        }
+        this.filteredItems = this.items.filter(item =>
+            item[this.displayProperty].toLowerCase().includes(query.toLowerCase())
+        );
+    }
 
-  openDropdown() {
-      this.isDropdownOpen = true;
-      this.filterItems(this.searchControl.value);
-  }
+    selectItem(item: any) {
+        this.input.writeValue(item[this.displayProperty])
+        this.formGroup.get(this.controlName)?.setValue(item);
+        this.isDropdownOpen = false;
+    }
 
-  closeDropdown() {
-      this.isDropdownOpen = false;
-  }
+    openDropdown() {
+        this.isDropdownOpen = !this.isDropdownOpen;
+        this.filterItems(this.searchFormGroup.get("searchControl")?.value);
+    }
 
-  onAddNew() {
-      const newItem = this.searchControl.value;
-      if (newItem) {
-          this.addNewItem.emit(newItem);
-          this.searchControl.setValue("");
-          this.isDropdownOpen = false;
-      }
-  }
+    closeDropdown() {
+        this.isDropdownOpen = false;
+    }
+
+    onAddNew() {
+        const newItem = this.searchFormGroup.get("searchControl")?.value;
+        if (newItem) {
+            this.addNewItem.emit(newItem);
+            this.searchFormGroup.get("searchControl")?.setValue("");
+            this.isDropdownOpen = false;
+        }
+    }
 
 }

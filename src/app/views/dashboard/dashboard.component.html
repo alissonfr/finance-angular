@@ -5,7 +5,63 @@
         <expenses-card class="card"/>
     </div>
     <div class="card flex gap-4 h-[83%]">
-        a
+        
+
+
+
+
+        <div class="fin-table" style="padding: 0;">
+            @if(bankAccountTransactions.length > 0) {
+                <section class="table-section">
+                    <table>
+                        <thead>
+                            <th></th>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Conta</th>
+                            <th>Tipo</th>
+                        </thead>
+                        <tbody>
+                            @for (transaction of bankAccountTransactions; track transaction.bankAccountTransactionId) {
+                                <tr>
+                                    <td><mat-icon class="material-symbols-outlined">tv</mat-icon></td>
+                                    <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ transaction.description }}</td>
+                                    <td>{{ transaction.amount }}</td>
+                                    <td>{{ transaction.bankAccount.name }}</td>
+                                    <td>{{ transaction.operation }}</td>
+                
+                                    <!-- <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item>
+                                            <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                                            <span>Editar</span>
+                                        </button>
+                                        <button mat-menu-item>
+                                            <mat-icon class="material-symbols-outlined">delete</mat-icon>
+                                            <span>Apagar</span>
+                                        </button>
+                                    </mat-menu> -->
+                                </tr>
+                              }
+                        </tbody>
+                    </table>
+                </section>
+            } @else {
+                <h1>Sem registros.</h1>
+            }
+            
+        </div>
+          
+        
+        
+
+
+
+
+
+
     </div>
 </section>
 

@@ -12,6 +12,11 @@ export const SidenavItems: SidenavItem[] = [
         icon: "paid"
     },
     {
+        name: "Categorias",
+        route: "/categories",
+        icon: "bookmark"
+    },
+    {
         name: "Relatórios",
         route: "/reports",
         icon: "summarize"

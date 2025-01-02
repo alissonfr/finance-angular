@@ -6,7 +6,6 @@ export const isFormInvalid = (formGroup: FormGroup) => {
     for (const key in controls) {
         if (Object.prototype.hasOwnProperty.call(controls, key)) {
             const control = controls[key as keyof typeof controls];
-            console.log(control)
             if(control.invalid) control.markAsTouched();
         }
     }

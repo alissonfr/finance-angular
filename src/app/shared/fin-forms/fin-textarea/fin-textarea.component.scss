@@ -1,18 +1,14 @@
 :host {
-    input {
-        @apply h-[42px] border border-gray-300 bg-white text-gray-900 text-sm rounded-lg block w-full p-2.5 
+    textarea {
+        @apply resize-none h-[124px] border border-gray-300 bg-white text-gray-900 text-sm rounded-lg block w-full p-2.5 
             dark:bg-sidenav-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
             focus:ring-1 focus:outline-none focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary;
     }
 
     &.ng-touched.ng-invalid {
-        input {
+        textarea {
             @apply border-error 
             focus:ring-1 focus:outline-none focus:ring-error focus:border-error dark:focus:ring-error dark:focus:border-error;
-
-            &::placeholder {
-                // color: red;
-            }
         }
     }
 }

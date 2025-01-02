@@ -1,26 +1,35 @@
-<div class="dropdown-container relative mb-5">
+<div class="dropdown-container relative" [formGroup]="searchFormGroup">
     <fin-input
+      #finInput
+      [label]="label"
       formControlName="searchControl"
       (focus)="openDropdown()"
       placeholder="Pesquisar..."
       autocomplete="off"
     />
+    <mat-icon class="material-icons-outlined arrow-icon" (click)="openDropdown()">{{ isDropdownOpen ? "keyboard_arrow_up" : "keyboard_arrow_down" }}</mat-icon>
+
     
-    <div *ngIf="isDropdownOpen" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 dark:bg-gray-700 dark:border-gray-600">
+    <div *ngIf="isDropdownOpen" class="absolute z-10 w-full border border-hover-dark bg-sidenav dark:bg-sidenav-dark">
       <ul class="max-h-60 overflow-auto">
-        <li
-          *ngFor="let item of filteredItems"
-          (click)="selectItem(item)"
-          class="cursor-pointer px-4 py-2 hover:bg-indigo-500 hover:text-white dark:hover:bg-primary"
-        >
-          {{ item[displayProperty] }}
-        </li>
+        @for (item of filteredItems; track $index) {
+          <li
+            (click)="selectItem(item)"
+            class="cursor-pointer px-4 py-2 hover:bg-hover-dark"
+          >
+            {{ item[displayProperty] }}
+          </li>
+        } @empty {
+          <li class="px-4 py-2">Nenhum registro encontrado.</li>
+        }
         <li
           (click)="onAddNew()"
-          class="cursor-pointer px-4 py-2 text-indigo-500 hover:bg-indigo-100 dark:hover:bg-primary dark:text-indigo-400">
+          class="cursor-pointer px-2 py-2 hover:bg-hover-dark text-primary brightness-150 flex gap-1">
+          <mat-icon class="">add</mat-icon>
           Novo
         </li>
       </ul>
     </div>
+    
   </div>
   

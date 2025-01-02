@@ -11,7 +11,7 @@ export class ModalService {
 
 
     open<T, R = unknown>(component: ComponentType<T>, config?: MatDialogConfig): MatDialogRef<T, R> {
-        return this.dialog.open(component, { minWidth: "400px", ...config });
+        return this.dialog.open(component, { minWidth: "40%", ...config });
     }
 
     confirm(data: { title: string, message: string }) {

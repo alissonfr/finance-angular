@@ -1,33 +1,15 @@
 <label class="block mt-3 mb-2 text-sm font-medium text-text dark:text-text-dark" [for]="name" *ngIf="label">{{ label }}</label>
 
-@if(matDatepicker) {
-  <input 
-  [type]="type" 
-  [id]="name" 
-  [name]="name" 
-  [value]="value" 
-  (input)="onInputChange($event)"
-  [placeholder]="placeholder" 
-  [autocomplete]="autocomplete"
-
-  (focus)="onFocus()"
-  (blur)="onBlur()"
-
-  [matDatepicker]="matDatepicker"
-  />
-} @else {
-  <input 
-  [type]="type" 
-  [id]="name" 
-  [name]="name" 
-  [value]="value" 
-  (input)="onInputChange($event)"
-  [placeholder]="placeholder" 
-  [autocomplete]="autocomplete"
-  (focus)="onFocus()"
-  (blur)="onBlur()"
-  />
-}
+<textarea 
+[id]="name" 
+[name]="name" 
+[value]="value" 
+(input)="onInputChange($event)"
+[placeholder]="placeholder" 
+[autocomplete]="autocomplete"
+(focus)="onFocus()"
+(blur)="onBlur()"
+></textarea>
 
 <div *ngIf="control?.touched && control?.invalid">
   <span class="text-xs text-error mt-1" *ngIf="control?.errors?.['required']">&#9888; Este campo é obrigatório.</span>

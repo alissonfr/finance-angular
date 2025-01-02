@@ -7,7 +7,7 @@
             <div class="flex items-center justify-center w-full px-3 my-5 mt-12">
                 <fin-button [matMenuTriggerFor]="menu" class="w-full" startIcon="add">Novo</fin-button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="createIncome()">
                         <mat-icon class="material-icons-outlined success">show_chart</mat-icon>
                         <span>Receita</span>
                     </button>

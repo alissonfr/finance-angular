@@ -1,11 +1,12 @@
 .fin-table {
+
   @apply relative overflow-x-auto w-full bg-sidenav dark:bg-sidenav-dark p-6 rounded-lg border dark:border-[#27272A];
 
   .search {
     @apply flex gap-3 items-center justify-between w-full;
   }
 
-  .table {
+  .table-section {
     @apply w-full rounded-lg;
 
     table {
@@ -37,5 +38,9 @@
         }
       }
     }
+  }
+
+  h1 {
+    @apply text-lg font-semibold text-text dark:text-text-dark text-center;
   }
 }

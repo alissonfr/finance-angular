@@ -1,0 +1,62 @@
+<div class="flex justify-between items-center" [class.expanded]="expanded">
+    <h2 class="text-xl font-semibold">{{ 'Nova receita' }}</h2>
+    <span class="cursor-pointer flex items-center justify-center rounded-full p-3 w-2 h-2 duration-200 hover:bg-hover-dark">
+      <button (click)="close()" class="focus:outline-none">&times;</button>
+    </span>
+  </div>
+  
+  <form class="pt-4" [formGroup]="formGroup">
+    
+
+    <section class="flex gap-4">
+      <div class="w-full">
+        <fin-input label="Descrição" placeholder="Netflix" name="description" formControlName="description" required />
+
+        <div class="grid grid-cols-2 gap-4">
+          <fin-input label="Data" placeholder="01/01/2025" name="date" formControlName="date" required />
+          <fin-input label="Valor" placeholder="R$ 20,00" name="amount" formControlName="amount" currency required />
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <fin-input label="Tipo" placeholder="Selecione uma opção..." name="type" formControlName="type" required />
+          <fin-input label="Forma de pagamento" placeholder="Selecione uma opção..." name="paymentMethod" formControlName="paymentMethod" required />
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <fin-autocomplete
+            required
+            label="Conta bancária"
+            [formGroup]="formGroup"
+            [items]="bankAccounts"
+            displayProperty="name"
+            controlName="bankAccount"
+            (addNewItem)="handleAddNew($event)" 
+          />
+    
+          <fin-autocomplete
+            required
+            label="Categoria"
+            [formGroup]="formGroup"
+            [items]="bankAccounts"
+            displayProperty="name"
+            controlName="category"
+            (addNewItem)="handleAddNew($event)" 
+          />
+        </div>
+      </div>
+      <div class="w-full" *ngIf="expanded">
+        <fin-textarea label="Notas" placeholder="Comprado no dia da praia" name="notes" formControlName="notes" />
+      </div>
+    </section>
+
+
+    <div class="flex items-center justify-end mt-3 font-semibold cursor-pointer hover:brightness-110" (click)="expanded = !expanded">
+      <span>{{ expanded ? "Menos detalhes" : "Mais detalhes" }}</span>
+      <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
+    </div>
+  
+    <div class="flex justify-end mt-6">
+      <fin-button (click)="submit()">Enviar</fin-button>
+    </div>
+  </form>
+  
