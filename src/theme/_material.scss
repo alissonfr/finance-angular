@@ -47,6 +47,10 @@ $finance-angular-theme: mat.m2-define-light-theme((
   @apply bg-sidenav dark:bg-sidenav-dark text-text dark:text-text-dark shadow-lg rounded-xl p-6;
 }
 
+.mdc-dialog--open .mat-mdc-dialog-surface {
+  @apply overflow-y-visible;
+}
+
 // .mat-mdc-menu-panel {
 //   @apply w-[225px];
 // }

@@ -78,9 +78,11 @@ export class FinInputComponent implements ControlValueAccessor {
     }
 
     onBlur() {
-        this.blur.emit();
-        if (this.onTouched) {
-            this.onTouched();
-        }
+        setTimeout(() => {
+            this.blur.emit();
+            if (this.onTouched) {
+                this.onTouched();
+            }
+        }, 150)
     }
 }

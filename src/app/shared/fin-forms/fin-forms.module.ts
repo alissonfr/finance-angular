@@ -5,6 +5,7 @@ import { FinAutocompleteComponent } from "./fin-autocomplete/fin-autocomplete.co
 import { FinButtonComponent } from "./fin-button/fin-button.component";
 import { FinDatePickerComponent } from "./fin-date-picker/fin-date-picker.component";
 import { FinInputComponent } from "./fin-input/fin-input.component";
+import { FinSelectComponent } from "./fin-select/fin-select.component";
 import { FinTextAreaComponent } from "./fin-textarea/fin-textarea.component";
 
 const components = [
@@ -12,7 +13,8 @@ const components = [
     FinDatePickerComponent, 
     FinAutocompleteComponent,
     FinButtonComponent,
-    FinTextAreaComponent
+    FinTextAreaComponent,
+    FinSelectComponent
 ]
 
 @NgModule({

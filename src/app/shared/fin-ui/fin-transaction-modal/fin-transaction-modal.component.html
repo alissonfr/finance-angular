@@ -8,7 +8,7 @@
   <form class="pt-4" [formGroup]="formGroup">
     
 
-    <section class="flex gap-4">
+    <section class="flex gap-4 w-full">
       <div class="w-full">
         <fin-input label="Descrição" placeholder="Netflix" name="description" formControlName="description" required />
 
@@ -18,23 +18,21 @@
         </div>
         
         <div class="grid grid-cols-2 gap-4">
-          <fin-input label="Tipo" placeholder="Selecione uma opção..." name="type" formControlName="type" required />
-          <fin-input label="Forma de pagamento" placeholder="Selecione uma opção..." name="paymentMethod" formControlName="paymentMethod" required />
+          <fin-select label="Tipo" name="type" [formGroup]="formGroup" controlName="type" [items]="transactionTypes" displayProperty="label" required />
+          <fin-select label="Forma de pagamento" name="paymentMethod" [formGroup]="formGroup" controlName="paymentMethod" [items]="paymentMethods" displayProperty="name" required />
         </div>
         
         <div class="grid grid-cols-2 gap-4">
           <fin-autocomplete
-            required
             label="Conta bancária"
             [formGroup]="formGroup"
             [items]="bankAccounts"
             displayProperty="name"
             controlName="bankAccount"
-            (addNewItem)="handleAddNew($event)" 
+            (addNewItem)="handleAddNew($event)"
           />
     
           <fin-autocomplete
-            required
             label="Categoria"
             [formGroup]="formGroup"
             [items]="bankAccounts"
@@ -50,8 +48,8 @@
     </section>
 
 
-    <div class="flex items-center justify-end mt-3 font-semibold cursor-pointer hover:brightness-110" (click)="expanded = !expanded">
-      <span>{{ expanded ? "Menos detalhes" : "Mais detalhes" }}</span>
+    <div class="flex items-center justify-end mt-3 font-semibold cursor-pointer hover:brightness-110">
+      <span (click)="expanded = !expanded">{{ expanded ? "Menos detalhes" : "Mais detalhes" }}</span>
       <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
     </div>
   

@@ -1,0 +1,5 @@
+:host {
+    .arrow-icon.mat-icon {
+        @apply absolute right-1 top-9 hover:bg-hover-dark rounded-full cursor-pointer;
+    }
+}

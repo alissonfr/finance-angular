@@ -1,19 +1,20 @@
-<div class="dropdown-container relative" [formGroup]="searchFormGroup">
+<div class="relative w-full" [formGroup]="searchFormGroup">
     <fin-input
       #finInput
       [label]="label"
       formControlName="searchControl"
       (focus)="openDropdown()"
       (blur)="closeDropdown()"
-      placeholder="Pesquisar..."
+      placeholder="Selecione uma opção..."
       autocomplete="off"
+      readonly
     />
-    <mat-icon class="material-icons-outlined arrow-icon" (click)="openDropdown()">{{ isDropdownOpen ? "keyboard_arrow_up" : "keyboard_arrow_down" }}</mat-icon>
+    <mat-icon class="material-icons-outlined arrow-icon" (click)="openDropdown()">{{ isDropdownOpen ? "arrow_drop_up" : "arrow_drop_down" }}</mat-icon>
 
     
     <div *ngIf="isDropdownOpen" class="absolute z-[9999] w-full border border-hover-dark bg-sidenav dark:bg-sidenav-dark">
       <ul class="max-h-60 overflow-auto">
-        @for (item of filteredItems; track $index) {
+        @for (item of items; track $index) {
           <li
             (click)="selectItem(item)"
             class="cursor-pointer px-4 py-2 hover:bg-hover-dark"
@@ -23,12 +24,6 @@
         } @empty {
           <li class="px-4 py-2">Nenhum registro encontrado.</li>
         }
-        <li
-          (click)="onAddNew()"
-          class="cursor-pointer px-2 py-2 hover:bg-hover-dark text-primary brightness-150 flex gap-1">
-          <mat-icon class="">add</mat-icon>
-          Novo
-        </li>
       </ul>
     </div>
     

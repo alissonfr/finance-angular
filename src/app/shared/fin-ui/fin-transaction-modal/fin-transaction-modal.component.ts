@@ -4,10 +4,13 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { BankAccountService } from "@services/api/bank-account.service";
+import { PaymentMethodService } from "@services/api/payment-method.service";
 import { ToastService } from "@services/toast.service";
 import { isFormInvalid } from "@utils/validators";
 import { CategoryModalComponent } from "@views/categories/components/bank-account-modal/category-modal.component";
+import { TransactionTypeLabels } from "src/app/enums/transaction-type.enum";
 import { BankAccount } from "src/app/models/bank-account";
+import { PaymentMethod } from "src/app/models/payment-method";
 import { FinFormsModule } from "../../fin-forms/fin-forms.module";
 
 @Component({
@@ -32,21 +35,29 @@ export class FinTransactionModalComponent {
     });
       
     bankAccounts: BankAccount[] = [];
+    paymentMethods: PaymentMethod[] = [];
+    transactionTypes: {name: string, label: string}[] = Array.from(TransactionTypeLabels, ([name, label]) => ({ name, label }));
+
     expanded: boolean = false;
     private readonly dialog = inject(MatDialogRef<CategoryModalComponent>);
     private readonly data = inject(MAT_DIALOG_DATA);
     private readonly bankAccountService = inject(BankAccountService);
+    private readonly paymentMethodService = inject(PaymentMethodService);
     private readonly toastService = inject(ToastService);
     
     ngOnInit() {
         // if(this.data?.id) ;
-        this.find();
+        this.findAutocompleteProps();
     }
 
-    find(): void {
-        this.bankAccountService.find(this.formGroup.getRawValue()).subscribe({
-            next: (bankAccounts) => this.bankAccounts = bankAccounts,
+    findAutocompleteProps(): void {
+        this.bankAccountService.find().subscribe({
+            next: (result) => this.bankAccounts = result,
             error: e => this.toastService.error(e, "Erro ao obter contas bancárias.")
+        });
+        this.paymentMethodService.find().subscribe({
+            next: (result) => this.paymentMethods = result,
+            error: e => this.toastService.error(e, "Erro ao obter métodos de pagamento.")
         });
     }
 
