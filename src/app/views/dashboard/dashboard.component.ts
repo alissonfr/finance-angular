@@ -1,10 +1,17 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { BankAccountTransactionService } from "@services/api/bank-account-transaction.service";
+import { ReportService } from "@services/api/report.service";
+import { ModalService } from "@services/modal.service";
+import { ToastService } from "@services/toast.service";
 import { Operation } from "src/app/enums/operation.enum";
-import { TransactionType } from "src/app/enums/transaction-type.enum";
+import { TransactionStatus } from "src/app/enums/transaction-status.enum";
 import { BankAccountTransaction } from "src/app/models/bank-account-transaction";
-import { User } from "src/app/models/user";
+import { FinancialReportDTO } from "src/app/models/financial-report";
+import { FinTransactionModalComponent } from "src/app/shared/fin-ui/fin-transaction-modal/fin-transaction-modal.component";
+import { FinUiModule } from "src/app/shared/fin-ui/fin-ui.module";
 import { BalanceCardComponent } from "./components/balance-card/balance-card.component";
 import { ExpensesCardComponent } from "./components/expenses-card/expenses-card.component";
 import { IncomesCardComponent } from "./components/incomes-card/incomes-card.component";
@@ -12,23 +19,81 @@ import { IncomesCardComponent } from "./components/incomes-card/incomes-card.com
 @Component({
     selector: "dashboard",
     standalone: true,
-    imports: [CommonModule, BalanceCardComponent, IncomesCardComponent, ExpensesCardComponent, MatIconModule],
+    imports: [CommonModule, BalanceCardComponent, IncomesCardComponent, ExpensesCardComponent, MatIconModule, FinUiModule, MatMenuModule],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.scss"
 })
 export class DashboardComponent {
-    bankAccountTransactions: BankAccountTransaction[] = [
-        {
-            bankAccountTransactionId: 1,
-            description: "Netflix",
-            date: new Date(),
-            notes: "Despesa da netflix",
-            amount: 29.99,
-            operation: Operation.EXPENSE,
-            type: TransactionType.RECURRENT,
-            category: null as unknown as any,
-            bankAccount: { bankAccountId: 1, name: "Conta Corrente", initialAmount: "1000", user: null as unknown as User },
-            paymentMethod: { paymentMethodId: 1, name: "Cartão de Crédito" },
-        },
-    ]
+    bankAccountTransactions: BankAccountTransaction[] = [];
+    report: FinancialReportDTO;
+
+    private readonly toastService = inject(ToastService);
+    private readonly bankAccountTransactionService = inject(BankAccountTransactionService);
+    private readonly reportService = inject(ReportService);
+    private readonly dialog = inject(ModalService);
+
+    get operations() {
+        return Operation;
+    }
+
+    get transactionStatus() {
+        return TransactionStatus;
+    }
+
+    ngOnInit() {
+        this.loadTransactions();
+        this.bankAccountTransactionService.transactionUpdated$.subscribe(() => this.loadTransactions());
+    }
+
+    changeStatus(id: number) {
+        this.bankAccountTransactionService.updateStatus(id).subscribe({
+            next: () => this.toastService.success("O status da transação foi atualizado com sucesso."),
+            error: (e) => this.toastService.error(e, "Erro ao obter transações.")
+        });
+    }
+
+    delete(transaction: BankAccountTransaction) {
+        const dialogRef = this.dialog.confirm({
+            title: "Apagar transação",
+            message: `Você está prestes a apagar a transação "${transaction.description}". Você tem certeza?`
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                this.bankAccountTransactionService.delete(transaction.bankAccountTransactionId).subscribe({
+                    next: () => {
+                        this.toastService.success("Transação apagada com sucesso.")
+                        this.loadTransactions();
+                    },
+                    error: e => this.toastService.error(e, "Erro ao apagar transação.")
+                });
+            }
+                
+        });
+    }
+
+    update(transaction: BankAccountTransaction) {
+        const dialogRef = this.dialog.open(FinTransactionModalComponent, { data: { 
+            operation: transaction.operation, 
+            id: transaction.bankAccountTransactionId
+        }});
+        dialogRef.afterClosed().subscribe(() => this.loadTransactions());
+    }
+    
+    private loadTransactions(): void {
+        this.bankAccountTransactionService.find().subscribe({
+            next: (result) => {
+                this.bankAccountTransactions = result
+                this.loadReport();
+            },
+            error: (e) => this.toastService.error(e, "Erro ao obter transações.")
+        });
+    }
+
+    private loadReport(): void {
+        this.reportService.getFinancialReport().subscribe({
+            next: (result) => this.report = result,
+            error: (e) => this.toastService.error(e, "Erro ao obter relatório.")
+        });
+    }
+
 }

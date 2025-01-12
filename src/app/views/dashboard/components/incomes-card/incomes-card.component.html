@@ -8,8 +8,8 @@
                 <span>Previsto</span>
             </div>
             <div class="flex flex-col">
-                <span class="font-bold text-success">R$ 2,562.20</span>
-                <span>R$ 5,562.20</span>
+                <span class="font-bold text-success">{{ incomesReport.received | currency: 'BRL' }}</span>
+                <span>{{ incomesReport.expected | currency: 'BRL' }}</span>
             </div>
         </div>
     </div>

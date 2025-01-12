@@ -1,6 +1,10 @@
 <div class="w-full h-full flex flex-col p-6">
-    <p class="text-sm">Saldo em todas as contas</p>
-    <span class="text-3xl font-bold">R$ 4,562.20</span>
+    <p class="text-sm">Saldo previsto em todas as contas</p>
+    <span class="text-3xl font-bold">{{ balanceReport.current | currency: 'BRL' }}</span>
 
-    <small class="text-xs pt-2"><b class="text-success">+12%</b> em relação ao último mês</small>
+    @if (isExpense(balanceReport.percentageChange)) {
+        <small class="text-xs pt-2"><b class="expense">-{{ balanceReport.percentageChange }}%</b> em relação ao último mês</small>
+    } @else {
+        <small class="text-xs pt-2"><b class="income">+{{ balanceReport.percentageChange }}%</b> em relação ao último mês</small>
+    }
 </div>

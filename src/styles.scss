@@ -14,3 +14,33 @@ html, body {
 body { 
     @apply m-0 font-nunito box-border;
 }
+
+.date-picker {
+    @apply relative;
+
+    mat-icon.mat-icon {
+        @apply absolute top-[51px] right-3 w-[20px] h-[20px] text-[20px];
+    }
+}
+
+.checkbox {
+    @apply inline-flex items-center justify-between cursor-pointer w-full h-[35px] mt-2;
+
+    .icon {
+        @apply flex gap-2 items-center justify-center;
+
+        .mat-icon {
+            @apply mt-1 w-[22px] h-[22px] text-[22px];
+        }
+
+        span {
+            @apply mt-3 mb-2 text-sm font-medium text-text dark:text-text-dark;
+        }
+    }
+
+    .button {
+        @apply relative w-11 h-6 bg-gray-700 rounded-full after:content-[''] 
+        after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all 
+        dark:border-gray-600 ;
+    }
+}

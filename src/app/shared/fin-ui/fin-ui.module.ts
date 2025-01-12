@@ -1,9 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { FinCategoryIconComponent } from "./fin-category-icon/fin-category-icon.component";
 import { PageHeaderComponent } from "./page-header/page-header.component";
 
 const components = [
-    PageHeaderComponent
+    PageHeaderComponent,
+    FinCategoryIconComponent
 ]
 
 @NgModule({

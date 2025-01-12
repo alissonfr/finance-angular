@@ -12,4 +12,5 @@ import { Category } from "src/app/models/category";
 })
 export class FinCategoryIconComponent {
     @Input({ required: true }) category: Category
+    @Input() size: "normal" | "small" = "normal";
 }

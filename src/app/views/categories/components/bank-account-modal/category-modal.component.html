@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center">
+<div class="flex justify-between items-center text-start">
   <h2 class="text-xl font-semibold">{{ formGroup.get('categoryId')?.value ? 'Atualizar categoria' : 'Nova categoria' }}</h2>
   <span class="cursor-pointer flex items-center justify-center rounded-full p-3 w-2 h-2 duration-200 hover:bg-hover-dark">
     <button (click)="close()" class="focus:outline-none">&times;</button>
@@ -7,20 +7,29 @@
 
 <form class="pt-4" [formGroup]="formGroup">
   <fin-input label="Nome" name="name" placeholder="Viagem" required formControlName="name" />
+  <fin-select label="Operação" name="operation" [formGroup]="formGroup" controlName="operation" [items]="operations" displayProperty="label" />
 
-  <div class="mb-4">
-    <p class="mb-2 text-sm font-medium text-text dark:text-text-dark">Cor da categoria</p>
-    <div class="p-2 h-24 bg-white dark:bg-sidenav-dark border border-gray-300 dark:border-gray-600 rounded-lg mb-2 overflow-y-auto flex flex-wrap gap-1 w-[416px]">
+  <div class="mt-4">
+    <p class="text-start mb-2 text-sm font-medium text-text dark:text-text-dark">Cor da categoria</p>
+    <div class="p-2 h-24 bg-white dark:bg-sidenav-dark border border-gray-300 dark:border-gray-600 rounded-lg mb-2 overflow-y-auto flex flex-wrap gap-1 w-[720px] max-lg:w-[500px] max-md:w-[400px] max-sm:w-[300px]">
       @for (color of colors; track $index) {
-        <div class="w-8 h-8 rounded-full cursor-pointer transition duration-300 hover:bg-hover-dark" [style.background]="color['700']" [matTooltip]="color.name"></div>
+        <div 
+        (click)="selectColor(color.name)"
+        class="w-8 h-8 rounded-full cursor-pointer transition duration-300 hover:bg-hover-dark" 
+        [class.selected]="formGroup.get('color')?.value === color.name" 
+        [style.background]="color['700']" 
+        [matTooltip]="color.name"></div>
       }
     </div>
   </div>
-  <div class="mb-4">
-    <p class="mb-2 text-sm font-medium text-text dark:text-text-dark">Ícone</p>
-    <div class="p-2 h-24 bg-white dark:bg-sidenav-dark border border-gray-300 dark:border-gray-600 rounded-lg mb-2 overflow-y-auto flex flex-wrap gap-1 w-[416px]">
+  <div class="mt-4">
+    <p class="text-start mb-2 text-sm font-medium text-text dark:text-text-dark">Ícone</p>
+    <div class="p-2 h-24 bg-white dark:bg-sidenav-dark border border-gray-300 dark:border-gray-600 rounded-lg mb-2 overflow-y-auto flex flex-wrap gap-1 w-[720px] max-lg:w-[500px] max-md:w-[400px] max-sm:w-[300px]">
       @for (icon of icons; track $index) {
-        <mat-icon class="material-symbols-outlined transition duration-300 hover:bg-hover-dark hover:brightness-110 cursor-pointer">{{ icon.name }}</mat-icon>
+        <mat-icon 
+        (click)="selectIcon(icon.name)" 
+        [class.selected]="formGroup.get('icon')?.value === icon.name" 
+        class="material-symbols-outlined transition duration-300 hover:bg-hover-dark hover:brightness-110 cursor-pointer">{{ icon.name }}</mat-icon>
       }
     </div>
   </div>

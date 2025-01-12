@@ -37,7 +37,7 @@ module.exports = {
         },
 
         error: "#D84A49",
-        warning: "#ECBF58",
+        warning: "#eab308",
         info: "#6CB3C7",
         success: "#5BC3A2",
       },

@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
+import { IncomeDTO } from "src/app/models/financial-report";
 
 @Component({
     selector: "incomes-card",
@@ -8,4 +9,6 @@ import { MatIconModule } from "@angular/material/icon";
     imports: [CommonModule, MatIconModule],
     templateUrl: "./incomes-card.component.html",
 })
-export class IncomesCardComponent {}
+export class IncomesCardComponent {
+    @Input() incomesReport: IncomeDTO;
+}

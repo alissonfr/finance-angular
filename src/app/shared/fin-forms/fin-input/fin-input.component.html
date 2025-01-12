@@ -1,20 +1,24 @@
-<label class="block mt-3 mb-2 text-sm font-medium text-text dark:text-text-dark" [for]="name" *ngIf="label">{{ label }}</label>
+<label class="text-start block mt-3 mb-2 text-sm font-medium text-text dark:text-text-dark" [for]="name" *ngIf="label">{{ label }}</label>
 
-@if(matDatepicker) {
+@if(isDatePicker) {
   <input 
   [type]="type" 
   [id]="name" 
   [name]="name" 
   [value]="value" 
   (input)="onInputChange($event)"
+  (dateChange)="onInputChange($event)" 
+  (dateInput)="onInputChange($event)"
   [placeholder]="placeholder" 
   [autocomplete]="autocomplete"
 
   (focus)="onFocus()"
   (blur)="onBlur()"
 
-  [matDatepicker]="matDatepicker"
+  [matDatepicker]="picker"
   />
+  <mat-icon (click)="picker.open()" class="date-icon">calendar_month</mat-icon>
+  <mat-datepicker #picker></mat-datepicker>
 } @else {
   <input 
   [type]="type" 
@@ -26,6 +30,8 @@
   [autocomplete]="autocomplete"
   (focus)="onFocus()"
   (blur)="onBlur()"
+  [mask]="mask"
+  [dropSpecialCharacters]="true"
   />
 }
 

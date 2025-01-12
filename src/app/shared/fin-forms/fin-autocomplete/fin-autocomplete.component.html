@@ -1,4 +1,4 @@
-<div class="dropdown-container relative" [formGroup]="searchFormGroup">
+<div class="dropdown-container relative text-start" [formGroup]="searchFormGroup">
     <fin-input
       #finInput
       [label]="label"
@@ -16,8 +16,11 @@
         @for (item of filteredItems; track $index) {
           <li
             (click)="selectItem(item)"
-            class="cursor-pointer px-4 py-2 hover:bg-hover-dark"
+            class="cursor-pointer px-4 py-2 hover:bg-hover-dark flex items-center gap-3"
           >
+            @if (controlName === "category") {
+              <fin-category-icon size="small" [category]="getCategory(item)" />
+            }
             {{ item[displayProperty] }}
           </li>
         } @empty {

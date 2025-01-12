@@ -6,16 +6,16 @@ import { MatMenuModule } from "@angular/material/menu";
 import { CategoryService } from "@services/api/category.service";
 import { ModalService } from "@services/modal.service";
 import { ToastService } from "@services/toast.service";
+import { OperationLabels } from "src/app/enums/operation.enum";
 import { Category } from "src/app/models/category";
 import { FinUiModule } from "src/app/shared/fin-ui/fin-ui.module";
 import { FinFormsModule } from "../../shared/fin-forms/fin-forms.module";
-import { FinCategoryIconComponent } from "../../shared/fin-ui/fin-category-icon/fin-category-icon.component";
 import { CategoryModalComponent } from "./components/bank-account-modal/category-modal.component";
 
 @Component({
     selector: "categories",
     standalone: true,
-    imports: [CommonModule, MatIconModule, FinFormsModule, FinUiModule, MatMenuModule, ReactiveFormsModule, FinCategoryIconComponent],
+    imports: [CommonModule, MatIconModule, FinFormsModule, FinUiModule, MatMenuModule, ReactiveFormsModule],
     templateUrl: "./categories.component.html",
     styleUrl: "./categories.component.scss"
 }) 
@@ -24,7 +24,14 @@ export class BankAccountComponent {
 
     formGroup = new FormGroup({
         name: new FormControl(""),
+        operation: new FormControl(""),
     });
+
+    operations: {name: string, label: string}[] = Array.from(OperationLabels, ([name, label]) => ({ name, label }));
+
+    get operationsLabels() {
+        return OperationLabels;
+    }
 
     private readonly categoryService = inject(CategoryService);
     private readonly toastService = inject(ToastService);

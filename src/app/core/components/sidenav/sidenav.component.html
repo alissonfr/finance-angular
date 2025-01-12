@@ -7,11 +7,11 @@
             <div class="flex items-center justify-center w-full px-3 my-5 mt-12">
                 <fin-button [matMenuTriggerFor]="menu" class="w-full" startIcon="add">Novo</fin-button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="createIncome()">
+                    <button mat-menu-item (click)="createTransaction(operation.INCOME)">
                         <mat-icon class="material-icons-outlined success">show_chart</mat-icon>
                         <span>Receita</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="createTransaction(operation.EXPENSE)">
                         <mat-icon class="material-icons-outlined error">show_chart</mat-icon>
                         <span>Despesa</span>
                     </button>
@@ -45,7 +45,7 @@
     </mat-sidenav>
     <mat-sidenav-content class="min-h-screen bg-white dark:bg-[#191919]">
         <header-component>
-            <mat-icon *ngIf="isMobile" (click)="toggleMenu()">menu</mat-icon>
+            <mat-icon *ngIf="isMobile" (click)="toggleMenu()" class="text-text dark:text-text-dark">menu</mat-icon>
         </header-component>
         <main class="h-[calc(100vh-68px)] overflow-x-hidden">
             <router-outlet></router-outlet>

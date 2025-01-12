@@ -5,3 +5,11 @@
 .flex-center {
     @apply flex items-center justify-center;
 }
+
+.expense {
+    @apply text-error;
+}
+
+.income {
+    @apply text-success;
+}

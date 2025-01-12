@@ -1,8 +1,10 @@
 <section class="w-[65%] flex flex-col gap-4">
     <div class="flex gap-4 h-[17%]">
-        <balance-card class="card col-span-2" />
-        <incomes-card class="card"/>
-        <expenses-card class="card"/>
+        @if (report) {
+            <balance-card [balanceReport]="report.totalBalance" class="card col-span-2" />
+            <incomes-card [incomesReport]="report.income" class="card"/>
+            <expenses-card [expensesReport]="report.expenses" class="card"/>
+        }
     </div>
     <div class="card flex gap-4 h-[83%]">
 
@@ -16,36 +18,44 @@
                             <th>Descrição</th>
                             <th>Valor</th>
                             <th>Conta</th>
-                            <th>Tipo</th>
+                            <th class="text-center">Recebido/Pago</th>
+                            <th></th>
                         </thead>
                         <tbody>
                             @for (transaction of bankAccountTransactions; track transaction.bankAccountTransactionId) {
                                 <tr>
-                                    <td><mat-icon class="material-symbols-outlined">tv</mat-icon></td>
+                                    <td style="padding-top: 0.5rem; padding-bottom: 0.5rem"><fin-category-icon [category]="transaction.category" /></td>
                                     <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
                                     <td>{{ transaction.description }}</td>
-                                    <td>{{ transaction.amount }}</td>
+                                    <td [class]="transaction.operation === operations.EXPENSE ? 'expense' : 'income'">{{ transaction.amount | currency: 'BRL' }}</td>
                                     <td>{{ transaction.bankAccount.name }}</td>
-                                    <td>{{ transaction.operation }}</td>
+                                    <td class="text-center">
+                                        <label class="checkbox" style="width: fit-content;">
+                                            <input type="checkbox" [checked]="transaction.status === transactionStatus.PAID" class="sr-only peer">
+                                            <div 
+                                            (click)="changeStatus(transaction.bankAccountTransactionId)"
+                                            class="button peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white peer-checked:bg-primary"></div>
+                                          </label>
+                                    </td>
                 
-                                    <!-- <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
+                                    <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
                                     <mat-menu #menu="matMenu">
                                         <button mat-menu-item>
-                                            <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                                            <mat-icon (click)="update(transaction)" class="material-symbols-outlined">edit</mat-icon>
                                             <span>Editar</span>
                                         </button>
-                                        <button mat-menu-item>
+                                        <button (click)="delete(transaction)" mat-menu-item>
                                             <mat-icon class="material-symbols-outlined">delete</mat-icon>
                                             <span>Apagar</span>
                                         </button>
-                                    </mat-menu> -->
+                                    </mat-menu>
                                 </tr>
                               }
                         </tbody>
                     </table>
                 </section>
             } @else {
-                <h1>Sem registros.</h1>
+                <h1 class="mt-4">Sem registros.</h1>
             }
             
         </div>

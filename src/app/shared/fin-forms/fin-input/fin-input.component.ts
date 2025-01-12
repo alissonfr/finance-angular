@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @angular-eslint/no-output-native */
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, forwardRef, Input, Output } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
-import { MatDatepickerControl, MatDatepickerModule, MatDatepickerPanel } from "@angular/material/datepicker";
+import { MatDatepickerInputEvent, MatDatepickerModule } from "@angular/material/datepicker";
+import { MatIconModule } from "@angular/material/icon";
 import { formatToCurrency, formatToNumeric } from "@utils/parsers";
+import { NgxMaskDirective } from "ngx-mask";
 
 @Component({
     selector: "fin-input",
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
+    imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule, MatIconModule, NgxMaskDirective],
     templateUrl: "./fin-input.component.html",
     styleUrl: "./fin-input.component.scss",
     providers: [
@@ -24,10 +27,11 @@ export class FinInputComponent implements ControlValueAccessor {
     @Input() name: string = "";
     @Input() placeholder: string = "";
     @Input() autocomplete: string = "off";
-    @Input() matDatepicker: MatDatepickerPanel<MatDatepickerControl<unknown>, unknown, unknown>;
     @Input() initialValue: string;
     @Input() label: string;
     @Input() currency: string;
+    @Input() datePicker: string;
+    @Input() mask: string;
     
     @Output() focus = new EventEmitter<void>();
     @Output() blur = new EventEmitter<void>();
@@ -38,6 +42,10 @@ export class FinInputComponent implements ControlValueAccessor {
 
     get isCurrency() {
         return this.currency || this.currency === "";
+    }
+
+    get isDatePicker() {
+        return this.datePicker || this.datePicker === "";
     }
   
     onChanged: (value: string) => void;
@@ -63,13 +71,18 @@ export class FinInputComponent implements ControlValueAccessor {
         this.disabled = isDisabled;
     }
 
-    onInputChange(event: Event): void {
-        const value = (event.target as HTMLInputElement)?.value ?? "";
+    onInputChange(event: Event | MatDatepickerInputEvent<Date>): void {
+        if(event instanceof MatDatepickerInputEvent) return this.onChanged(event.value?.toISOString() || "");
+        const target = (event.target as HTMLInputElement)
+        
+        const value = target?.value ?? "";
         if(this.isCurrency) {
             this.value = formatToCurrency(formatToNumeric(value));
-        } else {
-            this.value = value;
+            target.value = this.value;
+            this.onChanged(formatToNumeric(value).toString())
+            return
         }
+        this.value = value;
         this.onChanged(value);
     }
 

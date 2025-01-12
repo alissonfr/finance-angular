@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "@services/api/auth.service";
 import { ToastService } from "@services/toast.service";
-import { isFormInvalid } from "@utils/validators";
+import { isFormInvalid } from "@utils/form-validator";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 class LoginRequest {

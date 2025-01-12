@@ -19,8 +19,8 @@
                     @for (account of bankAccounts; track account.bankAccountId) {
                         <tr>
                             <td>{{ account.name }}</td>
-                            <td>{{ account.initialAmount }}</td>
-                            <td>{{ account.initialAmount }}</td>
+                            <td>{{ account.initialAmount | currency: 'BRL' }}</td>
+                            <td [class]="isExpense(account.totalAmount) ? 'expense' : 'income'">{{ account.totalAmount | currency: 'BRL' }}</td>
         
                             <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
                             <mat-menu #menu="matMenu">

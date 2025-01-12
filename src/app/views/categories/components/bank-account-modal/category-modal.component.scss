@@ -1,5 +1,10 @@
 :host {
+    @apply max-w-xs;
     .mat-icon {
         @apply h-[32px] w-[32px] text-[32px];
+    }
+
+    .selected {
+        @apply brightness-200;
     }
 }

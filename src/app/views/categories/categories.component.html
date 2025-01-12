@@ -3,6 +3,7 @@
 <div class="fin-table">
     <form class="search mb-10" [formGroup]="formGroup">
         <fin-input class="w-full h-12" placeholder="Nome" formControlName="name"/>
+        <fin-select class="w-full h-12" name="operation" [formGroup]="formGroup" controlName="operation" [items]="operations" displayProperty="label" />
         <fin-button (click)="clear()" size="large" color="outlined" startIcon="delete">Limpar</fin-button>
         <fin-button (click)="find()" size="large" startIcon="search">Pesquisar</fin-button>
     </form>
@@ -18,11 +19,9 @@
                 <tbody>
                     @for (category of categories; track category.categoryId) {
                         <tr>
-                            <td>
-                                <fin-category-icon [category]="category" />
-                            </td>
+                            <td style="padding-top: 0.5rem; padding-bottom: 0.5rem"><fin-category-icon [category]="category" /></td>
                             <td>{{ category.name }}</td>
-                            <td>{{ category.operation }}</td>
+                            <td>{{ operationsLabels.get(category.operation) }}</td>
                             <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
                             <mat-menu #menu="matMenu">
                                 <button (click)="update(category.categoryId)" mat-menu-item>

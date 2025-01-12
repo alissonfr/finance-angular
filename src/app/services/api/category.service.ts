@@ -12,7 +12,7 @@ export class CategoryService {
     private readonly PATH = `${environment.API_URL}v1/categories`;
     private http = inject(HttpService)
 
-    find(params: Record<string, string | number | null | undefined>): Observable<Category[]> {
+    find(params?: Record<string, string | number | null | undefined>): Observable<Category[]> {
         return this.http.get<Category[]>(this.PATH, params);
     }
 

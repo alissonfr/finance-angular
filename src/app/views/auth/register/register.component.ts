@@ -5,6 +5,7 @@ import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "@services/api/auth.service";
 import { LoadingService } from "@services/loading.service";
 import { ToastService } from "@services/toast.service";
+import { isFormInvalid } from "@utils/form-validator";
 import { User } from "src/app/models/user";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
@@ -28,7 +29,12 @@ export class RegisterComponent {
     private toastService = inject(ToastService);
 
     onSubmit(): void {
-        this.authService.register(this.formGroup.value as User)
+        if(isFormInvalid(this.formGroup)) {
+            this.toastService.invalidForm();
+            return;
+        }
+                
+        this.authService.register({...this.formGroup.value, cpf: (this.formGroup.value.cpf as string).replace(/\D/g, "") } as User)
             .subscribe({
                 next: () => this.router.navigate(["/dashboard"]),
                 error: e => this.toastService.error(e, "Erro ao realizar cadastro."),

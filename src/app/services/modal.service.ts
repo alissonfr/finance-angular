@@ -15,9 +15,8 @@ export class ModalService {
     }
 
     confirm(data: { title: string, message: string }) {
-        return this.open(FinDeleteModalComponent, { width: "400px", height: "300px", data: { ...data } });
+        return this.open(FinDeleteModalComponent, { width: "400px", height: "300px", data: { ...data }, maxWidth: "400px" });
     }
-
 
     closeAll(): void {
         this.dialog.closeAll();

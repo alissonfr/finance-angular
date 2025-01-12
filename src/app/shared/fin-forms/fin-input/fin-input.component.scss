@@ -1,8 +1,20 @@
 :host {
+    @apply relative;
+    
     input {
         @apply h-[42px] border border-gray-300 bg-white text-gray-900 text-sm rounded-lg block w-full p-2.5 
             dark:bg-sidenav-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
             focus:ring-1 focus:outline-none focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            @apply appearance-none m-0;
+        }
+
+    }
+    
+    .date-icon.mat-icon {
+        @apply absolute top-[51px] right-3 w-[20px] h-[20px] text-[20px] duration-200 cursor-pointer hover:brightness-110;
     }
 
     &.ng-touched.ng-invalid {
@@ -10,9 +22,8 @@
             @apply border-error 
             focus:ring-1 focus:outline-none focus:ring-error focus:border-error dark:focus:ring-error dark:focus:border-error;
 
-            &::placeholder {
-                // color: red;
-            }
+            // &::placeholder {
+            // }
         }
     }
 }

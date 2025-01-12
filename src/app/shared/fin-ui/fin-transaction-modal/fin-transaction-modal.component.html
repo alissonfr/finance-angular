@@ -1,56 +1,74 @@
 <div class="flex justify-between items-center" [class.expanded]="expanded">
-    <h2 class="text-xl font-semibold">{{ 'Nova receita' }}</h2>
+    <h2 class="text-xl font-semibold flex items-center justify-center cursor-pointer transition-all duration-300 hover:brightness-110" [matMenuTriggerFor]="menu">
+      <mat-icon class="material-icons-outlined mr-2" [class]="operation === operations.EXPENSE ? 'rotate text-error' : 'text-success'">{{ icon }}</mat-icon>
+      {{ title }}
+      <mat-icon class="material-icons-outlined ml-1" style="width: 20px; height: 20px; font-size: 20px;">keyboard_arrow_down</mat-icon>
+    </h2>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="changeOperation(operations.INCOME)">
+          <mat-icon class="material-icons-outlined success">show_chart</mat-icon>
+          <span>Receita</span>
+      </button>
+      <button mat-menu-item (click)="changeOperation(operations.EXPENSE)">
+          <mat-icon class="material-icons-outlined error">show_chart</mat-icon>
+          <span>Despesa</span>
+      </button>
+      <button mat-menu-item>
+          <mat-icon class="material-icons-outlined">credit_card</mat-icon>
+          <span>Despesa no cartão &nbsp;&nbsp;&nbsp;</span>
+      </button>
+    </mat-menu>
     <span class="cursor-pointer flex items-center justify-center rounded-full p-3 w-2 h-2 duration-200 hover:bg-hover-dark">
       <button (click)="close()" class="focus:outline-none">&times;</button>
     </span>
   </div>
   
   <form class="pt-4" [formGroup]="formGroup">
-    
-
     <section class="flex gap-4 w-full">
       <div class="w-full">
         <fin-input label="Descrição" placeholder="Netflix" name="description" formControlName="description" required />
 
-        <div class="grid grid-cols-2 gap-4">
-          <fin-input label="Data" placeholder="01/01/2025" name="date" formControlName="date" required />
+        <div class="grid grid-cols-3 gap-4">
+          <fin-input datePicker id="date" name="date" required formControlName="date" placeholder="01/01/2025" label="Data" />
           <fin-input label="Valor" placeholder="R$ 20,00" name="amount" formControlName="amount" currency required />
-        </div>
-        
-        <div class="grid grid-cols-2 gap-4">
-          <fin-select label="Tipo" name="type" [formGroup]="formGroup" controlName="type" [items]="transactionTypes" displayProperty="label" required />
           <fin-select label="Forma de pagamento" name="paymentMethod" [formGroup]="formGroup" controlName="paymentMethod" [items]="paymentMethods" displayProperty="name" required />
         </div>
         
         <div class="grid grid-cols-2 gap-4">
-          <fin-autocomplete
-            label="Conta bancária"
-            [formGroup]="formGroup"
-            [items]="bankAccounts"
-            displayProperty="name"
-            controlName="bankAccount"
-            (addNewItem)="createNewBankAccount($event)"
-          />
-    
-          <fin-autocomplete
-            label="Categoria"
-            [formGroup]="formGroup"
-            [items]="bankAccounts"
-            displayProperty="name"
-            controlName="category"
-            (addNewItem)="createNewCategory($event)" 
-          />
+          <fin-autocomplete label="Conta bancária" [formGroup]="formGroup" [items]="bankAccounts" displayProperty="name" controlName="bankAccount" (addNewItem)="createNewBankAccount($event)" />
+          <fin-autocomplete label="Categoria" [formGroup]="formGroup" [items]="categories" displayProperty="name" controlName="category" (addNewItem)="createNewCategory($event)" />
         </div>
+
       </div>
       <div class="w-full" *ngIf="expanded">
         <fin-textarea label="Notas" placeholder="Comprado no dia da praia" name="notes" formControlName="notes" />
+
+        <label class="checkbox">
+          <div class="icon">
+            <mat-icon class="material-symbols-outlined">keep</mat-icon>
+            <span>Transação fixa</span>
+          </div>
+          <input type="checkbox" [checked]="formGroup.get('type')?.value === types.RECURRENT" (change)="changeType($event, types.RECURRENT)" class="sr-only peer">
+          <div class="button peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white peer-checked:bg-primary"></div>
+        </label>
+        
+        <label class="checkbox">
+          <div class="icon">
+            <mat-icon class="material-symbols-outlined">replay</mat-icon>
+            <span>Transação parcelada</span>
+          </div>
+          <input type="checkbox" [checked]="formGroup.get('type')?.value === types.IN_INSTALLMENTS" (change)="changeType($event, types.IN_INSTALLMENTS)" class="sr-only peer">
+          <div class="button peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white peer-checked:bg-primary"></div>
+        </label>
+
+        <fin-input *ngIf="formGroup.get('type')?.value === types.IN_INSTALLMENTS" type="number" label="Parcelas" placeholder="12" name="date" formControlName="date" required />
       </div>
     </section>
 
 
     <div class="flex items-center justify-end mt-3 font-semibold cursor-pointer hover:brightness-110">
       <span (click)="expanded = !expanded">{{ expanded ? "Menos detalhes" : "Mais detalhes" }}</span>
-      <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
+      <mat-icon class="material-symbols-outlined">{{ expanded ? "chevron_left" : "chevron_right" }}</mat-icon>
     </div>
   
     <div class="flex justify-end mt-6">

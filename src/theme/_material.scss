@@ -44,11 +44,15 @@ $finance-angular-theme: mat.m2-define-light-theme((
 }
 
 .mat-mdc-dialog-surface {
-  @apply bg-sidenav dark:bg-sidenav-dark text-text dark:text-text-dark shadow-lg rounded-xl p-6;
+  @apply bg-sidenav dark:bg-sidenav-dark text-text dark:text-text-dark shadow-lg rounded-xl p-6 text-center;
 }
 
 .mdc-dialog--open .mat-mdc-dialog-surface {
-  @apply overflow-y-visible;
+  @apply overflow-y-visible text-center;
+}
+
+.cdk-overlay-pane {
+  @apply flex justify-center items-center;
 }
 
 // .mat-mdc-menu-panel {

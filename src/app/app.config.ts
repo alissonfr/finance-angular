@@ -7,6 +7,7 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideRouter } from "@angular/router";
 import { JwtModule } from "@auth0/angular-jwt";
 import { authInterceptor } from "@core/interceptors/auth.interceptor";
+import { provideEnvironmentNgxMask } from "ngx-mask";
 import { routes } from "./app.routes";
 
 registerLocaleData(localePt);
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
                 }
             })
         ]),
+        provideEnvironmentNgxMask(),
         { provide: LOCALE_ID, useValue: "pt-BR" },
     ]
 };

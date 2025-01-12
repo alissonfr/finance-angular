@@ -1,4 +1,4 @@
-<div class="relative w-full" [formGroup]="searchFormGroup">
+<div class="relative w-full text-text dark:text-text-dark" [formGroup]="searchFormGroup">
     <fin-input
       #finInput
       [label]="label"
@@ -9,10 +9,10 @@
       autocomplete="off"
       readonly
     />
-    <mat-icon class="material-icons-outlined arrow-icon" (click)="openDropdown()">{{ isDropdownOpen ? "arrow_drop_up" : "arrow_drop_down" }}</mat-icon>
+    <mat-icon class="material-icons-outlined arrow-icon" [style]="label ? 'top: 2.25rem' : 'top: 0.75rem'" (click)="openDropdown()">{{ isDropdownOpen ? "arrow_drop_up" : "arrow_drop_down" }}</mat-icon>
 
     
-    <div *ngIf="isDropdownOpen" class="absolute z-[9999] w-full border border-hover-dark bg-sidenav dark:bg-sidenav-dark">
+    <div *ngIf="isDropdownOpen" class="text-start absolute z-[9999] w-full border border-hover-dark bg-sidenav dark:bg-sidenav-dark">
       <ul class="max-h-60 overflow-auto">
         @for (item of items; track $index) {
           <li

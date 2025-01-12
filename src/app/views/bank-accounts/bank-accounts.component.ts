@@ -73,4 +73,8 @@ export class BankAccountComponent {
         this.formGroup.reset();
         this.find();
     }
+
+    isExpense(totalAmount: string): boolean {
+        return parseFloat(totalAmount) < 0;
+    }
 }

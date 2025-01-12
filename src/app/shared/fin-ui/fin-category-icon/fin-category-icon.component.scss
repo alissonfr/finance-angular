@@ -1,5 +1,9 @@
 :host {
   .category-icon.mat-icon {
     @apply transition duration-300 hover:brightness-110 cursor-pointer p-6 rounded-full;
-}
+
+    &.small {
+      @apply p-4 w-[18px] h-[18px] text-[18px] #{!important};
+    }
+  }
 }

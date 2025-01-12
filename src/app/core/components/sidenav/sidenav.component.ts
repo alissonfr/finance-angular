@@ -8,6 +8,7 @@ import { MatSidenav, MatSidenavModule } from "@angular/material/sidenav";
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { ModalService } from "@services/modal.service";
 import { ThemeSwitcher } from "@utils/theme-switcher";
+import { Operation } from "src/app/enums/operation.enum";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 import { FinTransactionModalComponent } from "src/app/shared/fin-ui/fin-transaction-modal/fin-transaction-modal.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -39,6 +40,7 @@ export class SidenavComponent {
     isMobile = true;
     isCollapsed = true;
     items: SidenavItem[] = SidenavItems;
+    operation = Operation;
 
     readonly LOGO_URL = "assets/img/logo-dark.svg"
     readonly DARK_LOGO_URL = "assets/img/logo-light.svg"
@@ -65,9 +67,9 @@ export class SidenavComponent {
         }
     }
 
-    createIncome(id?: number) {
-        const dialogRef = this.dialog.open(FinTransactionModalComponent, { data: { id } });
-        // dialogRef.afterClosed().subscribe(() => this.find());
+    createTransaction(operation: Operation) {
+        const dialogRef = this.dialog.open(FinTransactionModalComponent, { data: { operation } });
+        dialogRef.afterClosed().subscribe(() => {});
     }
 
     private _watchBreakpoint(): void {

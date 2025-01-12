@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { BankAccountService } from "@services/api/bank-account.service";
 import { ToastService } from "@services/toast.service";
-import { isFormInvalid } from "@utils/validators";
+import { isFormInvalid } from "@utils/form-validator";
 import { BankAccount } from "src/app/models/bank-account";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
@@ -29,6 +29,7 @@ export class BankAccountModalComponent {
 
     ngOnInit() {
         if(this.data?.id) this.get(this.data.id);
+        if(this.data?.name) this.formGroup.get("name")?.patchValue(this.data.name);
     }
 
     close(): void {
