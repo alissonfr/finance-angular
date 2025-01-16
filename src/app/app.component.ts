@@ -3,7 +3,7 @@ import { Component, inject } from "@angular/core";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { RouterOutlet } from "@angular/router";
 import { FinToastComponent } from "@core/components/fin-toast/fin-toast.component";
-import { ThemeSwitcher } from "./utils/theme-switcher";
+import { ThemeSwitcher } from "@utils/theme-switcher";
 
 @Component({
     selector: "app-root",
@@ -15,9 +15,5 @@ import { ThemeSwitcher } from "./utils/theme-switcher";
     `
 })
 export class AppComponent {
-    private _themeSwitcher = inject(ThemeSwitcher)
-  
-    ngOnInit(): void {
-        this._themeSwitcher.load();
-    }
+    readonly themeSwitcher = inject(ThemeSwitcher)
 }

@@ -33,6 +33,7 @@ export const routes: Routes = [
     {
         path: "not-found",
         loadChildren: () => import("./views/not-found/not-found.routes").then((r) => r.routes),
+        canActivate: [authGuard]
     },
     {
         path: "**",

@@ -37,10 +37,30 @@ body {
             @apply mt-3 mb-2 text-sm font-medium text-text dark:text-text-dark;
         }
     }
+}
 
-    .button {
-        @apply relative w-11 h-6 bg-gray-700 rounded-full after:content-[''] 
-        after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all 
-        dark:border-gray-600 ;
+.checkbox-button {
+    @apply relative w-11 h-6 bg-gray-700 rounded-full after:content-[''] 
+    after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-600 after:border after:rounded-full after:h-5 after:w-5 after:transition-all 
+    dark:border-gray-600 ;
+}
+
+.radio-group {
+    @apply flex flex-col w-full;
+
+    .radio-item {
+        @apply flex items-center mb-4 w-fit justify-start gap-1 cursor-pointer;
+
+        .icon {
+            @apply relative rounded-full w-5 h-5 bg-transparent border-2 border-transparent bg-hover;
+
+            &.selected {
+                @apply after:content-[''] after:absolute after:w-2 after:h-2 bg-primary after:bg-white after:inset-0 after:m-auto after:rounded-full;
+            }
+        }
+
+        span {
+            @apply cursor-pointer ms-2 text-base font-medium text-gray-900 dark:text-gray-300;
+        }
     }
 }

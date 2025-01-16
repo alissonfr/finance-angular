@@ -1,7 +1,9 @@
 import { inject, Injectable } from "@angular/core";
+import { DateControlService } from "@services/date-control.service";
 import { HttpService } from "@services/http.service";
 import { formatDateHourToNow } from "@utils/parsers";
 import { finalize, Observable, Subject } from "rxjs";
+import { DeleteTransactionOptions } from "src/app/enums/delete-transaction-options.enum";
 import { environment } from "src/app/environment";
 import { BankAccountTransaction } from "src/app/models/bank-account-transaction";
 
@@ -11,12 +13,19 @@ import { BankAccountTransaction } from "src/app/models/bank-account-transaction"
 export class BankAccountTransactionService {
     private readonly PATH = `${environment.API_URL}v1/bank-account-transactions`;
     private http = inject(HttpService);
+    private dateControlService = inject(DateControlService);
 
     private transactionUpdatedSubject = new Subject<void>();
     transactionUpdated$ = this.transactionUpdatedSubject.asObservable();
 
+    constructor() {
+        this.dateControlService.dateChanged.subscribe(() => {
+            this.notifyTransactionUpdated();
+        });
+    }
+
     find(params?: Record<string, string | number | null | undefined>): Observable<BankAccountTransaction[]> {
-        return this.http.get<BankAccountTransaction[]>(this.PATH, params);
+        return this.http.get<BankAccountTransaction[]>(this.PATH, { ...params, month: this.dateControlService.monthIndex.value + 1, year: this.dateControlService.year.value });
     }
 
     get(id: number): Observable<BankAccountTransaction> {
@@ -34,8 +43,8 @@ export class BankAccountTransactionService {
             .pipe(finalize(() => this.notifyTransactionUpdated()));
     }
 
-    delete(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.PATH}/${id}`)
+    delete(id: number, option?: DeleteTransactionOptions): Observable<void> {
+        return this.http.delete<void>(`${this.PATH}/${id}`, { option })
             .pipe(finalize(() => this.notifyTransactionUpdated()));
     }
 

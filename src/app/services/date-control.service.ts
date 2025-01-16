@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable, Subject } from "rxjs";
 import { MONTHS } from "../constants/date.constants";
 
 enum MonthsIndexEnum {
@@ -24,13 +24,17 @@ export class DateControlService {
     monthIndex: BehaviorSubject<number> = new BehaviorSubject<number>(new Date().getMonth());
     showMonthView: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     year: BehaviorSubject<number> = new BehaviorSubject<number>(new Date().getFullYear());
+
+    dateChanged: Subject<void> = new Subject<void>();
     
     nextMonth(): void {
         this.updateMonth(1, MonthsIndexEnum.JANEIRO, 1);
+        this.dateChanged.next();
     }
     
     previousMonth(): void {
         this.updateMonth(-1, MonthsIndexEnum.DEZEMBRO, -1);
+        this.dateChanged.next();
     }
     
     private updateMonth(monthIncrement: number, resetMonth: MonthsIndexEnum, yearIncrement: number): void {
@@ -50,15 +54,18 @@ export class DateControlService {
 
     nextYear(): void {
         this.year.next(this.year.value + 1);
+        this.dateChanged.next();
     }
 
     previousYear(): void {
         this.year.next(this.year.value - 1);
+        this.dateChanged.next();
     }
 
     changeMonth(monthIndex: number): void {
         this.monthIndex.next(monthIndex);
         this.changeView();
+        this.dateChanged.next();
     }
     
 

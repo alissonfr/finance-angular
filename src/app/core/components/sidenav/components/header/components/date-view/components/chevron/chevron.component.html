@@ -1,6 +1,8 @@
-<div class="border-2 border-primary text-primary rounded-3xl flex items-center justify-center duration-300 cursor-pointer
-        hover:bg-gray-100
-        dark:border-text-dark dark:text-text-dark dark:hover:bg-hover-dark">
+<div 
+    class="border-2 border-primary text-primary rounded-3xl flex items-center justify-center duration-300 
+        dark:border-text-dark dark:text-text-dark"
+    [class]="disabled ? 'opacity-60 cursor-default' : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-hover-dark'"
+        >
     <mat-icon class="text-base">
         {{ direction === "left" ? "chevron_left" : "chevron_right" }}
     </mat-icon>

@@ -4,9 +4,14 @@
         dark:text-gray-200">
         {{ dateControl.year | async }}
     </span>
-    <chevron (click)="dateControl.nextYear()" direction="right"></chevron>
+    @if(showNextYear) {
+        <chevron (click)="dateControl.nextYear()" direction="right"></chevron>
+    } @else {
+        <chevron [disabled]="true" direction="right"></chevron>
+    }
 </div>
 <div class="absolute inset-0 m-auto top-14 flex items-center justify-center gap-2 mt-2">
+    @if(showNextYear) {
     <span class="month-label text-xs flex items-center justify-center gap-0.5 border-2 border-primary text-primary p-2 rounded-3xl cursor-pointer
         hover:bg-gray-100
         dark:border-text-dark dark:text-text-dark dark:hover:bg-hover-dark" 
@@ -15,4 +20,15 @@
         [class.active]="(dateControl.getMonthLabel() | async) === month">
         <b>{{ month }}</b> 
     </span>
+    } @else {
+        <span class="month-label text-xs flex items-center justify-center gap-0.5 border-2 border-primary text-primary p-2 rounded-3xl
+        dark:border-text-dark dark:text-text-dark " 
+        
+        [class]="i <= currentMonth ? 'cursor-pointer hover:bg-gray-100 dark:hover:bg-hover-dark' : 'opacity-60 cursor-default'"
+        *ngFor="let month of months ; let i = index"
+        (click)="i <= currentMonth ? dateControl.changeMonth(i) : null"
+        [class.active]="(dateControl.getMonthLabel() | async) === month">
+        <b>{{ month }}</b> 
+    </span>
+    }
 </div>

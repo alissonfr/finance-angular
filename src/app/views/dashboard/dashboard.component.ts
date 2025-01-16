@@ -6,8 +6,10 @@ import { BankAccountTransactionService } from "@services/api/bank-account-transa
 import { ReportService } from "@services/api/report.service";
 import { ModalService } from "@services/modal.service";
 import { ToastService } from "@services/toast.service";
+import { DeleteTransactionOptions } from "src/app/enums/delete-transaction-options.enum";
 import { Operation } from "src/app/enums/operation.enum";
 import { TransactionStatus } from "src/app/enums/transaction-status.enum";
+import { TransactionType } from "src/app/enums/transaction-type.enum";
 import { BankAccountTransaction } from "src/app/models/bank-account-transaction";
 import { FinancialReportDTO } from "src/app/models/financial-report";
 import { FinTransactionModalComponent } from "src/app/shared/fin-ui/fin-transaction-modal/fin-transaction-modal.component";
@@ -47,26 +49,49 @@ export class DashboardComponent {
 
     changeStatus(id: number) {
         this.bankAccountTransactionService.updateStatus(id).subscribe({
-            next: () => this.toastService.success("O status da transação foi atualizado com sucesso."),
             error: (e) => this.toastService.error(e, "Erro ao obter transações.")
         });
     }
 
     delete(transaction: BankAccountTransaction) {
+        if(transaction.type === TransactionType.SINGLE) {
+            this.deleteSingleTransaction(transaction);
+            return;
+        }
+
+        this.deleteRecurringTransaction(transaction);
+    }
+
+    private deleteRecurringTransaction(transaction: BankAccountTransaction) {
+        const dialogRef = this.dialog.deleteTransaction(transaction);
+        dialogRef.afterClosed().subscribe((result) => {
+            if(!result) return
+
+            this.bankAccountTransactionService.delete(transaction.bankAccountTransactionId, result as DeleteTransactionOptions).subscribe({
+                next: () => {
+                    this.toastService.success("Transações apagadas com sucesso.")
+                    this.loadTransactions();
+                },
+                error: e => this.toastService.error(e, "Erro ao apagar transações.")
+            });
+        });
+    }
+    
+    private deleteSingleTransaction(transaction: BankAccountTransaction) {
         const dialogRef = this.dialog.confirm({
             title: "Apagar transação",
             message: `Você está prestes a apagar a transação "${transaction.description}". Você tem certeza?`
         });
         dialogRef.afterClosed().subscribe(result => {
-            if(result) {
-                this.bankAccountTransactionService.delete(transaction.bankAccountTransactionId).subscribe({
-                    next: () => {
-                        this.toastService.success("Transação apagada com sucesso.")
-                        this.loadTransactions();
-                    },
-                    error: e => this.toastService.error(e, "Erro ao apagar transação.")
-                });
-            }
+            if(!result) return
+            this.bankAccountTransactionService.delete(transaction.bankAccountTransactionId).subscribe({
+                next: () => {
+                    this.toastService.success("Transação apagada com sucesso.")
+                    this.loadTransactions();
+                },
+                error: e => this.toastService.error(e, "Erro ao apagar transação.")
+            });
+            
                 
         });
     }

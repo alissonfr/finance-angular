@@ -3,7 +3,7 @@
     <span class="text-3xl font-bold">{{ balanceReport.current | currency: 'BRL' }}</span>
 
     @if (isExpense(balanceReport.percentageChange)) {
-        <small class="text-xs pt-2"><b class="expense">-{{ balanceReport.percentageChange }}%</b> em relação ao último mês</small>
+        <small class="text-xs pt-2"><b class="expense">{{ balanceReport.percentageChange }}%</b> em relação ao último mês</small>
     } @else {
         <small class="text-xs pt-2"><b class="income">+{{ balanceReport.percentageChange }}%</b> em relação ao último mês</small>
     }

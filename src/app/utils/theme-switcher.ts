@@ -6,18 +6,19 @@ type Theme = "light" | "dark";
     providedIn: "root"
 })
 export class ThemeSwitcher {
-    public theme = signal<Theme>("dark");
+    theme = signal<Theme>("dark");
     
     constructor() {
+        const storage = localStorage.getItem("theme")
+        if(storage) {
+            this.theme.set(storage as Theme);
+        }
         effect(() => this.handleTheme(this.theme()));
-    }
-
-    load() {
-        this.theme.set("dark");
     }
 
     changeTo(theme: Theme) {
         this.theme.set(theme);
+        localStorage.setItem("theme", theme);
     }
 
     private handleTheme(theme: Theme) {

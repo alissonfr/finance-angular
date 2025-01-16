@@ -15,6 +15,7 @@ import { isFormInvalid } from "@utils/form-validator";
 import { BankAccountModalComponent } from "@views/bank-accounts/components/bank-account-modal/bank-account-modal.component";
 import { CategoryModalComponent } from "@views/categories/components/bank-account-modal/category-modal.component";
 import { Operation } from "src/app/enums/operation.enum";
+import { TransactionStatus } from "src/app/enums/transaction-status.enum";
 import { TransactionType } from "src/app/enums/transaction-type.enum";
 import { BankAccount } from "src/app/models/bank-account";
 import { BankAccountTransaction } from "src/app/models/bank-account-transaction";
@@ -43,11 +44,12 @@ export class FinTransactionModalComponent {
     expanded: boolean = false;
     operations = Operation;
     types = TransactionType;
-    formGroup = new FormGroup({
+    formGroup: FormGroup = new FormGroup({
         bankAccountTransactionId: new FormControl(0),
         description: new FormControl("", [Validators.required]),
-        date: new FormControl("", [Validators.required]),
+        date: new FormControl(new Date(), [Validators.required]),
         amount: new FormControl("", [Validators.required]),
+        status: new FormControl(TransactionStatus.PENDING, [Validators.required]),
         operation: new FormControl("", [Validators.required]),
         category: new FormControl("", [Validators.required]),
         type: new FormControl(TransactionType.SINGLE, [Validators.required]),
@@ -55,14 +57,14 @@ export class FinTransactionModalComponent {
         paymentMethod: new FormControl("", [Validators.required]),
         notes: new FormControl(""),
     });
-      
+    
     bankAccounts: BankAccount[] = [];
     categories: Category[] = [];
     paymentMethods: PaymentMethod[] = [];
 
+    protected readonly data = inject(MAT_DIALOG_DATA);
     private readonly modalService = inject(ModalService);
     private readonly dialog = inject(MatDialogRef<CategoryModalComponent>);
-    private readonly data = inject(MAT_DIALOG_DATA);
     private readonly bankAccountService = inject(BankAccountService);
     private readonly categoryService = inject(CategoryService);
     private readonly paymentMethodService = inject(PaymentMethodService);
@@ -79,6 +81,10 @@ export class FinTransactionModalComponent {
         return this.data.operation ? "show_chart" : "credit_card";
     }
 
+    get status() {
+        return TransactionStatus;
+    }
+
     get operation() {
         return this.data.operation as Operation;
     }
@@ -89,6 +95,8 @@ export class FinTransactionModalComponent {
         this.findCategories(this.data.operation);
         this.findBankAccounts();
         this.findPaymentMethods();
+
+        if(this.data?.id) this.get(this.data.id);
     }
 
     close(): void {
@@ -96,6 +104,7 @@ export class FinTransactionModalComponent {
     }
 
     submit(): void {
+        console.log(this.formGroup.value)
         if(isFormInvalid(this.formGroup)) {
             this.toastService.invalidForm();
             return;
@@ -132,10 +141,27 @@ export class FinTransactionModalComponent {
 
     changeType(event: Event, type: TransactionType) {
         const checking = (event.target as HTMLInputElement)?.checked
-        if(!checking) return this.formGroup.get("type")?.patchValue(TransactionType.SINGLE);
+        if(!checking) {
+            this.formGroup.removeControl("installments");
+            return this.formGroup.get("type")?.patchValue(TransactionType.SINGLE)
+        }
+
+        if(type === TransactionType.IN_INSTALLMENTS) {
+            this.formGroup.addControl("installments", new FormControl("", Validators.required))
+        } else {
+            this.formGroup.removeControl("installments");
+        }
 
         this.formGroup.get("type")?.patchValue(type);
-        this.data.type = type;
+    }
+
+    changeStatus() {
+        const status = this.formGroup.get("status");
+        if(status?.value === TransactionStatus.PAID) {
+            status.patchValue(TransactionStatus.PENDING)
+        } else {
+            status?.patchValue(TransactionStatus.PAID)
+        }
     }
 
     private findCategories(operation?: Operation): void {
@@ -160,7 +186,10 @@ export class FinTransactionModalComponent {
     }
 
     private get(id: number) {
-        console.log(id)
+        this.bankAccountTransactionService.get(id).subscribe({
+            next: (result) => this.formGroup.setValue(result as unknown as never),
+            error: e => this.toastService.error(e, "Erro ao obter métodos de pagamento.")
+        });
     }
 
     private create(transaction: BankAccountTransaction) {

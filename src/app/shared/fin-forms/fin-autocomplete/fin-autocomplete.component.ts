@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
+import { first } from "rxjs";
 import { Category } from "src/app/models/category";
 import { FinCategoryIconComponent } from "../../fin-ui/fin-category-icon/fin-category-icon.component";
 import { FinInputComponent } from "../fin-input/fin-input.component";
@@ -37,6 +38,7 @@ export class FinAutocompleteComponent {
         this.filteredItems = this.items;
         const autocompleteInput = this.searchFormGroup.get("searchControl");
         const propInput = this.formGroup.get(this.controlName);
+        this.setInitialValue();
         
         autocompleteInput?.valueChanges.subscribe(value => {
             if(!this.isDropdownOpen && value) this.isDropdownOpen = true;
@@ -53,6 +55,10 @@ export class FinAutocompleteComponent {
                 }
             });
         }
+    }
+
+    setInitialValue() {
+        this.formGroup.get(this.controlName)?.valueChanges.pipe(first()).subscribe(value => this.selectItem(value));
     }
 
     filterItems(query: string | null | undefined) {

@@ -1,0 +1,33 @@
+<div class="p-2 h-full flex flex-col justify-between items-center text-center">
+  <span class="error">
+    <mat-icon class="material-icons-outlined">warning</mat-icon>
+  </span>
+  
+  <section class="my-3">
+    <h1 class="text-2xl font-bold">Apagar transações</h1>
+    <h3>Atenção! Está é uma despesa do cartão parcelada (6/10). Você deseja deletar...</h3>
+  </section>
+
+  <div class="radio-group">
+    <div class="radio-item" (click)="changeOption(options.CURRENT)">
+      <div class="icon" [class.selected]="option === options.CURRENT"></div>
+      <span>Apenas esta parcela</span>
+    </div>
+  
+    <div class="radio-item" (click)="changeOption(options.CURRENT_AND_NEXT)">
+      <div class="icon" [class.selected]="option === options.CURRENT_AND_NEXT"></div>
+      <span>Esta e as futuras</span>
+    </div>
+  
+    <div class="radio-item" (click)="changeOption(options.CURRENT_AND_NEXT_AND_PREVIOUS)">
+      <div class="icon" [class.selected]="option === options.CURRENT_AND_NEXT_AND_PREVIOUS"></div>
+      <span>Todas, incluindo as passadas</span>
+    </div>
+
+  </div>
+
+  <div class="flex w-full justify-between">
+    <fin-button (click)="close()" color="plain">Não, mantenha.</fin-button>
+    <fin-button (click)="confirm()" color="cancel">Sim, apague!</fin-button>
+  </div>
+</div>

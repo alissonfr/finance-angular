@@ -23,6 +23,16 @@ export class AuthService {
     private http = inject(HttpService);
     private loadingService = inject(LoadingService);
 
+    constructor() {
+        setInterval(() => {
+            const token = localStorage.getItem("token");
+            if (token && this.isTokenExpired(token)) {
+                this.logout();
+                window.location.reload();
+            }
+        }, 5000)
+    }
+
     register(data: User) {
         return this.http.post<RegisterResponse>(`${this.PATH}/register`, data);
     }
@@ -48,10 +58,6 @@ export class AuthService {
         const user = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         if (!user || !token) {
-            return false;
-        }
-        if (this.isTokenExpired(token)) {
-            this.logout();
             return false;
         }
         return true;

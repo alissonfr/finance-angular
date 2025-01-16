@@ -10,11 +10,16 @@ export class BankAccountTransaction {
     description: string;
     date: Date;
     notes: string;
-    amount: number;
+    amount: string;
     operation: Operation;
     status: TransactionStatus;
-    category: Category;
     type: TransactionType;
+    category: Category;
     bankAccount: BankAccount;
     paymentMethod: PaymentMethod;
+    recurrency: {
+        installment?: number
+        installments?: number
+        total?: number
+    }
 }

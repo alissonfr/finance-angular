@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
+import { first } from "rxjs";
 import { FinInputComponent } from "../fin-input/fin-input.component";
 
 @Component({
@@ -32,6 +33,8 @@ export class FinSelectComponent {
 
     ngOnInit() {
         const propInput = this.formGroup.get(this.controlName);
+        console.log(propInput)
+        this.setInitialValue();
         
         if(propInput?.hasValidator(Validators.required)) {
             propInput?.events.subscribe(() => {
@@ -42,6 +45,10 @@ export class FinSelectComponent {
                 }
             });
         }
+    }
+
+    setInitialValue() {
+        this.formGroup.get(this.controlName)?.valueChanges.pipe(first()).subscribe(value => this.selectItem(value));
     }
 
     selectItem(item: any) {

@@ -2,6 +2,6 @@
     @apply relative;
     
     .month-label.active {
-        @apply bg-gray-100 dark:bg-gray-700;
+        @apply bg-gray-100 dark:bg-hover-dark
     }
 }

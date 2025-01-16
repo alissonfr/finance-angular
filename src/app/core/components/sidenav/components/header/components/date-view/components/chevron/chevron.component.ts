@@ -9,5 +9,6 @@ import { MatIconModule } from "@angular/material/icon";
     templateUrl: "./chevron.component.html",
 })
 export class ChevronComponent {
-    @Input({ required: true }) direction: "left" | "right" ;
+    @Input({ required: true }) direction: "left" | "right";
+    @Input() disabled: boolean = false;
 }
