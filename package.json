@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production --base-href /painel/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:finance-angular": "node dist/finance-angular/server/server.mjs",
