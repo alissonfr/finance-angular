@@ -7,5 +7,5 @@ RUN npm run build
 
 FROM nginx:1.27.3
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY /dist/finance-angular/browser /usr/share/nginx/html
+COPY --from=builder /app/dist/finance-angular/browser /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
