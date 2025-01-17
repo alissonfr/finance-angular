@@ -6,5 +6,5 @@ COPY . .
 RUN npm run build --prod
 
 FROM nginx:1.27.3
-COPY --from=builder /app/dist/finance-angular /usr/share/nginx/html
+COPY --from=builder /app/dist/finance-angular/browser /usr/share/nginx/html/painel
 CMD ["nginx", "-g", "daemon off;"]
