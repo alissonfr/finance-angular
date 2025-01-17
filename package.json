@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:finance-angular": "node dist/finance-angular/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "recontainerize": "docker rm -f finance-angular && docker rmi -f finance-angular-finance-angular && docker system prune && docker-compose up -d --build"
   },
   "private": true,
   "dependencies": {

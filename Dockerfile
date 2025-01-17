@@ -3,8 +3,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build --prod
+RUN npm run build
 
 FROM nginx:1.27.3
-COPY --from=builder /app/dist/finance-angular/browser /usr/share/nginx/html/painel
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY /dist/finance-angular/browser /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
