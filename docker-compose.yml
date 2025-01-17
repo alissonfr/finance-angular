@@ -1,5 +1,6 @@
 services:
   finance-angular:
+    container_name: finance-angular
     build:
       context: .
       dockerfile: Dockerfile
