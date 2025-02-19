@@ -1,10 +1,10 @@
 import { User } from "./user";
 
 export class CreditCard {
-    creditCardId?: number;
+    creditCardId: number;
     name: string;
-    creditLimit: number;
-    dueDay: number;
-    closingDay: number;
+    creditLimit: string;
+    dueDay: string;
+    closingDay: string;
     user: User;
 }

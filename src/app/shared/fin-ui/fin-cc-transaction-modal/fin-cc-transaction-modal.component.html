@@ -1,28 +1,21 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="flex justify-between items-center" [class.expanded]="expanded">
-    @if (data?.id) {
-      <h2 class="text-xl font-semibold flex items-center justify-center">
-        <mat-icon class="material-icons-outlined mr-2" [class]="operation === operations.EXPENSE ? 'rotate text-error' : 'text-success'">{{ icon }}</mat-icon>
-        {{ title }}
-      </h2>
-    } @else {
-      <h2 class="text-xl font-semibold flex items-center justify-center cursor-pointer transition-all duration-300 hover:brightness-110" [matMenuTriggerFor]="menu">
-        <mat-icon class="material-icons-outlined mr-2" [class]="operation === operations.EXPENSE ? 'rotate text-error' : 'text-success'">{{ icon }}</mat-icon>
-        {{ title }}
-        <mat-icon class="material-icons-outlined ml-1" style="width: 20px; height: 20px; font-size: 20px;">keyboard_arrow_down</mat-icon>
-      </h2>
-    }
+    <h2 class="text-xl font-semibold flex items-center justify-center cursor-pointer transition-all duration-300 hover:brightness-110" [matMenuTriggerFor]="menu">
+      <mat-icon class="material-icons-outlined mr-2">credit_card</mat-icon>
+      Despesa no cartão
+      <mat-icon class="material-icons-outlined ml-1" style="width: 20px; height: 20px; font-size: 20px;">keyboard_arrow_down</mat-icon>
+    </h2>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="changeOperation(operations.INCOME)">
+      <button mat-menu-item (click)="changeToBankAccount(operations.INCOME)">
           <mat-icon class="material-icons-outlined success">show_chart</mat-icon>
           <span>Receita</span>
       </button>
-      <button mat-menu-item (click)="changeOperation(operations.EXPENSE)">
+      <button mat-menu-item (click)="changeToBankAccount(operations.EXPENSE)">
           <mat-icon class="material-icons-outlined error">show_chart</mat-icon>
           <span>Despesa</span>
       </button>
-      <button mat-menu-item (click)="changeToCreditCard()">
+      <button mat-menu-item>
           <mat-icon class="material-icons-outlined">credit_card</mat-icon>
           <span>Despesa no cartão &nbsp;&nbsp;&nbsp;</span>
       </button>
@@ -37,14 +30,13 @@
       <div class="w-full">
         <fin-input label="Descrição" placeholder="Netflix" name="description" formControlName="description" required />
 
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 gap-4">
           <fin-input datePicker id="date" name="date" required formControlName="date" placeholder="01/01/2025" label="Data" />
           <fin-input label="Valor" placeholder="R$ 20,00" name="amount" formControlName="amount" currency required />
-          <fin-select label="Forma de pagamento" name="paymentMethod" [formGroup]="formGroup" controlName="paymentMethod" [items]="paymentMethods" displayProperty="name" required />
         </div>
         
         <div [class]="expanded && formGroup.get('type')?.value === types.IN_INSTALLMENTS ? 'grid-cols-1' : 'grid grid-cols-2 gap-4'">
-          <fin-autocomplete label="Conta bancária" [formGroup]="formGroup" [items]="bankAccounts" displayProperty="name" controlName="bankAccount" (addNewItem)="createNewBankAccount($event)" />
+          <fin-autocomplete label="Cartão de crédito" [formGroup]="formGroup" [items]="creditCards" displayProperty="name" controlName="creditCard" (addNewItem)="createNewCreditCard($event)" />
           <fin-autocomplete label="Categoria" [formGroup]="formGroup" [items]="categories" displayProperty="name" controlName="category" (addNewItem)="createNewCategory($event)" />
         </div>
 
@@ -83,9 +75,9 @@
     <div class="flex justify-end items-center mt-8 gap-8">
       <label class="flex items-center gap-2">
         <span class="text-sm font-medium text-text dark:text-text-dark">
-          {{ operation === operations.EXPENSE ? "Pago?" : "Recebido?" }}
+          Pago?
         </span>
-        <input type="checkbox" [checked]="formGroup.get('status')?.value === status.PAID" (change)="changeStatus()" class="sr-only peer">
+        <input type="checkbox" [checked]="true" (change)="changeStatus()" class="sr-only peer">
         <div class="checkbox-button peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white peer-checked:bg-primary"></div>
       </label>
       <fin-button (click)="submit()">Enviar</fin-button>

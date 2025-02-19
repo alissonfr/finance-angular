@@ -25,6 +25,12 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: "credit-cards",
+        loadChildren: () => import("./views/credit-cards/credit-cards.routes").then((r) => r.routes),
+        component: SidenavComponent,
+        canActivate: [authGuard]
+    },
+    {
         path: "categories",
         loadChildren: () => import("./views/categories/categories.routes").then((r) => r.routes),
         component: SidenavComponent,

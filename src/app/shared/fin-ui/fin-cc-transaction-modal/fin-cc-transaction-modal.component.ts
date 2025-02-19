@@ -5,97 +5,59 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
-import { BankAccountTransactionService } from "@services/api/bank-account-transaction.service";
-import { BankAccountService } from "@services/api/bank-account.service";
 import { CategoryService } from "@services/api/category.service";
-import { PaymentMethodService } from "@services/api/payment-method.service";
+import { CreditCardTransactionService } from "@services/api/credit-card-transaction.service";
+import { CreditCardService } from "@services/api/credit-card.service";
 import { ModalService } from "@services/modal.service";
 import { ToastService } from "@services/toast.service";
 import { isFormInvalid } from "@utils/form-validator";
-import { BankAccountModalComponent } from "@views/bank-accounts/components/bank-account-modal/bank-account-modal.component";
 import { CategoryModalComponent } from "@views/categories/components/bank-account-modal/category-modal.component";
+import { CreditCardModalComponent } from "@views/credit-cards/components/credit-card-modal/credit-card-modal.component";
 import { Operation } from "src/app/enums/operation.enum";
 import { TransactionStatus } from "src/app/enums/transaction-status.enum";
 import { TransactionType } from "src/app/enums/transaction-type.enum";
-import { BankAccount } from "src/app/models/bank-account";
-import { BankAccountTransaction } from "src/app/models/bank-account-transaction";
 import { Category } from "src/app/models/category";
-import { PaymentMethod } from "src/app/models/payment-method";
+import { CreditCard } from "src/app/models/credit-card";
+import { CreditCardTransaction } from "src/app/models/credit-card-transaction";
 import { FinFormsModule } from "../../fin-forms/fin-forms.module";
-import { FinCCTransactionModalComponent } from "../fin-cc-transaction-modal/fin-cc-transaction-modal.component";
-
-export const CreateOperationLabels = new Map<Operation, string>([
-    [Operation.INCOME, "Nova receita"],
-    [Operation.EXPENSE, "Nova despesa"],
-]);
-
-export const UpdateOperationLabels = new Map<Operation, string>([
-    [Operation.INCOME, "Atualizar receita"],
-    [Operation.EXPENSE, "Atualizar despesa"],
-]);
+import { FinTransactionModalComponent } from "../fin-transaction-modal/fin-transaction-modal.component";
 
 @Component({
-    selector: "fin-transaction-modal",
+    selector: "fin-cc-transaction-modal",
     standalone: true,
     imports: [CommonModule, FinFormsModule, ReactiveFormsModule, MatIconModule, MatMenuModule, MatDatepickerModule],
-    templateUrl: "./fin-transaction-modal.component.html",
-    styleUrl: "./fin-transaction-modal.component.scss"
+    templateUrl: "./fin-cc-transaction-modal.component.html",
+    styleUrl: "./fin-cc-transaction-modal.component.scss"
 })
-export class FinTransactionModalComponent {
+export class FinCCTransactionModalComponent {
     expanded: boolean = false;
     operations = Operation;
     types = TransactionType;
     formGroup: FormGroup = new FormGroup({
-        bankAccountTransactionId: new FormControl(0),
+        creditCardTransactionId: new FormControl(0),
         description: new FormControl("", [Validators.required]),
         date: new FormControl(new Date(), [Validators.required]),
         amount: new FormControl("", [Validators.required]),
-        status: new FormControl(TransactionStatus.PENDING, [Validators.required]),
-        operation: new FormControl("", [Validators.required]),
+        creditCard: new FormControl("", [Validators.required]),
         category: new FormControl("", [Validators.required]),
-        type: new FormControl(TransactionType.SINGLE, [Validators.required]),
-        bankAccount: new FormControl("", [Validators.required]),
-        paymentMethod: new FormControl("", [Validators.required]),
         notes: new FormControl(""),
+        type: new FormControl(TransactionType.SINGLE),
     });
     
-    bankAccounts: BankAccount[] = [];
+    creditCards: CreditCard[] = [];
     categories: Category[] = [];
-    paymentMethods: PaymentMethod[] = [];
 
     protected readonly data = inject(MAT_DIALOG_DATA);
     private readonly modalService = inject(ModalService);
     private readonly dialog = inject(MatDialogRef<CategoryModalComponent>);
-    private readonly bankAccountService = inject(BankAccountService);
+    private readonly creditCardService = inject(CreditCardService);
     private readonly categoryService = inject(CategoryService);
-    private readonly paymentMethodService = inject(PaymentMethodService);
     private readonly toastService = inject(ToastService);
-    private readonly bankAccountTransactionService = inject(BankAccountTransactionService);
-
-    get title() {
-        const operation = this.data.operation as Operation;
-        if(this.data?.id) return UpdateOperationLabels.get(operation);
-        return CreateOperationLabels.get(operation);
-    }
-
-    get icon() {
-        return this.data.operation ? "show_chart" : "credit_card";
-    }
-
-    get status() {
-        return TransactionStatus;
-    }
-
-    get operation() {
-        return this.data.operation as Operation;
-    }
+    private readonly bankAccountTransactionService = inject(CreditCardTransactionService);
     
     ngOnInit() {
-        const operation = this.data.operation as Operation;
-        this.formGroup.get("operation")?.patchValue(operation);
-        this.findCategories(this.data.operation);
-        this.findBankAccounts();
-        this.findPaymentMethods();
+        this.findCategories();
+        this.findCreditCards();
 
         if(this.data?.id) this.get(this.data.id);
     }
@@ -105,23 +67,22 @@ export class FinTransactionModalComponent {
     }
 
     submit(): void {
-        console.log(this.formGroup.value)
         if(isFormInvalid(this.formGroup)) {
             this.toastService.invalidForm();
             return;
         }
 
-        const transaction = this.formGroup.getRawValue() as unknown as BankAccountTransaction;
+        const transaction = this.formGroup.getRawValue() as unknown as CreditCardTransaction;
 
-        if(transaction.bankAccountTransactionId) {
-            this.update(transaction.bankAccountTransactionId, transaction);
+        if(transaction.creditCardTransactionId) {
+            this.update(transaction.creditCardTransactionId, transaction);
         } else {
             this.create(transaction)
         }
     }
 
-    createNewBankAccount(name: string) {
-        const dialogRef = this.modalService.open(BankAccountModalComponent, { data: { name } });
+    createNewCreditCard(name: string) {
+        const dialogRef = this.modalService.open(CreditCardModalComponent, { data: { name } });
         dialogRef.afterClosed().subscribe(() => {
 
         });
@@ -134,10 +95,10 @@ export class FinTransactionModalComponent {
         });
     }
 
-    changeOperation(operation: Operation) {
-        this.formGroup.get("operation")?.patchValue(operation);
-        this.data.operation = operation;
-        this.findCategories(operation);
+    changeToBankAccount(operation: Operation) {
+        this,close();
+        const dialogRef = this.modalService.open(FinTransactionModalComponent, { data: { operation } });
+        dialogRef.afterClosed().subscribe(() => {});
     }
 
     changeType(event: Event, type: TransactionType) {
@@ -165,29 +126,17 @@ export class FinTransactionModalComponent {
         }
     }
 
-    changeToCreditCard() {
-        this.close();
-        this.modalService.open(FinCCTransactionModalComponent);
-    }
-
-    private findCategories(operation?: Operation): void {
-        this.categoryService.find({ operation }).subscribe({
+    private findCategories(): void {
+        this.categoryService.find({ operatio: Operation.EXPENSE }).subscribe({
             next: (result) => this.categories = result,
             error: e => this.toastService.error(e, "Erro ao obter categorias.")
         });
     }
 
-    private findBankAccounts(): void {
-        this.bankAccountService.find().subscribe({
-            next: (result) => this.bankAccounts = result,
+    private findCreditCards(): void {
+        this.creditCardService.find().subscribe({
+            next: (result) => this.creditCards = result,
             error: e => this.toastService.error(e, "Erro ao obter contas bancárias.")
-        });
-    }
-
-    private findPaymentMethods(): void {
-        this.paymentMethodService.find().subscribe({
-            next: (result) => this.paymentMethods = result,
-            error: e => this.toastService.error(e, "Erro ao obter métodos de pagamento.")
         });
     }
 
@@ -198,7 +147,7 @@ export class FinTransactionModalComponent {
         });
     }
 
-    private create(transaction: BankAccountTransaction) {
+    private create(transaction: CreditCardTransaction) {
         this.bankAccountTransactionService.create(transaction).subscribe({
             next: () => {
                 this.toastService.success("Transação criada com sucesso.");
@@ -208,7 +157,7 @@ export class FinTransactionModalComponent {
         });
     }
 
-    private update(id: number, transaction: BankAccountTransaction) {
+    private update(id: number, transaction: CreditCardTransaction) {
         this.bankAccountTransactionService.update(id, transaction).subscribe({
             next: () => {
                 this.toastService.success("Transação atualizada com sucesso.");

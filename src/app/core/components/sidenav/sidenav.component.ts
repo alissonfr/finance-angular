@@ -14,6 +14,7 @@ import { FinTransactionModalComponent } from "src/app/shared/fin-ui/fin-transact
 import { HeaderComponent } from "./components/header/header.component";
 import { SidenavItem } from "./sidenav-item.type";
 import { SidenavItems } from "./sidenav-items";
+import { FinCCTransactionModalComponent } from "src/app/shared/fin-ui/fin-cc-transaction-modal/fin-cc-transaction-modal.component";
 
 const imports = [
     CommonModule, 
@@ -69,6 +70,11 @@ export class SidenavComponent {
 
     createTransaction(operation: Operation) {
         const dialogRef = this.dialog.open(FinTransactionModalComponent, { data: { operation } });
+        dialogRef.afterClosed().subscribe(() => {});
+    }
+
+    createCreditCardTransaction() {
+        const dialogRef = this.dialog.open(FinCCTransactionModalComponent);
         dialogRef.afterClosed().subscribe(() => {});
     }
 

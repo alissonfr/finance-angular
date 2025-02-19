@@ -43,11 +43,6 @@ export class BankAccountModalComponent {
         }
 
         const bankAccount = this.formGroup.getRawValue() as unknown as BankAccount;
-        bankAccount.initialAmount = bankAccount.initialAmount
-            .replace("R$", "")
-            .replace(/\./g, "")
-            .replace(",", ".")
-            .trim();
 
         if(bankAccount.bankAccountId) {
             this.update(bankAccount.bankAccountId, bankAccount);
@@ -58,13 +53,7 @@ export class BankAccountModalComponent {
 
     private get(id: number): void {
         this.bankAccountService.get(id).subscribe({
-            next: result => {
-                this.formGroup.patchValue({
-                    ...result,
-                    // initialAmount: result.initialAmount = result.initialAmount.replace(".", ",")
-                })
-                // this.formGroup.get("initialAmount")?.updateValueAndValidity()
-            },
+            next: result => this.formGroup.patchValue(result),
             error: e => this.toastService.error(e, "Erro ao obter conta bancária.")
         });
     }

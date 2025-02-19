@@ -17,7 +17,7 @@ export class BankAccountTransaction {
     category: Category;
     bankAccount: BankAccount;
     paymentMethod: PaymentMethod;
-    recurrency: {
+    recurrency?: {
         installment?: number
         installments?: number
         total?: number

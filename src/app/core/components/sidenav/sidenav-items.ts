@@ -12,6 +12,11 @@ export const SidenavItems: SidenavItem[] = [
         icon: "paid"
     },
     {
+        name: "Cartões de crédito",
+        route: "/credit-cards",
+        icon: "credit_card"
+    },
+    {
         name: "Categorias",
         route: "/categories",
         icon: "bookmark"

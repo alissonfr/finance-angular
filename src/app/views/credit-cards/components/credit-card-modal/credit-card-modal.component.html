@@ -1,0 +1,19 @@
+<div class="flex justify-between items-center">
+  <h2 class="text-xl font-semibold">{{ formGroup.get('creditCardId')?.value ? 'Atualizar cartão de crédito' : 'Novo cartão de crédito' }}</h2>
+  <span class="cursor-pointer flex items-center justify-center rounded-full p-3 w-2 h-2 duration-200 hover:bg-gray-200 dark:hover:bg-hover-dark">
+    <button (click)="close()" class="focus:outline-none">&times;</button>
+  </span>
+</div>
+
+<form class="pt-4" [formGroup]="formGroup">
+  <fin-input label="Nome" name="name" placeholder="Itaú" required formControlName="name" />
+  <div class="grid grid-cols-3 gap-4">
+    <fin-input label="Limite" currency name="creditLimit" placeholder="R$ 12.99" required formControlName="creditLimit" />
+    <fin-input label="Fechamento" name="closingDay" placeholder="01" required formControlName="closingDay" />
+    <fin-input label="Vencimento" name="dueDay" placeholder="10" required formControlName="dueDay" />
+  </div>
+
+  <div class="flex justify-end mt-4">
+    <fin-button (click)="submit()" >Enviar</fin-button>
+  </div>
+</form>

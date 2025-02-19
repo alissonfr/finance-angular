@@ -1,0 +1,7 @@
+.expanded {
+    width: 50vw;
+}
+
+.rotate {
+    @apply scale-x-[-1];
+}

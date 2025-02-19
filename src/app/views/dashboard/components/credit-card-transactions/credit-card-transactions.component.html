@@ -1,0 +1,57 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+ 
+<div class="fin-table" style="padding: 0;">
+    <section class="table-section">
+        <table>
+            <thead>
+                <th></th>
+                <th>Cartão</th>
+                <th>Fecha em</th>
+                <th>Vence em</th>
+                <th>Total</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @for (creditCard of creditCards; track creditCard.creditCardId) {
+                    <tr (click)="creditCard.isExpanded = !creditCard.isExpanded">
+                        <td class="pr-0"><mat-icon class="material-symbols-outlined">{{ creditCard.isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon></td>
+                        <td>{{ creditCard.name }}</td>
+                        <td>{{ creditCard.closingDate | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ creditCard.dueDate | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ creditCard.totalAmount | currency: 'BRL' }}</td>
+                        <!-- <td>Aberta</td> -->
+                        <td class="more" (click)="$event.stopPropagation()"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon class="material-symbols-outlined">delete</mat-icon>
+                                <span>Apagar</span>
+                            </button>
+                        </mat-menu>
+                    </tr>
+                    @if (creditCard.isExpanded) {
+                        @for (transaction of creditCard.transactions; track transaction.creditCardTransactionId) {
+                            <tr class="child">
+                                <td style="padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 1rem; padding-bottom: 1rem;"></td>
+                                <td colspan="2">{{ transaction.description }}</td>
+                                <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
+                                <td>{{ transaction.amount | currency: 'BRL' }}
+                                    <!-- @if (transaction.recurrency?.installments && transaction.recurrency?.installment) {
+                                        <span class="text-text/60 dark:text-text-dark/60 text-xs">({{ transaction.recurrency?.installment }}/{{ transaction.recurrency?.installments }})</span>
+                                    } -->
+                                </td>
+                                <td class="more"></td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+
+    </section>
+    
+</div>

@@ -5,13 +5,13 @@ import { formatDateHourToNow } from "@utils/parsers";
 import { finalize, Observable, Subject } from "rxjs";
 import { DeleteTransactionOptions } from "src/app/enums/delete-transaction-options.enum";
 import { environment } from "src/app/environment";
-import { BankAccountTransaction } from "src/app/models/bank-account-transaction";
+import { CreditCardTransaction } from "src/app/models/credit-card-transaction";
 
 @Injectable({ 
     providedIn: "root" 
 })
-export class BankAccountTransactionService {
-    private readonly PATH = `${environment.API_URL}v1/bank-account-transactions`;
+export class CreditCardTransactionService {
+    private readonly PATH = `${environment.API_URL}v1/credit-card-transactions`;
     private http = inject(HttpService);
     private dateControlService = inject(DateControlService);
 
@@ -24,23 +24,23 @@ export class BankAccountTransactionService {
         });
     }
 
-    find(params?: Record<string, string | number | null | undefined>): Observable<BankAccountTransaction[]> {
+    find(params?: Record<string, string | number | null | undefined>): Observable<CreditCardTransaction[]> {
         return this.http
-            .get<BankAccountTransaction[]>(this.PATH, { ...params, month: this.dateControlService.monthIndex.value + 1, year: this.dateControlService.year.value })
+            .get<CreditCardTransaction[]>(this.PATH, { ...params, month: this.dateControlService.monthIndex.value + 1, year: this.dateControlService.year.value })
     }
 
-    get(id: number): Observable<BankAccountTransaction> {
-        return this.http.get<BankAccountTransaction>(`${this.PATH}/${id}`);
+    get(id: number): Observable<CreditCardTransaction> {
+        return this.http.get<CreditCardTransaction>(`${this.PATH}/${id}`);
     }
 
-    create(transaction: Partial<BankAccountTransaction>): Observable<BankAccountTransaction> {
+    create(transaction: Partial<CreditCardTransaction>): Observable<CreditCardTransaction> {
         transaction.date = formatDateHourToNow(transaction.date);
-        return this.http.post<BankAccountTransaction>(this.PATH, transaction)
+        return this.http.post<CreditCardTransaction>(this.PATH, transaction)
             .pipe(finalize(() => this.notifyTransactionUpdated()));
     }
 
-    update(id: number, transaction: Partial<BankAccountTransaction>): Observable<BankAccountTransaction> {
-        return this.http.put<BankAccountTransaction>(`${this.PATH}/${id}`, transaction)
+    update(id: number, transaction: Partial<CreditCardTransaction>): Observable<CreditCardTransaction> {
+        return this.http.put<CreditCardTransaction>(`${this.PATH}/${id}`, transaction)
             .pipe(finalize(() => this.notifyTransactionUpdated()));
     }
 
@@ -49,8 +49,8 @@ export class BankAccountTransactionService {
             .pipe(finalize(() => this.notifyTransactionUpdated()));
     }
 
-    updateStatus(id: number): Observable<BankAccountTransaction> {
-        return this.http.put<BankAccountTransaction>(`${this.PATH}/${id}/status`, {})
+    updateStatus(id: number): Observable<CreditCardTransaction> {
+        return this.http.put<CreditCardTransaction>(`${this.PATH}/${id}/status`, {})
             .pipe(finalize(() => this.notifyTransactionUpdated()));
     }
 

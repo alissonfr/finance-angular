@@ -1,0 +1,49 @@
+<page-header title="Cartões de crédito" icon="person" (newClick)="create()" />
+
+<div class="fin-table">
+    <form class="search mb-10" [formGroup]="formGroup">
+        <fin-input class="w-full h-12" placeholder="Nome" formControlName="name"/>
+        <fin-button (click)="clear()" size="large" color="outlined" startIcon="delete">Limpar</fin-button>
+        <fin-button (click)="find()" size="large" startIcon="search">Pesquisar</fin-button>
+    </form>
+    @if(creditCards.length > 0) {
+        <section class="table-section">
+            <table>
+                <thead>
+                    <th>Nome</th>
+                    <th>Limite</th>
+                    <th>Fechamento da fatura</th>
+                    <th>Vencimento da fatura</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    @for (account of creditCards; track account.creditCardId) {
+                        <tr>
+                            <td>{{ account.name }}</td>
+                            <td>{{ account.creditLimit | currency: 'BRL' }}</td>
+                            <td>{{ account.closingDay }}</td>
+                            <td>{{ account.dueDay }}</td>
+        
+                            <td class="more"><mat-icon [matMenuTriggerFor]="menu" class="material-symbols-outlined">more_vert</mat-icon></td>
+                            <mat-menu #menu="matMenu">
+                                <button (click)="update(account.creditCardId)" mat-menu-item>
+                                    <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                                    <span>Editar</span>
+                                </button>
+                                <button (click)="delete(account)" mat-menu-item>
+                                    <mat-icon class="material-symbols-outlined">delete</mat-icon>
+                                    <span>Apagar</span>
+                                </button>
+                            </mat-menu>
+                        </tr>
+                      }
+                </tbody>
+            </table>
+        </section>
+    } @else {
+        <h1>Sem registros.</h1>
+    }
+    
+</div>
+  
+
