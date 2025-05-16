@@ -7,9 +7,8 @@ import { ChevronComponent } from "../chevron/chevron.component";
 
 @Component({
     selector: "month-view",
-    standalone: true,
     imports: [CommonModule, MatIconModule, ChevronComponent],
-    templateUrl: "./month-view.component.html",
+    templateUrl: "./month-view.component.html"
 }) 
 export class MonthViewComponent {
     dateControl = inject(DateControlService);

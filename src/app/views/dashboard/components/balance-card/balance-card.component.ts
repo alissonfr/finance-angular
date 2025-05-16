@@ -4,9 +4,8 @@ import { BalanceReportDTO } from "src/app/models/financial-report";
 
 @Component({
     selector: "balance-card",
-    standalone: true,
     imports: [CommonModule],
-    templateUrl: "./balance-card.component.html",
+    templateUrl: "./balance-card.component.html"
 })
 export class BalanceCardComponent {
     @Input() balanceReport: BalanceReportDTO;

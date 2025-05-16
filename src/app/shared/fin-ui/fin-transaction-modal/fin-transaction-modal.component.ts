@@ -36,7 +36,6 @@ export const UpdateOperationLabels = new Map<Operation, string>([
 
 @Component({
     selector: "fin-transaction-modal",
-    standalone: true,
     imports: [CommonModule, FinFormsModule, ReactiveFormsModule, MatIconModule, MatMenuModule, MatDatepickerModule],
     templateUrl: "./fin-transaction-modal.component.html",
     styleUrl: "./fin-transaction-modal.component.scss"

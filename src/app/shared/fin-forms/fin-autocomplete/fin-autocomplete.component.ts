@@ -11,7 +11,6 @@ import { FinInputComponent } from "../fin-input/fin-input.component";
 @Component({
     selector: "fin-autocomplete",
     imports: [CommonModule, FinInputComponent, ReactiveFormsModule, MatIconModule, FinCategoryIconComponent],
-    standalone: true,
     templateUrl: "./fin-autocomplete.component.html",
     styleUrl: "./fin-autocomplete.component.scss"
 })
@@ -26,14 +25,14 @@ export class FinAutocompleteComponent {
 
     @ViewChild(FinInputComponent) input: FinInputComponent;
     @ViewChild(FinInputComponent, { static: true, read: ElementRef }) inputRef: ElementRef;
-
+    
     filteredItems: typeof this.items = [];
     isDropdownOpen: boolean = false;
-
+    
     searchFormGroup = new FormGroup({
         searchControl: new FormControl(""),
     });
-
+        
     ngOnInit() {
         this.filteredItems = this.items;
         const autocompleteInput = this.searchFormGroup.get("searchControl");

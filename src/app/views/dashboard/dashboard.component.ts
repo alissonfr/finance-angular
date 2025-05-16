@@ -11,7 +11,6 @@ import { CreditCardTransactionsComponent } from "./components/credit-card-transa
 
 @Component({
     selector: "dashboard",
-    standalone: true,
     imports: [CommonModule, BalanceCardComponent, IncomesCardComponent, ExpensesCardComponent, BankAccountTransactionsComponent, CreditCardTransactionsComponent],
     templateUrl: "./dashboard.component.html",
     styleUrl: "./dashboard.component.scss"
@@ -21,6 +20,10 @@ export class DashboardComponent {
 
     private readonly toastService = inject(ToastService);
     private readonly reportService = inject(ReportService);
+
+    ngOnInit(): void {
+        this.loadReport();
+    }
 
     private loadReport(): void {
         this.reportService.getFinancialReport().subscribe({

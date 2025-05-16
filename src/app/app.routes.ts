@@ -37,6 +37,12 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: "reports",
+        loadChildren: () => import("./views/reports/reports.routes").then((r) => r.routes),
+        component: SidenavComponent,
+        canActivate: [authGuard]
+    },
+    {
         path: "not-found",
         loadChildren: () => import("./views/not-found/not-found.routes").then((r) => r.routes),
         canActivate: [authGuard]

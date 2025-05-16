@@ -7,7 +7,6 @@ import { ChevronComponent } from "../chevron/chevron.component";
 
 @Component({
     selector: "year-view",
-    standalone: true,
     imports: [CommonModule, MatIconModule, ChevronComponent],
     templateUrl: "./year-view.component.html",
     styleUrl: "./year-view.component.scss"

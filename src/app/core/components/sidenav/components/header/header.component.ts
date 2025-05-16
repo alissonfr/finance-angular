@@ -9,14 +9,13 @@ import { DateViewComponent } from "./components/date-view/date-view.component";
 
 @Component({
     selector: "header-component",
-    standalone: true,
     imports: [CommonModule, MatIconModule, MatMenuModule, DateViewComponent],
     templateUrl: "./header.component.html"
 })
 export class HeaderComponent {
     private authService = inject(AuthService);
     private router = inject(Router);
-    themeSwitcher = inject(ThemeSwitcher)
+    protected readonly themeSwitcher = inject(ThemeSwitcher);
   
     public change() {
         const currentTheme = this.themeSwitcher.theme();

@@ -14,7 +14,6 @@ import { CategoryModalComponent } from "./components/bank-account-modal/category
 
 @Component({
     selector: "categories",
-    standalone: true,
     imports: [CommonModule, MatIconModule, FinFormsModule, FinUiModule, MatMenuModule, ReactiveFormsModule],
     templateUrl: "./categories.component.html",
     styleUrl: "./categories.component.scss"

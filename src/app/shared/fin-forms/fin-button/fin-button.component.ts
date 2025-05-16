@@ -5,7 +5,6 @@ import { LoadingService } from "@services/loading.service";
 
 @Component({
     selector: "fin-button",
-    standalone: true,
     imports: [CommonModule, MatIconModule],
     templateUrl: "./fin-button.component.html",
     styleUrls: ["./fin-button.component.scss"]

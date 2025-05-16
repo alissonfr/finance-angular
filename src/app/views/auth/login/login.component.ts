@@ -14,7 +14,6 @@ class LoginRequest {
 
 @Component({
     selector: "login",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FinFormsModule, RouterLink],
     templateUrl: "./login.component.html"
 })

@@ -6,7 +6,6 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @Component({
     selector: "fin-textarea",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
     templateUrl: "./fin-textarea.component.html",
     styleUrl: "./fin-textarea.component.scss",
@@ -16,7 +15,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
             useExisting: forwardRef(() => FinTextAreaComponent),
             multi: true,
         },
-    ],
+    ]
 })
 export class FinTextAreaComponent implements ControlValueAccessor {
     @Input() type: string = "text";

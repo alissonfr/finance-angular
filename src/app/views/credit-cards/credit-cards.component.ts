@@ -13,7 +13,6 @@ import { CreditCardService } from "@services/api/credit-card.service";
 
 @Component({
     selector: "credit-cards",
-    standalone: true,
     imports: [CommonModule, MatIconModule, FinFormsModule, FinUiModule, MatMenuModule, ReactiveFormsModule],
     templateUrl: "./credit-cards.component.html",
     styleUrl: "./credit-cards.component.scss"

@@ -1,16 +1,18 @@
 import { CommonModule } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { CreditCardService } from "@services/api/credit-card.service";
+import { IssuerService } from "@services/api/issuer.service";
 import { ToastService } from "@services/toast.service";
 import { isFormInvalid } from "@utils/form-validator";
 import { CreditCard } from "src/app/models/credit-card";
+import { Issuer } from "src/app/models/issuer.";
 import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 @Component({
     selector: "credit-card-modal",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FinFormsModule],
     templateUrl: "./credit-card-modal.component.html",
     styleUrl: "./credit-card-modal.component.scss"
@@ -19,12 +21,16 @@ export class CreditCardModalComponent {
     formGroup = new FormGroup({
         creditCardId: new FormControl(0),
         name: new FormControl("", [Validators.required]),
+        issuer: new FormControl("", [Validators.required]),
         creditLimit: new FormControl("", [Validators.required]),
         dueDay: new FormControl("", [Validators.required]),
         closingDay: new FormControl("", [Validators.required]),
     });
+
+    issuers: Issuer[] = [];
     
     private readonly creditCardService = inject(CreditCardService)
+    private readonly issuerService = inject(IssuerService)
     private readonly toastService = inject(ToastService);
     private readonly dialog = inject(MatDialogRef<CreditCardModalComponent>);
     private readonly data = inject(MAT_DIALOG_DATA);
@@ -32,8 +38,18 @@ export class CreditCardModalComponent {
     ngOnInit() {
         if(this.data?.id) this.get(this.data.id);
         if(this.data?.name) this.formGroup.get("name")?.patchValue(this.data.name);
+        this.findIssuers();
     }
 
+    async findIssuers() {
+        try {
+            this.issuers = await this.issuerService.find();
+        } catch (e) {
+            console.error(e)
+            this.toastService.error(e as unknown as HttpErrorResponse, "Erro ao obter bancos.");
+        }
+    }
+    
     close(): void {
         this.dialog.close();
     }
@@ -45,7 +61,6 @@ export class CreditCardModalComponent {
         }
 
         const creditCard = this.formGroup.getRawValue() as unknown as CreditCard;
-        console.log(creditCard)
 
         if(creditCard.creditCardId) {
             this.update(creditCard.creditCardId, creditCard);

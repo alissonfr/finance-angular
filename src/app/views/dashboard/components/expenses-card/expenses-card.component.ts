@@ -5,9 +5,8 @@ import { ExpensesDTO } from "src/app/models/financial-report";
 
 @Component({
     selector: "expenses-card",
-    standalone: true,
     imports: [CommonModule, MatIconModule],
-    templateUrl: "./expenses-card.component.html",
+    templateUrl: "./expenses-card.component.html"
 })
 export class ExpensesCardComponent {
     @Input() expensesReport: ExpensesDTO;

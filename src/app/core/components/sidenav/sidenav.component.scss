@@ -5,7 +5,7 @@
 
     mat-sidenav-container {
         mat-sidenav {
-            @apply border-0 dark:border-0 bg-sidenav dark:bg-sidenav-dark;
+            @apply border-0 dark:border-0 bg-sidenav dark:bg-sidenav-dark #{!important};
 
             &.mat-drawer-opened {
                 @apply w-[250px] dark:border-r dark:border-r-gray-950;

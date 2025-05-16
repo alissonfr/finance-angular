@@ -33,6 +33,29 @@ export class CreditCardService {
             .get<CreditCardWithTransactions[]>(`${this.PATH}/transactions`, { ...params, month: this.dateControlService.monthIndex.value + 1, year: this.dateControlService.year.value })
     }
 
+    /*
+    findWithTransactions(params?: Record<string, string | number | null | undefined>): Observable<CreditCardWithTransactions[]> {
+        return this.http
+            .get<CreditCardWithTransactions[]>(`${this.PATH}/transactions`, {
+                ...params,
+                month: this.dateControlService.monthIndex.value + 1,
+                year: this.dateControlService.year.value
+            })
+            .pipe(
+                mergeMap(async (creditCards) => {
+                    return await Promise.all(
+                        creditCards.map(async (card) => {
+                            if (card.issuer) {
+                                card.issuer.logoUrl = await this.fileService.get(card.issuer.logoUrl);
+                            }
+                            return card;
+                        })
+                    );
+                })
+            );
+    } 
+    */
+
     get(id: number): Observable<CreditCard> {
         return this.http.get<CreditCard>(`${this.PATH}/${id}`);
     }

@@ -16,7 +16,6 @@ import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 @Component({
     selector: "category-modal",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FinFormsModule, MatIconModule, MatTooltipModule],
     templateUrl: "./category-modal.component.html",
     styleUrl: "./category-modal.component.scss"

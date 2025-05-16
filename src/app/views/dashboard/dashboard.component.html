@@ -1,14 +1,14 @@
-<section class="w-[60%] max-2xl:w-full flex flex-col gap-4">
-    <div class="flex gap-4">
+<section class="w-[60%] max-lg:w-full flex flex-col gap-4">
+    <div class="flex gap-4 max-sm:flex-wrap">
         @if (report) {
-            <balance-card [balanceReport]="report.totalBalance" class="card col-span-2" />
-            <incomes-card [incomesReport]="report.income" class="card"/>
-            <expenses-card [expensesReport]="report.expenses" class="card"/>
+            <balance-card [balanceReport]="report.totalBalance" class="card col-span-2 max-sm:basis-full" />
+            <incomes-card [incomesReport]="report.income" class="card max-sm:basis-[48%]"/>
+            <expenses-card [expensesReport]="report.expenses" class="card max-sm:basis-[48%]"/>
         }
     </div>
     <div class="card flex gap-4 h-full"><bank-account-transactions class="w-full" /></div>
 </section>
 
-<section class="w-[40%] max-2xl:w-full flex flex-col gap-4">
+<section class="w-[40%] max-lg:w-full flex flex-col gap-4">
     <div class="card flex gap-4 h-full"><credit-card-transactions class="w-full" /></div>
 </section>

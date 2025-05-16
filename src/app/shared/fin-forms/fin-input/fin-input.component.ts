@@ -10,7 +10,6 @@ import { NgxMaskDirective } from "ngx-mask";
 
 @Component({
     selector: "fin-input",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule, MatIconModule, NgxMaskDirective],
     templateUrl: "./fin-input.component.html",
     styleUrl: "./fin-input.component.scss",
@@ -20,7 +19,7 @@ import { NgxMaskDirective } from "ngx-mask";
             useExisting: forwardRef(() => FinInputComponent),
             multi: true,
         },
-    ],
+    ]
 })
 export class FinInputComponent implements ControlValueAccessor {
     @Input() type: string = "text";

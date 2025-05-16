@@ -10,7 +10,6 @@ import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 @Component({
     selector: "bank-account-modal",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FinFormsModule],
     templateUrl: "./bank-account-modal.component.html",
     styleUrl: "./bank-account-modal.component.scss"

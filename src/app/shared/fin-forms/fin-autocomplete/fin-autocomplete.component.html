@@ -1,3 +1,6 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+ 
 <div class="dropdown-container relative text-start" [formGroup]="searchFormGroup">
     <fin-input
       #finInput
@@ -21,12 +24,16 @@
             @if (controlName === "category") {
               <fin-category-icon size="small" [category]="getCategory(item)" />
             }
+            @if (controlName === "issuer") {
+              <img class="w-8 h-8 rounded-lg" [src]="item.logoUrl" alt="Logo do banco {{ item.name }}"
+              />
+            }
             {{ item[displayProperty] }}
           </li>
         } @empty {
           <li class="px-4 py-2">Nenhum registro encontrado.</li>
         }
-        <li
+        <li *ngIf="controlName !== 'issuer'"
           (click)="onAddNew()"
           class="cursor-pointer px-2 py-2 hover:bg-hover-dark text-primary brightness-150 flex gap-1">
           <mat-icon class="">add</mat-icon>

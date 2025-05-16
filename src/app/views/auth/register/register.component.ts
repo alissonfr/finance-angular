@@ -11,7 +11,6 @@ import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 @Component({
     selector: "register",
-    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FinFormsModule, RouterLink],
     templateUrl: "./register.component.html"
 })

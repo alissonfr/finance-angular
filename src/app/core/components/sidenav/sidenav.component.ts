@@ -31,7 +31,6 @@ const imports = [
 
 @Component({
     selector: "sidenav-component",
-    standalone: true,
     imports: [...imports],
     templateUrl: "./sidenav.component.html",
     styleUrl: "./sidenav.component.scss"
@@ -79,6 +78,6 @@ export class SidenavComponent {
     }
 
     private _watchBreakpoint(): void {
-        this._breakpointObserver.observe(["(max-width: 800px)"]).subscribe((screenSize: BreakpointState) => this.isMobile = screenSize.matches);
+        this._breakpointObserver.observe(["(max-width: 1024px)"]).subscribe((screenSize: BreakpointState) => this.isMobile = screenSize.matches);
     }
 }

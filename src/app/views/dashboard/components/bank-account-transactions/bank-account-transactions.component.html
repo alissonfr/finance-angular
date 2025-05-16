@@ -1,6 +1,14 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
- 
+
+<div class="p-6">
+    <h2 class="text-xl font-semibold">Compras recentes</h2>
+    <div class="grid gap-4 mt-4 w-full" style="grid-template-columns: 2fr 1fr;" [formGroup]="formGroup">
+        <fin-input name="creditLimit" placeholder="Pesquisar..." required formControlName="search" class="w-full" />
+        <fin-select controlName="sort" [items]="sort" displayProperty="label" [formGroup]="formGroup"  class="w-full" />
+    </div>
+</div>
+
 <div class="fin-table" style="padding: 0;">
     @if(bankAccountTransactions.length > 0) {
         <section class="table-section">
@@ -10,8 +18,8 @@
                     <th>Data</th>
                     <th>Descrição</th>
                     <th>Valor</th>
-                    <th class="max-xl:hidden">Conta</th>
-                    <th class="text-center max-xl:hidden">Recebido/Pago</th>
+                    <th class="max-2xl:hidden">Conta</th>
+                    <th class="text-center max-2xl:hidden" style="padding-left: 0.5rem; padding-right: 0.5rem;">Recebido/Pago</th>
                     <th></th>
                 </thead>
                 <tbody>
@@ -28,8 +36,8 @@
                                     <span class="text-text/60 dark:text-text-dark/60 text-xs">({{ transaction.recurrency?.installment }}/{{ transaction.recurrency?.installments }})</span>
                                 }
                             </td>
-                            <td class="max-xl:hidden">{{ transaction.bankAccount.name }}</td>
-                            <td class="text-center max-xl:hidden">
+                            <td class="max-2xl:hidden">{{ transaction.bankAccount.name }}</td>
+                            <td class="text-center max-2xl:hidden" style="padding-left: 0.5rem; padding-right: 0.5rem;">
                                 <label class="checkbox" style="width: fit-content;">
                                     <input type="checkbox" [checked]="transaction.status === transactionStatus.PAID" class="sr-only peer">
                                     <div 

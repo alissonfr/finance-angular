@@ -13,7 +13,6 @@ import { BankAccountModalComponent } from "./components/bank-account-modal/bank-
 
 @Component({
     selector: "bank-accounts",
-    standalone: true,
     imports: [CommonModule, MatIconModule, FinFormsModule, FinUiModule, MatMenuModule, ReactiveFormsModule],
     templateUrl: "./bank-accounts.component.html",
     styleUrl: "./bank-accounts.component.scss"

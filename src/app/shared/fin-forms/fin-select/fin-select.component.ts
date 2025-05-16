@@ -9,7 +9,6 @@ import { FinInputComponent } from "../fin-input/fin-input.component";
 @Component({
     selector: "fin-select",
     imports: [CommonModule, FinInputComponent, ReactiveFormsModule, MatIconModule],
-    standalone: true,
     templateUrl: "./fin-select.component.html",
     styleUrl: "./fin-select.component.scss"
 })

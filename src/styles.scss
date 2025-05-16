@@ -1,11 +1,12 @@
+@use "./theme/reset";
+@use "./theme/material";
+@use "./theme/utilitary-classes";
+@use "./theme/table";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "./theme/reset";
-@import "./theme/material";
-@import "./theme/utilitary-classes";
-@import "./theme/table";
 
 html, body { 
     @apply h-full; 

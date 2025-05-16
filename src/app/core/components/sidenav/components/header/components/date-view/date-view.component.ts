@@ -12,9 +12,8 @@ const components = [
 
 @Component({
     selector: "date-view",
-    standalone: true,
     imports: [CommonModule, MatIconModule, ...components],
-    templateUrl: "./date-view.component.html",
+    templateUrl: "./date-view.component.html"
 }) 
 export class DateViewComponent {
     dateControlService = inject(DateControlService)

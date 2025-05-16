@@ -5,10 +5,9 @@ import { Category } from "src/app/models/category";
 
 @Component({
     selector: "fin-category-icon",
-    standalone: true,
     imports: [MatIconModule, MatIconModule, MatTooltipModule],
     templateUrl: "./fin-category-icon.component.html",
-    styleUrl: "./fin-category-icon.component.scss",
+    styleUrl: "./fin-category-icon.component.scss"
 })
 export class FinCategoryIconComponent {
     @Input({ required: true }) category: Category

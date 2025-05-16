@@ -7,7 +7,6 @@ import { FinFormsModule } from "src/app/shared/fin-forms/fin-forms.module";
 
 @Component({
     selector: "fin-delete-transaction-modal",
-    standalone: true,
     imports: [CommonModule, FinFormsModule, MatIconModule],
     templateUrl: "./fin-delete-transaction-modal.component.html",
     styleUrl: "./fin-delete-transaction-modal.component.scss"

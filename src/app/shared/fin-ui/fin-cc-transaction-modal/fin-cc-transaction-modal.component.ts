@@ -24,7 +24,6 @@ import { FinTransactionModalComponent } from "../fin-transaction-modal/fin-trans
 
 @Component({
     selector: "fin-cc-transaction-modal",
-    standalone: true,
     imports: [CommonModule, FinFormsModule, ReactiveFormsModule, MatIconModule, MatMenuModule, MatDatepickerModule],
     templateUrl: "./fin-cc-transaction-modal.component.html",
     styleUrl: "./fin-cc-transaction-modal.component.scss"

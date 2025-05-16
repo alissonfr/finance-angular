@@ -5,7 +5,6 @@ import { ToastService } from "@services/toast.service";
 
 @Component({
     selector: "fin-toast",
-    standalone: true,
     imports: [CommonModule, MatIconModule],
     templateUrl: "./fin-toast.component.html",
     styleUrl: "./fin-toast.component.scss"

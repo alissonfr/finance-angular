@@ -7,7 +7,6 @@ import { ThemeSwitcher } from "@utils/theme-switcher";
 
 @Component({
     selector: "app-root",
-    standalone: true,
     imports: [CommonModule, RouterOutlet, FinToastComponent, MatSnackBarModule],
     template: `
         <router-outlet /> 

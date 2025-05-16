@@ -7,6 +7,7 @@
 
 <form class="pt-4" [formGroup]="formGroup">
   <fin-input label="Nome" name="name" placeholder="Itaú" required formControlName="name" />
+  <fin-autocomplete *ngIf="issuers.length > 0" label="Banco" [formGroup]="formGroup" [items]="issuers" displayProperty="name" controlName="issuer" />
   <div class="grid grid-cols-3 gap-4">
     <fin-input label="Limite" currency name="creditLimit" placeholder="R$ 12.99" required formControlName="creditLimit" />
     <fin-input label="Fechamento" name="closingDay" placeholder="01" required formControlName="closingDay" />

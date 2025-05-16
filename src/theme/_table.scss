@@ -1,9 +1,5 @@
 .fin-table {
 
-  tr.child {
-    @apply bg-sidenav dark:bg-[#303030] dark:hover:bg-[#343434] #{!important};
-  }
-
   @apply relative overflow-x-auto w-full bg-sidenav dark:bg-sidenav-dark p-6 rounded-lg border dark:border-[#27272A];
 
   .search {
